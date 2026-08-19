@@ -1,0 +1,41 @@
+.alert {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid;
+}
+.body {
+  min-width: 0;
+}
+.title {
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+}
+.content {
+  font-size: 0.92rem;
+}
+.content :is(ul, ol) {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+}
+.actions {
+  flex-shrink: 0;
+}
+.info {
+  background: var(--color-info-bg);
+  border-color: var(--color-info);
+}
+.warning {
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning);
+}
+.error {
+  background: var(--color-error-bg);
+  border-color: var(--color-error);
+}
+.success {
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+}

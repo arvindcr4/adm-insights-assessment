@@ -1,0 +1,922 @@
+[
+  {
+    "id": "ins-001",
+    "title": "Soybean crush margins widen in the US Midwest",
+    "content": "Board crush margins improved as soybean meal demand from poultry integrators outpaced bean prices; plants in Iowa and Illinois are running near capacity.",
+    "language": "en",
+    "metadata": {
+      "category": "Oilseeds",
+      "tags": [
+        "soybean",
+        "crush",
+        "margins",
+        "midwest",
+        "meal"
+      ],
+      "confidence": 0.69,
+      "source": "market-desk",
+      "publishedAt": "2026-03-13T16:00:00Z"
+    }
+  },
+  {
+    "id": "ins-002",
+    "title": "Brazil soybean harvest pace ahead of five-year average",
+    "content": "Favourable weather in Mato Grosso accelerated harvest; export line-ups at Santos and Paranaguá are filling for March shipment.",
+    "language": "en",
+    "metadata": {
+      "category": "Oilseeds",
+      "tags": [
+        "soybean",
+        "brazil",
+        "harvest",
+        "exports",
+        "weather"
+      ],
+      "confidence": 0.57,
+      "source": "field-report",
+      "publishedAt": "2026-02-12T15:00:00Z"
+    }
+  },
+  {
+    "id": "ins-003",
+    "title": "Argentina crush volumes recover after drought year",
+    "content": "Higher farmer selling and an improved soy crop lift Rosario crush rates back toward normal utilisation.",
+    "language": "en",
+    "metadata": {
+      "category": "Oilseeds",
+      "tags": [
+        "soybean",
+        "argentina",
+        "crush",
+        "drought"
+      ],
+      "confidence": 0.57,
+      "source": "market-desk",
+      "publishedAt": "2026-04-02T07:00:00Z"
+    }
+  },
+  {
+    "id": "ins-004",
+    "title": "Canola supply tightens on lower Canadian acreage",
+    "content": "Reduced planted area on the Prairies and dry pockets in Saskatchewan point to a smaller canola crop and firmer basis at crushers.",
+    "language": "en",
+    "metadata": {
+      "category": "Oilseeds",
+      "tags": [
+        "canola",
+        "canada",
+        "acreage",
+        "supply"
+      ],
+      "confidence": 0.74,
+      "source": "field-report",
+      "publishedAt": "2026-02-08T07:00:00Z"
+    }
+  },
+  {
+    "id": "ins-005",
+    "title": "Sunflower oil discount to palm narrows",
+    "content": "Black Sea sunflower oil premiums firmed as Ukrainian crush slowed; buyers in India switched part of their book to palm.",
+    "language": "en",
+    "metadata": {
+      "category": "Oilseeds",
+      "tags": [
+        "sunflower",
+        "vegetable-oil",
+        "black-sea",
+        "palm",
+        "india"
+      ],
+      "confidence": 0.79,
+      "source": "trade-flow",
+      "publishedAt": "2026-01-27T15:00:00Z"
+    }
+  },
+  {
+    "id": "ins-006",
+    "title": "Corn yields trend above USDA estimate in Illinois",
+    "content": "Early combine reports show strong ear counts; basis at river terminals softened on heavy farmer movement.",
+    "language": "en",
+    "metadata": {
+      "category": "Grains",
+      "tags": [
+        "corn",
+        "yield",
+        "illinois",
+        "usda",
+        "basis"
+      ],
+      "confidence": 0.6,
+      "source": "field-report",
+      "publishedAt": "2026-04-21T16:00:00Z"
+    }
+  },
+  {
+    "id": "ins-007",
+    "title": "Wheat protein premiums rise on hard red winter quality",
+    "content": "Lower protein across Kansas pushes millers to pay up for 12%+ HRW; spreads to soft wheat widened.",
+    "language": "en",
+    "metadata": {
+      "category": "Grains",
+      "tags": [
+        "wheat",
+        "protein",
+        "kansas",
+        "milling",
+        "quality"
+      ],
+      "confidence": 0.8,
+      "source": "market-desk",
+      "publishedAt": "2026-01-19T15:00:00Z"
+    }
+  },
+  {
+    "id": "ins-008",
+    "title": "Black Sea wheat exports set monthly record",
+    "content": "Russian FOB offers undercut EU origins, winning Egyptian and Algerian tenders; freight rates held steady.",
+    "language": "en",
+    "metadata": {
+      "category": "Grains",
+      "tags": [
+        "wheat",
+        "black-sea",
+        "exports",
+        "tender",
+        "freight"
+      ],
+      "confidence": 0.72,
+      "source": "trade-flow",
+      "publishedAt": "2026-04-02T14:00:00Z"
+    }
+  },
+  {
+    "id": "ins-009",
+    "title": "Sorghum demand from China lifts Texas Gulf basis",
+    "content": "Renewed Chinese purchases of US sorghum tightened Gulf supplies ahead of the new crop.",
+    "language": "en",
+    "metadata": {
+      "category": "Grains",
+      "tags": [
+        "sorghum",
+        "china",
+        "texas",
+        "basis",
+        "exports"
+      ],
+      "confidence": 0.92,
+      "source": "trade-flow",
+      "publishedAt": "2026-05-14T08:00:00Z"
+    }
+  },
+  {
+    "id": "ins-010",
+    "title": "Rice prices ease as India relaxes export curbs",
+    "content": "Removal of minimum export prices on non-basmati rice weighed on Thai and Vietnamese quotes.",
+    "language": "en",
+    "metadata": {
+      "category": "Grains",
+      "tags": [
+        "rice",
+        "india",
+        "exports",
+        "asia",
+        "policy"
+      ],
+      "confidence": 0.78,
+      "source": "policy-watch",
+      "publishedAt": "2026-05-18T16:00:00Z"
+    }
+  },
+  {
+    "id": "ins-011",
+    "title": "Barley malting premiums steady in Europe",
+    "content": "Brewers covered Q3 needs early; weather in France and Germany remains supportive for quality.",
+    "language": "en",
+    "metadata": {
+      "category": "Grains",
+      "tags": [
+        "barley",
+        "malting",
+        "europe",
+        "brewing",
+        "weather"
+      ],
+      "confidence": 0.63,
+      "source": "market-desk",
+      "publishedAt": "2026-04-12T07:00:00Z"
+    }
+  },
+  {
+    "id": "ins-012",
+    "title": "Ethanol margins improve on lower corn costs",
+    "content": "Plant margins turned positive as corn basis weakened and gasoline blending demand stayed seasonally firm.",
+    "language": "en",
+    "metadata": {
+      "category": "Biofuels",
+      "tags": [
+        "ethanol",
+        "corn",
+        "margins",
+        "gasoline",
+        "biofuel"
+      ],
+      "confidence": 0.79,
+      "source": "market-desk",
+      "publishedAt": "2026-02-19T06:00:00Z"
+    }
+  },
+  {
+    "id": "ins-013",
+    "title": "Renewable diesel capacity additions pressure soybean oil spreads",
+    "content": "New RD plants on the US Gulf Coast lifted feedstock demand, but credit values softened, compressing bean oil premiums.",
+    "language": "en",
+    "metadata": {
+      "category": "Biofuels",
+      "tags": [
+        "renewable-diesel",
+        "soybean-oil",
+        "feedstock",
+        "gulf-coast",
+        "biofuel"
+      ],
+      "confidence": 0.82,
+      "source": "policy-watch",
+      "publishedAt": "2026-08-22T14:00:00Z"
+    }
+  },
+  {
+    "id": "ins-014",
+    "title": "Sustainable aviation fuel mandates drive lipid demand outlook",
+    "content": "EU SAF blending requirements point to incremental demand for used cooking oil and tallow through the decade.",
+    "language": "en",
+    "metadata": {
+      "category": "Biofuels",
+      "tags": [
+        "saf",
+        "aviation",
+        "mandate",
+        "eu",
+        "feedstock",
+        "biofuel"
+      ],
+      "confidence": 0.73,
+      "source": "policy-watch",
+      "publishedAt": "2026-06-15T15:00:00Z"
+    }
+  },
+  {
+    "id": "ins-015",
+    "title": "Brazil raises ethanol blend in gasoline",
+    "content": "The higher mandatory blend supports domestic corn ethanol expansion in Mato Grosso.",
+    "language": "en",
+    "metadata": {
+      "category": "Biofuels",
+      "tags": [
+        "ethanol",
+        "brazil",
+        "mandate",
+        "corn",
+        "policy"
+      ],
+      "confidence": 0.95,
+      "source": "policy-watch",
+      "publishedAt": "2026-06-10T09:00:00Z"
+    }
+  },
+  {
+    "id": "ins-016",
+    "title": "Plant-based protein demand shifts toward pea and fava",
+    "content": "Formulators favour pea and fava isolates for texture; soy protein still leads on cost per gram of protein.",
+    "language": "en",
+    "metadata": {
+      "category": "Nutrition",
+      "tags": [
+        "protein",
+        "plant-based",
+        "pea",
+        "fava",
+        "soy",
+        "nutrition"
+      ],
+      "confidence": 0.89,
+      "source": "consumer-insights",
+      "publishedAt": "2026-04-03T15:00:00Z"
+    }
+  },
+  {
+    "id": "ins-017",
+    "title": "Probiotic ingredient sales grow in Asia-Pacific",
+    "content": "Digestive-health positioning drove double-digit growth in functional beverages across Japan and Korea.",
+    "language": "en",
+    "metadata": {
+      "category": "Nutrition",
+      "tags": [
+        "probiotics",
+        "asia",
+        "functional-food",
+        "beverage",
+        "nutrition"
+      ],
+      "confidence": 0.68,
+      "source": "consumer-insights",
+      "publishedAt": "2026-08-11T17:00:00Z"
+    }
+  },
+  {
+    "id": "ins-018",
+    "title": "Sugar reduction remains the top reformulation driver",
+    "content": "Beverage makers are pairing stevia with allulose to close the taste gap versus full-sugar formulas.",
+    "language": "en",
+    "metadata": {
+      "category": "Nutrition",
+      "tags": [
+        "sugar",
+        "sweetener",
+        "stevia",
+        "reformulation",
+        "beverage",
+        "nutrition"
+      ],
+      "confidence": 0.74,
+      "source": "consumer-insights",
+      "publishedAt": "2026-02-04T14:00:00Z"
+    }
+  },
+  {
+    "id": "ins-019",
+    "title": "Flavour trends: citrus and botanicals lead new launches",
+    "content": "Yuzu, bergamot and elderflower appear in a growing share of global beverage launches.",
+    "language": "en",
+    "metadata": {
+      "category": "Nutrition",
+      "tags": [
+        "flavour",
+        "beverage",
+        "launches",
+        "trends",
+        "nutrition"
+      ],
+      "confidence": 0.73,
+      "source": "consumer-insights",
+      "publishedAt": "2026-06-05T13:00:00Z"
+    }
+  },
+  {
+    "id": "ins-020",
+    "title": "Pet food premiumisation lifts specialty protein demand",
+    "content": "Fresh and freeze-dried formats push demand for novel animal and insect proteins.",
+    "language": "en",
+    "metadata": {
+      "category": "Nutrition",
+      "tags": [
+        "pet-food",
+        "protein",
+        "premium",
+        "animal-nutrition"
+      ],
+      "confidence": 0.73,
+      "source": "consumer-insights",
+      "publishedAt": "2026-02-25T14:00:00Z"
+    }
+  },
+  {
+    "id": "ins-021",
+    "title": "Soybean meal inclusion rises in European feed rations",
+    "content": "Cheaper meal relative to wheat and rapeseed meal raised inclusion rates for swine and poultry.",
+    "language": "en",
+    "metadata": {
+      "category": "Animal Nutrition",
+      "tags": [
+        "soybean",
+        "meal",
+        "feed",
+        "europe",
+        "swine",
+        "poultry"
+      ],
+      "confidence": 0.8,
+      "source": "market-desk",
+      "publishedAt": "2026-06-11T17:00:00Z"
+    }
+  },
+  {
+    "id": "ins-022",
+    "title": "Amino acid prices soften on new Chinese capacity",
+    "content": "Lysine and threonine offers fell as additional fermentation capacity came online.",
+    "language": "en",
+    "metadata": {
+      "category": "Animal Nutrition",
+      "tags": [
+        "amino-acids",
+        "lysine",
+        "china",
+        "feed",
+        "pricing"
+      ],
+      "confidence": 0.7,
+      "source": "market-desk",
+      "publishedAt": "2026-08-19T18:00:00Z"
+    }
+  },
+  {
+    "id": "ins-023",
+    "title": "Aquafeed demand grows with salmon output",
+    "content": "Norwegian and Chilean harvest growth supports demand for high-protein feed ingredients.",
+    "language": "en",
+    "metadata": {
+      "category": "Animal Nutrition",
+      "tags": [
+        "aquafeed",
+        "salmon",
+        "protein",
+        "norway",
+        "chile"
+      ],
+      "confidence": 0.75,
+      "source": "trade-flow",
+      "publishedAt": "2026-02-09T13:00:00Z"
+    }
+  },
+  {
+    "id": "ins-024",
+    "title": "Mississippi River draft restrictions return",
+    "content": "Low water at Memphis gauge forced barge draft reductions, lifting freight costs for Gulf-bound grain.",
+    "language": "en",
+    "metadata": {
+      "category": "Logistics",
+      "tags": [
+        "logistics",
+        "mississippi",
+        "barge",
+        "freight",
+        "gulf"
+      ],
+      "confidence": 0.85,
+      "source": "field-report",
+      "publishedAt": "2026-02-02T17:00:00Z"
+    }
+  },
+  {
+    "id": "ins-025",
+    "title": "Panama Canal transit slots improve after rainy season",
+    "content": "Restored draft and daily slots reduced wait times for grain vessels bound for Asia.",
+    "language": "en",
+    "metadata": {
+      "category": "Logistics",
+      "tags": [
+        "logistics",
+        "panama-canal",
+        "shipping",
+        "asia",
+        "freight"
+      ],
+      "confidence": 0.85,
+      "source": "trade-flow",
+      "publishedAt": "2026-08-10T17:00:00Z"
+    }
+  },
+  {
+    "id": "ins-026",
+    "title": "Container rates ease for specialty grain exports",
+    "content": "Lower trans-Pacific box rates benefit identity-preserved soybean and pulse shipments.",
+    "language": "en",
+    "metadata": {
+      "category": "Logistics",
+      "tags": [
+        "logistics",
+        "container",
+        "exports",
+        "specialty",
+        "pulses"
+      ],
+      "confidence": 0.72,
+      "source": "trade-flow",
+      "publishedAt": "2026-06-01T13:00:00Z"
+    }
+  },
+  {
+    "id": "ins-027",
+    "title": "Rail car availability tightens in Canadian Prairies",
+    "content": "Strong canola and wheat movement outpaced hopper car supply; basis widened at inland elevators.",
+    "language": "en",
+    "metadata": {
+      "category": "Logistics",
+      "tags": [
+        "logistics",
+        "rail",
+        "canada",
+        "canola",
+        "wheat"
+      ],
+      "confidence": 0.7,
+      "source": "field-report",
+      "publishedAt": "2026-02-16T06:00:00Z"
+    }
+  },
+  {
+    "id": "ins-028",
+    "title": "El Niño transition raises South American weather risk",
+    "content": "Forecast shift toward La Niña conditions increases dryness risk for southern Brazil and Argentina this season.",
+    "language": "en",
+    "metadata": {
+      "category": "Weather",
+      "tags": [
+        "weather",
+        "el-nino",
+        "la-nina",
+        "brazil",
+        "argentina",
+        "risk"
+      ],
+      "confidence": 0.64,
+      "source": "weather-desk",
+      "publishedAt": "2026-05-05T17:00:00Z"
+    }
+  },
+  {
+    "id": "ins-029",
+    "title": "US Corn Belt heat dome forecast for pollination window",
+    "content": "Extended heat in late July could trim corn yields if rainfall disappoints; soybeans less exposed.",
+    "language": "en",
+    "metadata": {
+      "category": "Weather",
+      "tags": [
+        "weather",
+        "corn",
+        "heat",
+        "yield",
+        "midwest"
+      ],
+      "confidence": 0.66,
+      "source": "weather-desk",
+      "publishedAt": "2026-07-28T13:00:00Z"
+    }
+  },
+  {
+    "id": "ins-030",
+    "title": "Indian monsoon progress near normal",
+    "content": "Timely monsoon advance supports kharif sowing of rice, soybeans and cotton.",
+    "language": "en",
+    "metadata": {
+      "category": "Weather",
+      "tags": [
+        "weather",
+        "monsoon",
+        "india",
+        "rice",
+        "soybean",
+        "cotton"
+      ],
+      "confidence": 0.58,
+      "source": "weather-desk",
+      "publishedAt": "2026-08-13T14:00:00Z"
+    }
+  },
+  {
+    "id": "ins-031",
+    "title": "Australian wheat belt receives timely rains",
+    "content": "Western Australia and New South Wales saw planting-season rainfall, improving yield prospects.",
+    "language": "en",
+    "metadata": {
+      "category": "Weather",
+      "tags": [
+        "weather",
+        "australia",
+        "wheat",
+        "rain",
+        "yield"
+      ],
+      "confidence": 0.67,
+      "source": "weather-desk",
+      "publishedAt": "2026-03-27T12:00:00Z"
+    }
+  },
+  {
+    "id": "ins-032",
+    "title": "Regenerative agriculture acreage expands under grower programs",
+    "content": "Cover cropping and reduced tillage enrolments rose sharply, supported by per-acre incentive payments.",
+    "language": "en",
+    "metadata": {
+      "category": "Sustainability",
+      "tags": [
+        "sustainability",
+        "regenerative",
+        "carbon",
+        "growers",
+        "acreage"
+      ],
+      "confidence": 0.92,
+      "source": "policy-watch",
+      "publishedAt": "2026-05-23T12:00:00Z"
+    }
+  },
+  {
+    "id": "ins-033",
+    "title": "EU deforestation regulation timelines clarified",
+    "content": "Traceability requirements for soy and palm imports shape sourcing and documentation for exporters.",
+    "language": "en",
+    "metadata": {
+      "category": "Sustainability",
+      "tags": [
+        "sustainability",
+        "eudr",
+        "deforestation",
+        "soybean",
+        "palm",
+        "eu",
+        "policy"
+      ],
+      "confidence": 0.97,
+      "source": "policy-watch",
+      "publishedAt": "2026-07-08T08:00:00Z"
+    }
+  },
+  {
+    "id": "ins-034",
+    "title": "Low-carbon-intensity corn programs gain ethanol plant uptake",
+    "content": "Carbon-scored feedstock premiums reward growers for reduced nitrogen and tillage.",
+    "language": "en",
+    "metadata": {
+      "category": "Sustainability",
+      "tags": [
+        "sustainability",
+        "carbon",
+        "corn",
+        "ethanol",
+        "growers"
+      ],
+      "confidence": 0.59,
+      "source": "policy-watch",
+      "publishedAt": "2026-03-08T16:00:00Z"
+    }
+  },
+  {
+    "id": "ins-035",
+    "title": "Scope 3 reporting drives supply-chain data demand",
+    "content": "Food manufacturers request farm-level emissions data from ingredient suppliers.",
+    "language": "en",
+    "metadata": {
+      "category": "Sustainability",
+      "tags": [
+        "sustainability",
+        "scope-3",
+        "emissions",
+        "supply-chain",
+        "reporting"
+      ],
+      "confidence": 0.65,
+      "source": "policy-watch",
+      "publishedAt": "2026-08-27T15:00:00Z"
+    }
+  },
+  {
+    "id": "ins-036",
+    "title": "China soybean purchases shift toward Brazil",
+    "content": "Tariff uncertainty and Brazilian price discounts increased Brazil's share of Chinese imports.",
+    "language": "en",
+    "metadata": {
+      "category": "Trade Policy",
+      "tags": [
+        "china",
+        "soybean",
+        "brazil",
+        "tariffs",
+        "imports",
+        "trade"
+      ],
+      "confidence": 0.63,
+      "source": "policy-watch",
+      "publishedAt": "2026-05-01T08:00:00Z"
+    }
+  },
+  {
+    "id": "ins-037",
+    "title": "Indonesia palm oil export levy adjusted",
+    "content": "Revised levy structure alters palm's competitiveness against soybean and sunflower oils.",
+    "language": "en",
+    "metadata": {
+      "category": "Trade Policy",
+      "tags": [
+        "palm",
+        "indonesia",
+        "levy",
+        "vegetable-oil",
+        "policy",
+        "trade"
+      ],
+      "confidence": 0.73,
+      "source": "policy-watch",
+      "publishedAt": "2026-06-20T15:00:00Z"
+    }
+  },
+  {
+    "id": "ins-038",
+    "title": "Mexico GM corn import rules under review",
+    "content": "Outcome of the USMCA panel affects US yellow corn export flows to Mexico.",
+    "language": "en",
+    "metadata": {
+      "category": "Trade Policy",
+      "tags": [
+        "mexico",
+        "corn",
+        "gmo",
+        "usmca",
+        "exports",
+        "trade"
+      ],
+      "confidence": 0.69,
+      "source": "policy-watch",
+      "publishedAt": "2026-03-23T14:00:00Z"
+    }
+  },
+  {
+    "id": "ins-039",
+    "title": "EU tariffs on Russian grain imports take effect",
+    "content": "Prohibitive duties redirect Russian wheat and oilseed flows toward MENA and Asia.",
+    "language": "en",
+    "metadata": {
+      "category": "Trade Policy",
+      "tags": [
+        "eu",
+        "russia",
+        "wheat",
+        "tariffs",
+        "trade"
+      ],
+      "confidence": 0.96,
+      "source": "policy-watch",
+      "publishedAt": "2026-01-15T18:00:00Z"
+    }
+  },
+  {
+    "id": "ins-040",
+    "title": "Funds extend net short in CBOT corn",
+    "content": "Managed money added to short positions ahead of the acreage report, raising short-covering risk.",
+    "language": "en",
+    "metadata": {
+      "category": "Markets",
+      "tags": [
+        "funds",
+        "cbot",
+        "corn",
+        "positioning",
+        "futures"
+      ],
+      "confidence": 0.96,
+      "source": "market-desk",
+      "publishedAt": "2026-07-13T12:00:00Z"
+    }
+  },
+  {
+    "id": "ins-041",
+    "title": "Soybean oil share of crush value hits multi-year high",
+    "content": "Biofuel demand keeps oil share elevated relative to meal; crushers favour high-oil beans.",
+    "language": "en",
+    "metadata": {
+      "category": "Markets",
+      "tags": [
+        "soybean-oil",
+        "crush",
+        "share",
+        "biofuel",
+        "futures"
+      ],
+      "confidence": 0.72,
+      "source": "market-desk",
+      "publishedAt": "2026-08-21T12:00:00Z"
+    }
+  },
+  {
+    "id": "ins-042",
+    "title": "Cocoa volatility spills into sweet-goods formulation",
+    "content": "Record cocoa prices push confectioners toward cocoa-butter equivalents and reduced-cocoa recipes.",
+    "language": "en",
+    "metadata": {
+      "category": "Markets",
+      "tags": [
+        "cocoa",
+        "volatility",
+        "confectionery",
+        "pricing",
+        "reformulation"
+      ],
+      "confidence": 0.58,
+      "source": "consumer-insights",
+      "publishedAt": "2026-02-07T13:00:00Z"
+    }
+  },
+  {
+    "id": "ins-043",
+    "title": "Sugar futures fall on Brazil Centre-South output",
+    "content": "Strong cane crush and higher sugar mix pressured raw sugar prices.",
+    "language": "en",
+    "metadata": {
+      "category": "Markets",
+      "tags": [
+        "sugar",
+        "brazil",
+        "futures",
+        "cane",
+        "pricing"
+      ],
+      "confidence": 0.62,
+      "source": "market-desk",
+      "publishedAt": "2026-06-20T06:00:00Z"
+    }
+  },
+  {
+    "id": "ins-044",
+    "title": "Palm oil stocks build in Malaysia",
+    "content": "Seasonal production increase and slower exports lifted end-month inventories.",
+    "language": "en",
+    "metadata": {
+      "category": "Markets",
+      "tags": [
+        "palm",
+        "malaysia",
+        "stocks",
+        "exports",
+        "vegetable-oil"
+      ],
+      "confidence": 0.59,
+      "source": "market-desk",
+      "publishedAt": "2026-03-18T07:00:00Z"
+    }
+  },
+  {
+    "id": "ins-045",
+    "title": "Predictive maintenance cuts unplanned downtime at crush plants",
+    "content": "Vibration analytics on extractors reduced unscheduled stops across the pilot sites.",
+    "language": "en",
+    "metadata": {
+      "category": "Operations",
+      "tags": [
+        "operations",
+        "maintenance",
+        "crush",
+        "analytics",
+        "plant"
+      ],
+      "confidence": 0.96,
+      "source": "ops-review",
+      "publishedAt": "2026-01-03T09:00:00Z"
+    }
+  },
+  {
+    "id": "ins-046",
+    "title": "Grain elevator throughput improves with automated sampling",
+    "content": "Automated probe and grading reduced truck turnaround at harvest peaks.",
+    "language": "en",
+    "metadata": {
+      "category": "Operations",
+      "tags": [
+        "operations",
+        "elevator",
+        "automation",
+        "harvest",
+        "throughput"
+      ],
+      "confidence": 0.81,
+      "source": "ops-review",
+      "publishedAt": "2026-03-21T10:00:00Z"
+    }
+  },
+  {
+    "id": "ins-047",
+    "title": "Energy efficiency upgrades lower dryer costs",
+    "content": "Heat recovery on grain dryers cut natural gas use per bushel.",
+    "language": "en",
+    "metadata": {
+      "category": "Operations",
+      "tags": [
+        "operations",
+        "energy",
+        "dryer",
+        "cost",
+        "efficiency"
+      ],
+      "confidence": 0.96,
+      "source": "ops-review",
+      "publishedAt": "2026-06-16T07:00:00Z"
+    }
+  },
+  {
+    "id": "ins-048",
+    "title": "Digital grower platform adoption rises",
+    "content": "More growers contract and price grain through the mobile app, smoothing origination flows.",
+    "language": "en",
+    "metadata": {
+      "category": "Operations",
+      "tags": [
+        "operations",
+        "digital",
+        "growers",
+        "origination",
+        "app"
+      ],
+      "confidence": 0.6,
+      "source": "ops-review",
+      "publishedAt": "2026-08-15T13:00:00Z"
+    }
+  }
+]

@@ -1,0 +1,34 @@
+/// <reference types="vitest/config" />
+import { fileURLToPath, URL } from 'node:url'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
+  },
+  server: {
+    port: 5173,
+    // Dev-only proxy so the SPA can call the BFF same-origin (no CORS, no hard-coded host).
+    proxy: {
+      '/api': {
+        target: process.env.VITE_PROXY_TARGET ?? 'http://localhost:8000',
+        changeOrigin: true,
+      },
+    },
+  },
+  test: {
+    environment: 'jsdom',
+    // jsdom has no origin, so fetch needs an absolute base URL; msw handlers use the same constant.
+    env: { VITE_API_BASE_URL: 'http://localhost:8000/api/v1' },
+    globals: true,
+    setupFiles: ['./src/test/setup.ts'],
+    css: { modules: { classNameStrategy: 'non-scoped' } },
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['src/test/**', 'src/main.tsx'],
+    },
+  },
+})

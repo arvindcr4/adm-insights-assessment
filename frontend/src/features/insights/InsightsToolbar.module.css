@@ -1,0 +1,38 @@
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.search {
+  flex: 1 1 16rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.input,
+.select {
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.input {
+  flex: 1;
+}
+.input:focus,
+.select:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sortLabel {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}

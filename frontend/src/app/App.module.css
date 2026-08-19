@@ -1,0 +1,41 @@
+.shell {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18rem;
+  grid-template-areas:
+    'header header'
+    'main aside';
+  gap: 1.5rem;
+}
+@media (max-width: 56rem) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'header'
+      'main'
+      'aside';
+  }
+}
+.header {
+  grid-area: header;
+}
+.brand {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.tagline {
+  margin: 0.25rem 0 0;
+  color: var(--color-text-muted);
+}
+.main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+.aside {
+  grid-area: aside;
+}
