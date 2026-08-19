@@ -102,7 +102,7 @@ State management:
 ## Tests
 
 - Backend (29): gatekeeper rules, pagination maths, API validation/4xx shapes, clarification short-circuit (spy AI), page navigation/disjointness, 404, determinism, turn counting.
-- Frontend (28): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network), form validity gating + language loading, SUCCESS/clarification rendering, no page-1 refetch + load more, debounced search across pages, sort toggles, retryable page-fetch error.
+- Frontend (29): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network), form validity gating + language loading, SUCCESS/clarification rendering, no page-1 refetch + load more, debounced search across pages, sort toggles, retryable page-fetch error, search reset on new answer.
 
 ## Not done / next
 

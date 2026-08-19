@@ -98,6 +98,10 @@ export function InsightsPanel({
 
       <InsightList insights={visible} loading={isLoading} searchTerm={searchTerm} />
 
+      {error && data && (
+        <Alert tone="error" title={`Could not load more: ${toAppError(error).message}`} />
+      )}
+
       {pagination && (
         <LoadMoreBar
           pagination={pagination}

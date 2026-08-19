@@ -3,6 +3,7 @@ import { makeStore } from '@/app/store'
 import { insightsApi, promptsApi } from '@/services/api'
 import { http, HttpResponse } from 'msw'
 import { ALL_INSIGHTS, API, server } from '@/test/server'
+import { searchTermChanged, selectSearchTerm } from '@/features/insights/insightsViewSlice'
 import { conversationReset, selectContextId, selectHistory, selectOutcome } from './promptSlice'
 
 const flushMicrotasks = () => new Promise((r) => setTimeout(r, 0))
@@ -57,6 +58,14 @@ describe('promptSlice', () => {
     const store = makeStore()
     const outcome = selectOutcome(await submit(store, 'soybean crush margins'))
     expect(outcome).toMatchObject({ kind: 'error', error: { code: 'NETWORK_ERROR' } })
+  })
+
+  it('a new answer clears the search term but keeps sort settings', async () => {
+    const store = makeStore()
+    store.dispatch(searchTermChanged('brazil'))
+    await submit(store, 'soybean crush margins')
+    expect(selectSearchTerm(store.getState())).toBe('')
+    expect(store.getState().insightsView.sortField).toBe('title')
   })
 
   it('conversationReset clears everything', async () => {

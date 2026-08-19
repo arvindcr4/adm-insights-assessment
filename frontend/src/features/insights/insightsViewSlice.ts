@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { promptsApi } from '@/services/api'
 
 export const SORT_FIELDS = ['title', 'content'] as const
 export type SortField = (typeof SORT_FIELDS)[number]
@@ -33,6 +34,12 @@ const insightsViewSlice = createSlice({
     viewReset() {
       return initialInsightsViewState
     },
+  },
+  extraReducers: (builder) => {
+    // A new answer is a new result set: drop the search term, keep the user's sort preference.
+    builder.addMatcher(promptsApi.endpoints.submitPrompt.matchFulfilled, (state) => {
+      state.searchTerm = ''
+    })
   },
   selectors: {
     selectSearchTerm: (state) => state.searchTerm,
