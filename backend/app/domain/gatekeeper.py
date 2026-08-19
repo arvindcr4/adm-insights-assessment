@@ -17,6 +17,9 @@ STOPWORDS: frozenset[str] = frozenset(
     very can will just should now please tell give show explain help hi hello hey thanks
     thank ok okay yes yeah something anything everything nothing stuff thing things details
     detail info information want need know let us get find see look make use
+    el la los las un una unos unas y o de del en con por para al lo que es son como
+    le les des une et ou du au aux sur dans pour par est sont que qui
+    der die das ein eine und oder von zu mit auf für im am ist sind wie
     """.split()  # noqa: SIM905 - readable word list
 )
 

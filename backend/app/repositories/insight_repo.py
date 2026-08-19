@@ -5,9 +5,10 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
+from types import MappingProxyType
 from typing import Protocol
 
-from app.domain.models import Insight, InsightMetadata
+from app.domain.models import Insight, InsightMetadata, LocalizedText
 
 DEFAULT_DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "insights.json"
 
@@ -33,11 +34,16 @@ class JsonInsightRepository:
 
 def _parse(item: dict) -> Insight:
     meta = item["metadata"]
+    translations = {
+        code: LocalizedText(title=loc["title"], content=loc["content"])
+        for code, loc in item.get("translations", {}).items()
+    }
     return Insight(
         id=item["id"],
         title=item["title"],
         content=item["content"],
         language=item.get("language", "en"),
+        translations=MappingProxyType(translations),
         metadata=InsightMetadata(
             category=meta["category"],
             tags=tuple(meta["tags"]),
