@@ -37,19 +37,69 @@ VAGUE_PHRASES: frozenset[str] = frozenset(
     }
 )
 
-REASON_MESSAGES: dict[str, str] = {
-    "PROMPT_TOO_SHORT": "The prompt is too short to be understood.",
-    "TOO_FEW_WORDS": "A single word is not enough context.",
-    "NO_MEANINGFUL_CONTENT": "The prompt contains no meaningful words.",
-    "ONLY_FILLER_WORDS": "The prompt only contains filler words (e.g. 'what is it?').",
-    "VAGUE_PROMPT": "The prompt is too vague to act on.",
+# Human-readable copy per language. Codes in `reasons` stay machine-readable for clients.
+PREFIX: dict[str, str] = {
+    "en": "Please provide more details.",
+    "es": "Por favor, aporta más detalles.",
+    "fr": "Veuillez donner plus de détails.",
+    "de": "Bitte geben Sie mehr Details an.",
 }
 
-DEFAULT_SUGGESTIONS: tuple[str, ...] = (
-    "Name the subject you are interested in (e.g. a commodity, a market, a process).",
-    "Add a region or time frame if relevant.",
-    "Say what kind of answer you expect (trend, comparison, explanation).",
-)
+REASON_MESSAGES: dict[str, dict[str, str]] = {
+    "en": {
+        "PROMPT_TOO_SHORT": "The prompt is too short to be understood.",
+        "TOO_FEW_WORDS": "A single word is not enough context.",
+        "NO_MEANINGFUL_CONTENT": "The prompt contains no meaningful words.",
+        "ONLY_FILLER_WORDS": "The prompt only contains filler words (e.g. 'what is it?').",
+        "VAGUE_PROMPT": "The prompt is too vague to act on.",
+    },
+    "es": {
+        "PROMPT_TOO_SHORT": "La consulta es demasiado corta para entenderse.",
+        "TOO_FEW_WORDS": "Una sola palabra no da suficiente contexto.",
+        "NO_MEANINGFUL_CONTENT": "La consulta no contiene palabras con significado.",
+        "ONLY_FILLER_WORDS": "La consulta solo contiene palabras de relleno (p. ej. «¿qué es?»).",
+        "VAGUE_PROMPT": "La consulta es demasiado vaga para actuar.",
+    },
+    "fr": {
+        "PROMPT_TOO_SHORT": "La requête est trop courte pour être comprise.",
+        "TOO_FEW_WORDS": "Un seul mot ne donne pas assez de contexte.",
+        "NO_MEANINGFUL_CONTENT": "La requête ne contient aucun mot significatif.",
+        "ONLY_FILLER_WORDS": "La requête ne contient que des mots vides (ex. « c’est quoi ? »).",
+        "VAGUE_PROMPT": "La requête est trop vague pour y donner suite.",
+    },
+    "de": {
+        "PROMPT_TOO_SHORT": "Die Anfrage ist zu kurz, um verstanden zu werden.",
+        "TOO_FEW_WORDS": "Ein einzelnes Wort liefert nicht genug Kontext.",
+        "NO_MEANINGFUL_CONTENT": "Die Anfrage enthält keine aussagekräftigen Wörter.",
+        "ONLY_FILLER_WORDS": "Die Anfrage besteht nur aus Füllwörtern (z. B. „was ist das?“).",
+        "VAGUE_PROMPT": "Die Anfrage ist zu vage, um darauf zu reagieren.",
+    },
+}
+
+SUGGESTIONS: dict[str, tuple[str, ...]] = {
+    "en": (
+        "Name the subject you are interested in (e.g. a commodity, a market, a process).",
+        "Add a region or time frame if relevant.",
+        "Say what kind of answer you expect (trend, comparison, explanation).",
+    ),
+    "es": (
+        "Indica el tema que te interesa (p. ej. una materia prima, un mercado, un proceso).",
+        "Añade una región o un periodo si procede.",
+        "Di qué tipo de respuesta esperas (tendencia, comparación, explicación).",
+    ),
+    "fr": (
+        "Nommez le sujet qui vous intéresse (ex. une matière première, un marché, un procédé).",
+        "Ajoutez une région ou une période si pertinent.",
+        "Précisez le type de réponse attendu (tendance, comparaison, explication).",
+    ),
+    "de": (
+        "Nennen Sie das Thema, das Sie interessiert (z. B. Rohstoff, Markt, Prozess).",
+        "Ergänzen Sie ggf. eine Region oder einen Zeitraum.",
+        "Sagen Sie, welche Art Antwort Sie erwarten (Trend, Vergleich, Erklärung).",
+    ),
+}
+
+DEFAULT_LANGUAGE = "en"
 
 
 @dataclass(frozen=True, slots=True)
@@ -79,10 +129,18 @@ class PromptGatekeeper:
         unique = tuple(dict.fromkeys(reasons))
         if not unique:
             return ClarificationVerdict(needs_clarification=False)
-        return ClarificationVerdict(
-            needs_clarification=True, reasons=unique, suggestions=DEFAULT_SUGGESTIONS
-        )
+        return ClarificationVerdict(needs_clarification=True, reasons=unique)
 
     @staticmethod
-    def describe(reasons: tuple[str, ...]) -> str:
-        return " ".join(REASON_MESSAGES.get(r, r) for r in reasons)
+    def describe(reasons: tuple[str, ...], language: str = DEFAULT_LANGUAGE) -> str:
+        """Localized message: prefix + the primary reason, in `language` (falls back to English)."""
+        lang = language if language in REASON_MESSAGES else DEFAULT_LANGUAGE
+        table = REASON_MESSAGES[lang]
+        detail = " ".join(
+            table.get(r, REASON_MESSAGES[DEFAULT_LANGUAGE].get(r, r)) for r in reasons
+        )
+        return f"{PREFIX[lang]} {detail}".strip()
+
+    @staticmethod
+    def suggestions(language: str = DEFAULT_LANGUAGE) -> tuple[str, ...]:
+        return SUGGESTIONS.get(language, SUGGESTIONS[DEFAULT_LANGUAGE])

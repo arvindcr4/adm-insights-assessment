@@ -99,7 +99,7 @@ describe('InsightsPanel', () => {
     )
     await user.click(screen.getByRole('button', { name: /load more/i }))
     const alert = await screen.findByRole('alert')
-    expect(alert).toHaveTextContent(/could not load more: request not found or expired/i)
+    expect(alert).toHaveTextContent(/could not load more: this answer has expired/i)
     expect(screen.getAllByTestId('insight-card')).toHaveLength(10)
   })
 
@@ -114,7 +114,9 @@ describe('InsightsPanel', () => {
     )
     renderPanel()
     const alert = await screen.findByRole('alert')
-    expect(within(alert).getByText(/request not found or expired/i)).toBeInTheDocument()
+    expect(
+      within(alert).getByText(/this answer has expired.*REQUEST_NOT_FOUND/i),
+    ).toBeInTheDocument()
     expect(within(alert).getByRole('button', { name: /retry/i })).toBeInTheDocument()
   })
 })

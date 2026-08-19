@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { useAppSelector } from '@/app/hooks'
 import { Alert, Badge, Button } from '@/components/ui'
+import { errorTitle, useLocale, useT } from '@/i18n'
 import { deriveVisibleInsights } from '@/lib/insightFilters'
 import { toAppError, useGetInsightsPagesInfiniteQuery } from '@/services/api'
 import { InsightList } from './InsightList'
@@ -31,6 +32,8 @@ export function InsightsPanel({
   turn,
   matchedKeywords,
 }: InsightsPanelProps) {
+  const t = useT()
+  const locale = useLocale()
   const {
     data,
     error,
@@ -45,8 +48,8 @@ export function InsightsPanel({
 
   const loaded = useMemo(() => data?.pages.flatMap((p) => p.insights) ?? EMPTY, [data])
   const visible = useMemo(
-    () => deriveVisibleInsights(loaded, searchTerm, sortField, sortDirection),
-    [loaded, searchTerm, sortField, sortDirection],
+    () => deriveVisibleInsights(loaded, searchTerm, sortField, sortDirection, locale),
+    [loaded, searchTerm, sortField, sortDirection, locale],
   )
   const pagination = data?.pages.at(-1)?.pagination
 
@@ -59,10 +62,10 @@ export function InsightsPanel({
     return (
       <Alert
         tone="error"
-        title={`${appError.message} (${appError.code})`}
+        title={`${errorTitle(t, appError.code, appError.message)} (${appError.code})`}
         actions={
           <Button variant="secondary" onClick={() => void refetch()}>
-            Retry
+            {t('outcome.retry')}
           </Button>
         }
       />
@@ -70,15 +73,20 @@ export function InsightsPanel({
   }
 
   return (
-    <section className={styles.panel} aria-label="Insights" aria-busy={isFetching || undefined}>
+    <section
+      className={styles.panel}
+      aria-label={t('insights.region')}
+      aria-busy={isFetching || undefined}
+    >
       <header className={styles.header}>
         <div>
-          <h2 className={styles.title}>Insights for “{prompt}”</h2>
+          <h2 className={styles.title}>{t('insights.heading', { prompt })}</h2>
           <p className={styles.meta}>
-            <Badge tone="accent">{targetLanguage}</Badge> <Badge>turn {turn}</Badge>{' '}
+            <Badge tone="accent">{targetLanguage}</Badge>{' '}
+            <Badge>{t('insights.turn', { turn })}</Badge>{' '}
             {matchedKeywords.length > 0 && (
               <span>
-                matched:{' '}
+                {t('insights.matched')}{' '}
                 {matchedKeywords.map((k) => (
                   <code key={k}>{k} </code>
                 ))}
@@ -88,8 +96,11 @@ export function InsightsPanel({
         </div>
         {pagination && (
           <p className={styles.count} aria-live="polite">
-            Showing <strong>{visible.length}</strong> of {loaded.length} loaded ·{' '}
-            {pagination.totalItems} total
+            {t('insights.showing', {
+              visible: visible.length,
+              loaded: loaded.length,
+              total: pagination.totalItems,
+            })}
           </p>
         )}
       </header>
@@ -99,7 +110,12 @@ export function InsightsPanel({
       <InsightList insights={visible} loading={isLoading} searchTerm={searchTerm} />
 
       {error && data && (
-        <Alert tone="error" title={`Could not load more: ${toAppError(error).message}`} />
+        <Alert
+          tone="error"
+          title={t('insights.loadMoreFailed', {
+            message: errorTitle(t, toAppError(error).code, toAppError(error).message),
+          })}
+        />
       )}
 
       {pagination && (

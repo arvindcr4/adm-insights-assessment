@@ -89,6 +89,14 @@ State management:
 - **`promptSlice`** stores every request/response pair (`history`, including rejected 4xx/network exchanges), the conversation `contextId`, and a single discriminated `outcome` — populated by matchers on the mutation's fulfilled/rejected actions, so components never copy API results around. Clicking a history row re-opens that exchange; successful answers render straight from the RTK Query cache.
 - **`insightsViewSlice`** holds the debounced search term and sort settings.
 
+## Localization
+
+The selected target language drives the whole experience, not just the answer:
+
+- **UI copy** — `frontend/src/i18n/`: a dependency-free, typed dictionary per locale (`en` is the source of truth; `es`/`fr`/`de` are typed against it, so a missing key is a compile error, and a test asserts identical key sets). `useT()` / `translate()` handle `{param}` interpolation and `Intl.PluralRules` plurals. `localeSlice` holds the UI locale; the form's `targetLanguage` field dispatches `localeChanged`. `<html lang>`, the document title, zod validation messages, error titles (by error code) and `Intl` date/percent/collation all follow it.
+- **Content** — each catalogue entry carries en/es/fr/de title, content and category; the BFF returns the rendition for `targetLanguage` (tags/source stay machine identifiers). Keyword matching spans all four languages, so prompts written in Spanish/French/German match.
+- **BFF copy** — clarification `message` and `suggestions` are localized by `targetLanguage`; `reasons` and `error` codes stay machine-readable so clients can map them (the SPA does, for error titles).
+
 ## Decisions worth calling out
 
 - **Pagination in the BE, search/sort in the FE.** The backend owns slicing and metadata (the result set can be large, and the client should not need all of it). The UI uses "Load more" so client-side search/sort work over everything loaded so far and the count line says "showing X of Y loaded · Z total" to keep that honest. If global search were required, `q`/`sort` would move to the page endpoint — the `lib/` functions are already pure and would be replaced by query params, not rewritten.
@@ -102,8 +110,8 @@ State management:
 
 ## Tests
 
-- Backend (42): gatekeeper rules, pagination maths, API validation/4xx envelopes (incl. framework 404/405), clarification short-circuit (spy AI), page navigation/disjointness, injected page-size bounds, body-size guard (declared and chunked), store TTL/LRU eviction, turn counting, determinism.
-- Frontend (34): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network, history incl. rejected, re-open), form validity gating, language loading + fallback on failure, SUCCESS/clarification/4xx/422 rendering, no page-1 refetch + load more, load-more failure, debounced search across pages, sort toggles, first-page fetch error with retry, search reset on new answer.
+- Backend (48): gatekeeper rules, pagination maths, API validation/4xx envelopes (incl. framework 404/405), clarification short-circuit (spy AI), page navigation/disjointness, injected page-size bounds, body-size guard (declared and chunked), store TTL/LRU eviction, turn counting, determinism, localized content/categories/clarification copy, multilingual matching.
+- Frontend (38): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network, history incl. rejected, re-open), form validity gating, language loading + fallback on failure, SUCCESS/clarification/4xx/422 rendering, no page-1 refetch + load more, load-more failure, debounced search across pages, sort toggles, first-page fetch error with retry, search reset on new answer, i18n (key parity across locales, plurals, whole-UI switch incl. validation messages and result chrome).
 
 ## Hardening
 

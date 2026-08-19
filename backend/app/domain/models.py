@@ -22,6 +22,7 @@ class InsightMetadata:
 class LocalizedText:
     title: str
     content: str
+    category: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -50,7 +51,10 @@ class Insight:
         loc = self.translations.get(language)
         if loc is None:
             return self
-        return replace(self, title=loc.title, content=loc.content, language=language)
+        metadata = replace(self.metadata, category=loc.category) if loc.category else self.metadata
+        return replace(
+            self, title=loc.title, content=loc.content, language=language, metadata=metadata
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -75,7 +79,6 @@ class StoredRequest:
 class ClarificationVerdict:
     needs_clarification: bool
     reasons: tuple[str, ...] = field(default=())
-    suggestions: tuple[str, ...] = field(default=())
 
 
 def _tokenize(text: str) -> list[str]:

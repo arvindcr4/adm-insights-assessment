@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { EmptyState } from '@/components/ui'
+import { useT } from '@/i18n'
 import type { Insight } from '@/services/api'
 import { InsightCard } from './InsightCard'
 import styles from './InsightList.module.css'
@@ -16,9 +17,10 @@ export const InsightList = memo(function InsightList({
   loading,
   searchTerm,
 }: InsightListProps) {
+  const t = useT()
   if (loading) {
     return (
-      <ul className={styles.list} aria-busy="true" aria-label="Loading insights">
+      <ul className={styles.list} aria-busy="true" aria-label={t('insights.loading')}>
         {Array.from({ length: 3 }, (_, i) => (
           <li key={i} className={styles.skeleton} />
         ))}
@@ -27,8 +29,10 @@ export const InsightList = memo(function InsightList({
   }
   if (insights.length === 0) {
     return (
-      <EmptyState title={searchTerm ? `No insights match “${searchTerm}”` : 'No insights returned'}>
-        {searchTerm ? 'Try a different search term or load more results.' : null}
+      <EmptyState
+        title={searchTerm ? t('insights.noMatch', { term: searchTerm }) : t('insights.none')}
+      >
+        {searchTerm ? t('insights.noMatchHint') : null}
       </EmptyState>
     )
   }

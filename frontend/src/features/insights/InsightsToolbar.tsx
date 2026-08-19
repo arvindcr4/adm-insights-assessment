@@ -2,6 +2,7 @@ import { memo, useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { Button } from '@/components/ui'
 import { useDebouncedCallback } from '@/hooks/useDebouncedCallback'
+import { useT } from '@/i18n'
 import styles from './InsightsToolbar.module.css'
 import {
   searchTermChanged,
@@ -18,8 +19,9 @@ export const SEARCH_DEBOUNCE_MS = 300
 
 /** Search + sort controls. Memoised: it never depends on the list itself. */
 export const InsightsToolbar = memo(function InsightsToolbar() {
+  const t = useT()
   return (
-    <div className={styles.toolbar} role="group" aria-label="Filter and sort insights">
+    <div className={styles.toolbar} role="group" aria-label={t('insights.toolbarLabel')}>
       <SearchInput />
       <SortControls />
     </div>
@@ -28,6 +30,7 @@ export const InsightsToolbar = memo(function InsightsToolbar() {
 
 function SearchInput() {
   const dispatch = useAppDispatch()
+  const t = useT()
   // Raw value is local so every keystroke does not touch the store; the store gets the debounced term.
   const storeTerm = useAppSelector(selectSearchTerm)
   const [value, setValue] = useState(storeTerm)
@@ -59,19 +62,19 @@ function SearchInput() {
   return (
     <div className={styles.search}>
       <label htmlFor="insight-search" className="sr-only">
-        Search insights
+        {t('insights.searchLabel')}
       </label>
       <input
         id="insight-search"
         type="search"
         className={styles.input}
-        placeholder="Search text, category, tags…"
+        placeholder={t('insights.searchPlaceholder')}
         value={value}
         onChange={onChange}
         autoComplete="off"
       />
       {value && (
-        <Button variant="ghost" onClick={onClear} aria-label="Clear search">
+        <Button variant="ghost" onClick={onClear} aria-label={t('insights.clearSearch')}>
           ×
         </Button>
       )}
@@ -79,17 +82,18 @@ function SearchInput() {
   )
 }
 
-const SORT_LABEL: Record<SortField, string> = { title: 'Title', content: 'Content' }
+const SORT_LABEL_KEY = { title: 'insights.sortTitle', content: 'insights.sortContent' } as const
 
 function SortControls() {
   const dispatch = useAppDispatch()
+  const t = useT()
   const sortField = useAppSelector(selectSortField)
   const sortDirection = useAppSelector(selectSortDirection)
 
   return (
     <div className={styles.sort}>
       <label htmlFor="sort-field" className={styles.sortLabel}>
-        Sort by
+        {t('insights.sortBy')}
       </label>
       <select
         id="sort-field"
@@ -99,17 +103,19 @@ function SortControls() {
       >
         {SORT_FIELDS.map((f) => (
           <option key={f} value={f}>
-            {SORT_LABEL[f]}
+            {t(SORT_LABEL_KEY[f])}
           </option>
         ))}
       </select>
       <Button
         variant="secondary"
         onClick={() => dispatch(sortDirectionToggled())}
-        aria-label={`Sort ${sortDirection === 'asc' ? 'A to Z' : 'Z to A'}; click to toggle`}
+        aria-label={t('insights.sortToggleAria', {
+          order: t(sortDirection === 'asc' ? 'insights.sortOrderAsc' : 'insights.sortOrderDesc'),
+        })}
         aria-pressed={sortDirection === 'desc'}
       >
-        {sortDirection === 'asc' ? 'A → Z' : 'Z → A'}
+        {sortDirection === 'asc' ? t('insights.sortAsc') : t('insights.sortDesc')}
       </Button>
     </div>
   )

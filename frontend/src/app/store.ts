@@ -2,12 +2,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { insightsViewReducer, insightsViewSliceName } from '@/features/insights/insightsViewSlice'
 import { promptReducer, promptSliceName } from '@/features/prompt/promptSlice'
+import { localeReducer, localeSliceName } from '@/i18n/localeSlice'
 import { baseApi } from '@/services/api'
 
 export const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
   [promptSliceName]: promptReducer,
   [insightsViewSliceName]: insightsViewReducer,
+  [localeSliceName]: localeReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

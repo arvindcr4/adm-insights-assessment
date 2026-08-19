@@ -16,7 +16,8 @@ def test_localized_returns_translated_text_and_tags_language() -> None:
     es = insight.localized("es")
     assert es.language == "es"
     assert es.title != insight.title and es.content != insight.content
-    assert es.id == insight.id and es.metadata == insight.metadata
+    assert es.id == insight.id and es.metadata.tags == insight.metadata.tags
+    assert es.metadata.category == "Oleaginosas"
     # Unknown language: source text, honestly tagged as the source language.
     xx = insight.localized("xx")
     assert xx.language == "en" and xx.title == insight.title
@@ -28,6 +29,16 @@ def test_api_returns_insights_in_the_target_language(client: TestClient) -> None
     assert en["id"] == de["id"]
     assert de["language"] == "de"
     assert de["title"] != en["title"]
+    assert de["metadata"]["category"] != en["metadata"]["category"]
+    assert de["metadata"]["tags"] == en["metadata"]["tags"]  # tags are machine identifiers
+
+
+def test_clarification_is_in_the_target_language(client: TestClient) -> None:
+    body = submit(client, prompt="hi", targetLanguage="fr").json()
+    assert body["status"] == "NEEDS_CLARIFICATION"
+    assert body["message"].startswith("Veuillez donner plus de détails.")
+    assert body["suggestions"][0].startswith("Nommez le sujet")
+    assert "PROMPT_TOO_SHORT" in body["reasons"]
 
 
 def test_prompts_in_other_languages_match_too(client: TestClient) -> None:

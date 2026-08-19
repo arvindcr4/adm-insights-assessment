@@ -20,15 +20,18 @@
     "translations": {
       "es": {
         "title": "Los márgenes de molienda de soja se amplían en el Medio Oeste de EE. UU.",
-        "content": "Los márgenes de molienda mejoraron porque la demanda de harina de soja de los integradores avícolas superó el precio del grano; las plantas de Iowa e Illinois operan cerca de su capacidad."
+        "content": "Los márgenes de molienda mejoraron porque la demanda de harina de soja de los integradores avícolas superó el precio del grano; las plantas de Iowa e Illinois operan cerca de su capacidad.",
+        "category": "Oleaginosas"
       },
       "fr": {
         "title": "Les marges de trituration du soja s’élargissent dans le Midwest américain",
-        "content": "Les marges de trituration se sont améliorées, la demande de tourteau de soja des intégrateurs avicoles dépassant le prix des fèves ; les usines de l’Iowa et de l’Illinois tournent près de leur capacité."
+        "content": "Les marges de trituration se sont améliorées, la demande de tourteau de soja des intégrateurs avicoles dépassant le prix des fèves ; les usines de l’Iowa et de l’Illinois tournent près de leur capacité.",
+        "category": "Oléagineux"
       },
       "de": {
         "title": "Sojaverarbeitungsmargen im US-Mittleren Westen weiten sich aus",
-        "content": "Die Crush-Margen verbesserten sich, da die Nachfrage der Geflügelintegratoren nach Sojaschrot die Bohnenpreise übertraf; die Werke in Iowa und Illinois laufen nahe der Kapazitätsgrenze."
+        "content": "Die Crush-Margen verbesserten sich, da die Nachfrage der Geflügelintegratoren nach Sojaschrot die Bohnenpreise übertraf; die Werke in Iowa und Illinois laufen nahe der Kapazitätsgrenze.",
+        "category": "Ölsaaten"
       }
     }
   },
@@ -53,15 +56,18 @@
     "translations": {
       "es": {
         "title": "El ritmo de cosecha de soja en Brasil supera el promedio de cinco años",
-        "content": "El clima favorable en Mato Grosso aceleró la cosecha; las filas de embarque en Santos y Paranaguá se llenan para envíos de marzo."
+        "content": "El clima favorable en Mato Grosso aceleró la cosecha; las filas de embarque en Santos y Paranaguá se llenan para envíos de marzo.",
+        "category": "Oleaginosas"
       },
       "fr": {
         "title": "Le rythme de récolte du soja au Brésil dépasse la moyenne quinquennale",
-        "content": "Une météo favorable dans le Mato Grosso a accéléré la récolte ; les files d’attente à l’export à Santos et Paranaguá se remplissent pour les chargements de mars."
+        "content": "Une météo favorable dans le Mato Grosso a accéléré la récolte ; les files d’attente à l’export à Santos et Paranaguá se remplissent pour les chargements de mars.",
+        "category": "Oléagineux"
       },
       "de": {
         "title": "Brasiliens Sojaernte liegt vor dem Fünfjahresdurchschnitt",
-        "content": "Günstiges Wetter in Mato Grosso beschleunigte die Ernte; die Exportwarteschlangen in Santos und Paranaguá füllen sich für Märzverladungen."
+        "content": "Günstiges Wetter in Mato Grosso beschleunigte die Ernte; die Exportwarteschlangen in Santos und Paranaguá füllen sich für Märzverladungen.",
+        "category": "Ölsaaten"
       }
     }
   },
@@ -85,15 +91,18 @@
     "translations": {
       "es": {
         "title": "La molienda en Argentina se recupera tras el año de sequía",
-        "content": "Mayores ventas de los productores y una mejor cosecha de soja devuelven los ritmos de molienda de Rosario hacia una utilización normal."
+        "content": "Mayores ventas de los productores y una mejor cosecha de soja devuelven los ritmos de molienda de Rosario hacia una utilización normal.",
+        "category": "Oleaginosas"
       },
       "fr": {
         "title": "La trituration argentine se redresse après l’année de sécheresse",
-        "content": "Des ventes agricoles plus soutenues et une meilleure récolte de soja ramènent les cadences de trituration de Rosario vers une utilisation normale."
+        "content": "Des ventes agricoles plus soutenues et une meilleure récolte de soja ramènent les cadences de trituration de Rosario vers une utilisation normale.",
+        "category": "Oléagineux"
       },
       "de": {
         "title": "Argentiniens Verarbeitungsmengen erholen sich nach dem Dürrejahr",
-        "content": "Höhere Verkäufe der Landwirte und eine bessere Sojaernte bringen die Crush-Raten in Rosario wieder in Richtung normaler Auslastung."
+        "content": "Höhere Verkäufe der Landwirte und eine bessere Sojaernte bringen die Crush-Raten in Rosario wieder in Richtung normaler Auslastung.",
+        "category": "Ölsaaten"
       }
     }
   },
@@ -117,15 +126,18 @@
     "translations": {
       "es": {
         "title": "La oferta de canola se ajusta por menor superficie en Canadá",
-        "content": "Menos área sembrada en las Praderas y focos secos en Saskatchewan apuntan a una cosecha de canola más pequeña y bases más firmes en las molturadoras."
+        "content": "Menos área sembrada en las Praderas y focos secos en Saskatchewan apuntan a una cosecha de canola más pequeña y bases más firmes en las molturadoras.",
+        "category": "Oleaginosas"
       },
       "fr": {
         "title": "L’offre de canola se resserre avec le recul des surfaces canadiennes",
-        "content": "La baisse des surfaces dans les Prairies et des poches de sécheresse en Saskatchewan annoncent une récolte de canola plus faible et des bases plus fermes chez les triturateurs."
+        "content": "La baisse des surfaces dans les Prairies et des poches de sécheresse en Saskatchewan annoncent une récolte de canola plus faible et des bases plus fermes chez les triturateurs.",
+        "category": "Oléagineux"
       },
       "de": {
         "title": "Canola-Angebot verknappt sich durch geringere kanadische Anbaufläche",
-        "content": "Weniger Anbaufläche in den Prärien und Trockeninseln in Saskatchewan deuten auf eine kleinere Canola-Ernte und festere Basis bei den Ölmühlen hin."
+        "content": "Weniger Anbaufläche in den Prärien und Trockeninseln in Saskatchewan deuten auf eine kleinere Canola-Ernte und festere Basis bei den Ölmühlen hin.",
+        "category": "Ölsaaten"
       }
     }
   },
@@ -150,15 +162,18 @@
     "translations": {
       "es": {
         "title": "Se reduce el descuento del aceite de girasol frente a la palma",
-        "content": "Las primas del aceite de girasol del mar Negro se firmaron al desacelerarse la molienda ucraniana; compradores en India pasaron parte de su cartera a palma."
+        "content": "Las primas del aceite de girasol del mar Negro se firmaron al desacelerarse la molienda ucraniana; compradores en India pasaron parte de su cartera a palma.",
+        "category": "Oleaginosas"
       },
       "fr": {
         "title": "La décote de l’huile de tournesol face à la palme se réduit",
-        "content": "Les primes de l’huile de tournesol de la mer Noire se sont raffermies avec le ralentissement de la trituration ukrainienne ; des acheteurs indiens ont basculé une partie de leurs achats vers la palme."
+        "content": "Les primes de l’huile de tournesol de la mer Noire se sont raffermies avec le ralentissement de la trituration ukrainienne ; des acheteurs indiens ont basculé une partie de leurs achats vers la palme.",
+        "category": "Oléagineux"
       },
       "de": {
         "title": "Abschlag von Sonnenblumenöl gegenüber Palmöl schrumpft",
-        "content": "Die Prämien für Schwarzmeer-Sonnenblumenöl festigten sich, da die ukrainische Verarbeitung nachließ; Käufer in Indien verlagerten einen Teil ihres Bedarfs auf Palmöl."
+        "content": "Die Prämien für Schwarzmeer-Sonnenblumenöl festigten sich, da die ukrainische Verarbeitung nachließ; Käufer in Indien verlagerten einen Teil ihres Bedarfs auf Palmöl.",
+        "category": "Ölsaaten"
       }
     }
   },
@@ -183,15 +198,18 @@
     "translations": {
       "es": {
         "title": "Los rendimientos de maíz en Illinois superan la estimación del USDA",
-        "content": "Los primeros reportes de cosecha muestran buen número de mazorcas; la base en terminales fluviales se suavizó por fuertes ventas de productores."
+        "content": "Los primeros reportes de cosecha muestran buen número de mazorcas; la base en terminales fluviales se suavizó por fuertes ventas de productores.",
+        "category": "Granos"
       },
       "fr": {
         "title": "Les rendements de maïs en Illinois dépassent l’estimation de l’USDA",
-        "content": "Les premiers retours de moisson montrent de bons comptages d’épis ; la base aux terminaux fluviaux s’est détendue sous l’effet de ventes agricoles soutenues."
+        "content": "Les premiers retours de moisson montrent de bons comptages d’épis ; la base aux terminaux fluviaux s’est détendue sous l’effet de ventes agricoles soutenues.",
+        "category": "Céréales"
       },
       "de": {
         "title": "Maiserträge in Illinois über der USDA-Schätzung",
-        "content": "Erste Ernteberichte zeigen hohe Kolbenzahlen; die Basis an den Flussterminals gab wegen starker Abgaben der Landwirte nach."
+        "content": "Erste Ernteberichte zeigen hohe Kolbenzahlen; die Basis an den Flussterminals gab wegen starker Abgaben der Landwirte nach.",
+        "category": "Getreide"
       }
     }
   },
@@ -216,15 +234,18 @@
     "translations": {
       "es": {
         "title": "Suben las primas por proteína del trigo duro rojo de invierno",
-        "content": "Menor proteína en Kansas obliga a los molineros a pagar más por HRW de 12 %+; los diferenciales frente al trigo blando se ampliaron."
+        "content": "Menor proteína en Kansas obliga a los molineros a pagar más por HRW de 12 %+; los diferenciales frente al trigo blando se ampliaron.",
+        "category": "Granos"
       },
       "fr": {
         "title": "Les primes de protéine du blé dur rouge d’hiver augmentent",
-        "content": "La faible teneur en protéines au Kansas pousse les meuniers à payer plus cher le HRW à 12 %+ ; les écarts avec le blé tendre se sont creusés."
+        "content": "La faible teneur en protéines au Kansas pousse les meuniers à payer plus cher le HRW à 12 %+ ; les écarts avec le blé tendre se sont creusés.",
+        "category": "Céréales"
       },
       "de": {
         "title": "Proteinprämien für Hard Red Winter-Weizen steigen",
-        "content": "Niedrigere Proteingehalte in Kansas zwingen Mühlen, für HRW mit 12 %+ mehr zu zahlen; die Spreads zu Weichweizen weiteten sich aus."
+        "content": "Niedrigere Proteingehalte in Kansas zwingen Mühlen, für HRW mit 12 %+ mehr zu zahlen; die Spreads zu Weichweizen weiteten sich aus.",
+        "category": "Getreide"
       }
     }
   },
@@ -249,15 +270,18 @@
     "translations": {
       "es": {
         "title": "Las exportaciones de trigo del mar Negro marcan récord mensual",
-        "content": "Las ofertas FOB rusas quedaron por debajo de los orígenes de la UE y ganaron licitaciones de Egipto y Argelia; los fletes se mantuvieron estables."
+        "content": "Las ofertas FOB rusas quedaron por debajo de los orígenes de la UE y ganaron licitaciones de Egipto y Argelia; los fletes se mantuvieron estables.",
+        "category": "Granos"
       },
       "fr": {
         "title": "Les exportations de blé de la mer Noire battent un record mensuel",
-        "content": "Les offres FOB russes ont sous-coté les origines européennes et remporté les appels d’offres égyptien et algérien ; les taux de fret sont restés stables."
+        "content": "Les offres FOB russes ont sous-coté les origines européennes et remporté les appels d’offres égyptien et algérien ; les taux de fret sont restés stables.",
+        "category": "Céréales"
       },
       "de": {
         "title": "Schwarzmeer-Weizenexporte erreichen Monatsrekord",
-        "content": "Russische FOB-Angebote unterboten EU-Herkünfte und gewannen ägyptische und algerische Ausschreibungen; die Frachtraten blieben stabil."
+        "content": "Russische FOB-Angebote unterboten EU-Herkünfte und gewannen ägyptische und algerische Ausschreibungen; die Frachtraten blieben stabil.",
+        "category": "Getreide"
       }
     }
   },
@@ -282,15 +306,18 @@
     "translations": {
       "es": {
         "title": "La demanda china de sorgo eleva la base en el Golfo de Texas",
-        "content": "Las compras renovadas de sorgo estadounidense por parte de China ajustaron la oferta del Golfo antes de la nueva cosecha."
+        "content": "Las compras renovadas de sorgo estadounidense por parte de China ajustaron la oferta del Golfo antes de la nueva cosecha.",
+        "category": "Granos"
       },
       "fr": {
         "title": "La demande chinoise de sorgho soutient la base du golfe du Texas",
-        "content": "Le retour des achats chinois de sorgho américain a resserré l’offre du Golfe avant la nouvelle récolte."
+        "content": "Le retour des achats chinois de sorgho américain a resserré l’offre du Golfe avant la nouvelle récolte.",
+        "category": "Céréales"
       },
       "de": {
         "title": "Chinas Sorghum-Nachfrage hebt die Basis am Golf von Texas",
-        "content": "Erneute chinesische Käufe von US-Sorghum verknappten das Angebot am Golf vor der neuen Ernte."
+        "content": "Erneute chinesische Käufe von US-Sorghum verknappten das Angebot am Golf vor der neuen Ernte.",
+        "category": "Getreide"
       }
     }
   },
@@ -315,15 +342,18 @@
     "translations": {
       "es": {
         "title": "Los precios del arroz ceden al relajar India las restricciones a la exportación",
-        "content": "La eliminación de precios mínimos de exportación para arroz no basmati presionó las cotizaciones de Tailandia y Vietnam."
+        "content": "La eliminación de precios mínimos de exportación para arroz no basmati presionó las cotizaciones de Tailandia y Vietnam.",
+        "category": "Granos"
       },
       "fr": {
         "title": "Les prix du riz reculent, l’Inde assouplissant ses restrictions à l’export",
-        "content": "La suppression des prix minimaux à l’export du riz non basmati a pesé sur les cotations thaïlandaises et vietnamiennes."
+        "content": "La suppression des prix minimaux à l’export du riz non basmati a pesé sur les cotations thaïlandaises et vietnamiennes.",
+        "category": "Céréales"
       },
       "de": {
         "title": "Reispreise geben nach, da Indien Exportbeschränkungen lockert",
-        "content": "Die Abschaffung von Mindestexportpreisen für Nicht-Basmati-Reis belastete die thailändischen und vietnamesischen Notierungen."
+        "content": "Die Abschaffung von Mindestexportpreisen für Nicht-Basmati-Reis belastete die thailändischen und vietnamesischen Notierungen.",
+        "category": "Getreide"
       }
     }
   },
@@ -348,15 +378,18 @@
     "translations": {
       "es": {
         "title": "Las primas de cebada cervecera se mantienen estables en Europa",
-        "content": "Las cervecerías cubrieron temprano sus necesidades del tercer trimestre; el clima en Francia y Alemania sigue favoreciendo la calidad."
+        "content": "Las cervecerías cubrieron temprano sus necesidades del tercer trimestre; el clima en Francia y Alemania sigue favoreciendo la calidad.",
+        "category": "Granos"
       },
       "fr": {
         "title": "Les primes d’orge de brasserie restent stables en Europe",
-        "content": "Les brasseurs ont couvert tôt leurs besoins du troisième trimestre ; la météo en France et en Allemagne reste favorable à la qualité."
+        "content": "Les brasseurs ont couvert tôt leurs besoins du troisième trimestre ; la météo en France et en Allemagne reste favorable à la qualité.",
+        "category": "Céréales"
       },
       "de": {
         "title": "Braugerste-Prämien in Europa stabil",
-        "content": "Brauereien deckten ihren Bedarf für das dritte Quartal früh ein; das Wetter in Frankreich und Deutschland stützt weiterhin die Qualität."
+        "content": "Brauereien deckten ihren Bedarf für das dritte Quartal früh ein; das Wetter in Frankreich und Deutschland stützt weiterhin die Qualität.",
+        "category": "Getreide"
       }
     }
   },
@@ -381,15 +414,18 @@
     "translations": {
       "es": {
         "title": "Los márgenes del etanol mejoran por menores costos del maíz",
-        "content": "Los márgenes de las plantas pasaron a positivo al debilitarse la base del maíz y mantenerse firme la demanda estacional de mezcla con gasolina."
+        "content": "Los márgenes de las plantas pasaron a positivo al debilitarse la base del maíz y mantenerse firme la demanda estacional de mezcla con gasolina.",
+        "category": "Biocombustibles"
       },
       "fr": {
         "title": "Les marges de l’éthanol s’améliorent grâce à la baisse du coût du maïs",
-        "content": "Les marges des usines sont redevenues positives avec l’affaiblissement de la base du maïs et une demande de mélange à l’essence saisonnièrement ferme."
+        "content": "Les marges des usines sont redevenues positives avec l’affaiblissement de la base du maïs et une demande de mélange à l’essence saisonnièrement ferme.",
+        "category": "Biocarburants"
       },
       "de": {
         "title": "Ethanolmargen verbessern sich dank niedrigerer Maiskosten",
-        "content": "Die Werksmargen drehten ins Plus, da die Maisbasis nachgab und die saisonale Beimischungsnachfrage für Benzin fest blieb."
+        "content": "Die Werksmargen drehten ins Plus, da die Maisbasis nachgab und die saisonale Beimischungsnachfrage für Benzin fest blieb.",
+        "category": "Biokraftstoffe"
       }
     }
   },
@@ -414,15 +450,18 @@
     "translations": {
       "es": {
         "title": "Nueva capacidad de diésel renovable presiona los diferenciales del aceite de soja",
-        "content": "Las nuevas plantas de diésel renovable en la costa del Golfo de EE. UU. elevaron la demanda de materia prima, pero los créditos se debilitaron y comprimieron las primas del aceite de soja."
+        "content": "Las nuevas plantas de diésel renovable en la costa del Golfo de EE. UU. elevaron la demanda de materia prima, pero los créditos se debilitaron y comprimieron las primas del aceite de soja.",
+        "category": "Biocombustibles"
       },
       "fr": {
         "title": "Les nouvelles capacités de diesel renouvelable pèsent sur les écarts de l’huile de soja",
-        "content": "Les nouvelles usines de diesel renouvelable sur la côte du golfe des États-Unis ont dopé la demande de matières premières, mais la valeur des crédits a fléchi, comprimant les primes de l’huile de soja."
+        "content": "Les nouvelles usines de diesel renouvelable sur la côte du golfe des États-Unis ont dopé la demande de matières premières, mais la valeur des crédits a fléchi, comprimant les primes de l’huile de soja.",
+        "category": "Biocarburants"
       },
       "de": {
         "title": "Neue Kapazitäten für erneuerbaren Diesel drücken die Sojaöl-Spreads",
-        "content": "Neue RD-Anlagen an der US-Golfküste steigerten die Rohstoffnachfrage, doch die Kreditwerte gaben nach und drückten die Sojaöl-Prämien."
+        "content": "Neue RD-Anlagen an der US-Golfküste steigerten die Rohstoffnachfrage, doch die Kreditwerte gaben nach und drückten die Sojaöl-Prämien.",
+        "category": "Biokraftstoffe"
       }
     }
   },
@@ -448,15 +487,18 @@
     "translations": {
       "es": {
         "title": "Los mandatos de combustible sostenible de aviación impulsan la demanda de lípidos",
-        "content": "Los requisitos de mezcla de SAF en la UE apuntan a una demanda creciente de aceite de cocina usado y sebo durante la década."
+        "content": "Los requisitos de mezcla de SAF en la UE apuntan a una demanda creciente de aceite de cocina usado y sebo durante la década.",
+        "category": "Biocombustibles"
       },
       "fr": {
         "title": "Les mandats de carburant d’aviation durable soutiennent la demande de lipides",
-        "content": "Les obligations d’incorporation de SAF dans l’UE annoncent une demande croissante d’huiles de cuisson usagées et de suif au cours de la décennie."
+        "content": "Les obligations d’incorporation de SAF dans l’UE annoncent une demande croissante d’huiles de cuisson usagées et de suif au cours de la décennie.",
+        "category": "Biocarburants"
       },
       "de": {
         "title": "SAF-Quoten treiben den Ausblick für die Lipidnachfrage",
-        "content": "Die EU-Beimischungsvorgaben für nachhaltigen Flugkraftstoff deuten auf zusätzliche Nachfrage nach Altspeiseöl und Talg im Laufe des Jahrzehnts hin."
+        "content": "Die EU-Beimischungsvorgaben für nachhaltigen Flugkraftstoff deuten auf zusätzliche Nachfrage nach Altspeiseöl und Talg im Laufe des Jahrzehnts hin.",
+        "category": "Biokraftstoffe"
       }
     }
   },
@@ -481,15 +523,18 @@
     "translations": {
       "es": {
         "title": "Brasil eleva la mezcla de etanol en la gasolina",
-        "content": "La mayor mezcla obligatoria respalda la expansión del etanol de maíz nacional en Mato Grosso."
+        "content": "La mayor mezcla obligatoria respalda la expansión del etanol de maíz nacional en Mato Grosso.",
+        "category": "Biocombustibles"
       },
       "fr": {
         "title": "Le Brésil relève le taux d’éthanol dans l’essence",
-        "content": "Le taux d’incorporation obligatoire plus élevé soutient l’expansion de l’éthanol de maïs national dans le Mato Grosso."
+        "content": "Le taux d’incorporation obligatoire plus élevé soutient l’expansion de l’éthanol de maïs national dans le Mato Grosso.",
+        "category": "Biocarburants"
       },
       "de": {
         "title": "Brasilien erhöht die Ethanolbeimischung im Benzin",
-        "content": "Die höhere Pflichtbeimischung stützt den Ausbau von heimischem Maisethanol in Mato Grosso."
+        "content": "Die höhere Pflichtbeimischung stützt den Ausbau von heimischem Maisethanol in Mato Grosso.",
+        "category": "Biokraftstoffe"
       }
     }
   },
@@ -515,15 +560,18 @@
     "translations": {
       "es": {
         "title": "La demanda de proteína vegetal se desplaza hacia guisante y haba",
-        "content": "Los formuladores prefieren aislados de guisante y haba por su textura; la proteína de soja sigue liderando en costo por gramo de proteína."
+        "content": "Los formuladores prefieren aislados de guisante y haba por su textura; la proteína de soja sigue liderando en costo por gramo de proteína.",
+        "category": "Nutrición"
       },
       "fr": {
         "title": "La demande de protéines végétales se tourne vers le pois et la féverole",
-        "content": "Les formulateurs privilégient les isolats de pois et de féverole pour la texture ; la protéine de soja reste en tête sur le coût par gramme de protéine."
+        "content": "Les formulateurs privilégient les isolats de pois et de féverole pour la texture ; la protéine de soja reste en tête sur le coût par gramme de protéine.",
+        "category": "Nutrition"
       },
       "de": {
         "title": "Nachfrage nach Pflanzenprotein verlagert sich zu Erbse und Ackerbohne",
-        "content": "Formulierer bevorzugen Erbsen- und Ackerbohnenisolate wegen der Textur; Sojaprotein führt weiterhin bei den Kosten pro Gramm Protein."
+        "content": "Formulierer bevorzugen Erbsen- und Ackerbohnenisolate wegen der Textur; Sojaprotein führt weiterhin bei den Kosten pro Gramm Protein.",
+        "category": "Ernährung"
       }
     }
   },
@@ -548,15 +596,18 @@
     "translations": {
       "es": {
         "title": "Crecen las ventas de ingredientes probióticos en Asia-Pacífico",
-        "content": "El posicionamiento en salud digestiva impulsó un crecimiento de dos dígitos en bebidas funcionales en Japón y Corea."
+        "content": "El posicionamiento en salud digestiva impulsó un crecimiento de dos dígitos en bebidas funcionales en Japón y Corea.",
+        "category": "Nutrición"
       },
       "fr": {
         "title": "Les ventes d’ingrédients probiotiques progressent en Asie-Pacifique",
-        "content": "Le positionnement santé digestive a porté une croissance à deux chiffres des boissons fonctionnelles au Japon et en Corée."
+        "content": "Le positionnement santé digestive a porté une croissance à deux chiffres des boissons fonctionnelles au Japon et en Corée.",
+        "category": "Nutrition"
       },
       "de": {
         "title": "Absatz probiotischer Zutaten wächst im Asien-Pazifik-Raum",
-        "content": "Die Positionierung für Verdauungsgesundheit trieb zweistelliges Wachstum bei funktionellen Getränken in Japan und Korea."
+        "content": "Die Positionierung für Verdauungsgesundheit trieb zweistelliges Wachstum bei funktionellen Getränken in Japan und Korea.",
+        "category": "Ernährung"
       }
     }
   },
@@ -582,15 +633,18 @@
     "translations": {
       "es": {
         "title": "La reducción de azúcar sigue siendo el principal motor de reformulación",
-        "content": "Los fabricantes de bebidas combinan estevia con alulosa para cerrar la brecha de sabor frente a las fórmulas con azúcar."
+        "content": "Los fabricantes de bebidas combinan estevia con alulosa para cerrar la brecha de sabor frente a las fórmulas con azúcar.",
+        "category": "Nutrición"
       },
       "fr": {
         "title": "La réduction du sucre reste le premier moteur de reformulation",
-        "content": "Les fabricants de boissons associent stévia et allulose pour combler l’écart de goût avec les formules sucrées."
+        "content": "Les fabricants de boissons associent stévia et allulose pour combler l’écart de goût avec les formules sucrées.",
+        "category": "Nutrition"
       },
       "de": {
         "title": "Zuckerreduktion bleibt wichtigster Treiber für Rezepturänderungen",
-        "content": "Getränkehersteller kombinieren Stevia mit Allulose, um die Geschmackslücke zu vollzuckrigen Rezepturen zu schließen."
+        "content": "Getränkehersteller kombinieren Stevia mit Allulose, um die Geschmackslücke zu vollzuckrigen Rezepturen zu schließen.",
+        "category": "Ernährung"
       }
     }
   },
@@ -615,15 +669,18 @@
     "translations": {
       "es": {
         "title": "Tendencias de sabor: cítricos y botánicos lideran los lanzamientos",
-        "content": "Yuzu, bergamota y flor de saúco aparecen en una proporción creciente de lanzamientos globales de bebidas."
+        "content": "Yuzu, bergamota y flor de saúco aparecen en una proporción creciente de lanzamientos globales de bebidas.",
+        "category": "Nutrición"
       },
       "fr": {
         "title": "Tendances aromatiques : agrumes et botaniques en tête des lancements",
-        "content": "Le yuzu, la bergamote et la fleur de sureau figurent dans une part croissante des lancements mondiaux de boissons."
+        "content": "Le yuzu, la bergamote et la fleur de sureau figurent dans une part croissante des lancements mondiaux de boissons.",
+        "category": "Nutrition"
       },
       "de": {
         "title": "Geschmackstrends: Zitrus und Botanicals führen bei Neueinführungen",
-        "content": "Yuzu, Bergamotte und Holunderblüte tauchen in einem wachsenden Anteil der weltweiten Getränkeeinführungen auf."
+        "content": "Yuzu, Bergamotte und Holunderblüte tauchen in einem wachsenden Anteil der weltweiten Getränkeeinführungen auf.",
+        "category": "Ernährung"
       }
     }
   },
@@ -647,15 +704,18 @@
     "translations": {
       "es": {
         "title": "La premiumización del alimento para mascotas eleva la demanda de proteínas especiales",
-        "content": "Los formatos frescos y liofilizados impulsan la demanda de proteínas animales novedosas y de insectos."
+        "content": "Los formatos frescos y liofilizados impulsan la demanda de proteínas animales novedosas y de insectos.",
+        "category": "Nutrición"
       },
       "fr": {
         "title": "La montée en gamme des aliments pour animaux de compagnie dope la demande de protéines spécialisées",
-        "content": "Les formats frais et lyophilisés tirent la demande de protéines animales nouvelles et d’insectes."
+        "content": "Les formats frais et lyophilisés tirent la demande de protéines animales nouvelles et d’insectes.",
+        "category": "Nutrition"
       },
       "de": {
         "title": "Premiumisierung bei Tiernahrung steigert Nachfrage nach Spezialproteinen",
-        "content": "Frische und gefriergetrocknete Formate treiben die Nachfrage nach neuartigen tierischen und Insektenproteinen."
+        "content": "Frische und gefriergetrocknete Formate treiben die Nachfrage nach neuartigen tierischen und Insektenproteinen.",
+        "category": "Ernährung"
       }
     }
   },
@@ -681,15 +741,18 @@
     "translations": {
       "es": {
         "title": "Aumenta la inclusión de harina de soja en las raciones europeas",
-        "content": "La harina más barata frente al trigo y la harina de colza elevó las tasas de inclusión para cerdos y aves."
+        "content": "La harina más barata frente al trigo y la harina de colza elevó las tasas de inclusión para cerdos y aves.",
+        "category": "Nutrición animal"
       },
       "fr": {
         "title": "La part du tourteau de soja augmente dans les rations européennes",
-        "content": "Un tourteau moins cher que le blé et le tourteau de colza a relevé les taux d’incorporation pour les porcs et la volaille."
+        "content": "Un tourteau moins cher que le blé et le tourteau de colza a relevé les taux d’incorporation pour les porcs et la volaille.",
+        "category": "Nutrition animale"
       },
       "de": {
         "title": "Sojaschrotanteil in europäischen Futterrationen steigt",
-        "content": "Günstigeres Schrot im Vergleich zu Weizen und Rapsschrot erhöhte die Einsatzraten bei Schweinen und Geflügel."
+        "content": "Günstigeres Schrot im Vergleich zu Weizen und Rapsschrot erhöhte die Einsatzraten bei Schweinen und Geflügel.",
+        "category": "Tierernährung"
       }
     }
   },
@@ -714,15 +777,18 @@
     "translations": {
       "es": {
         "title": "Los precios de los aminoácidos se suavizan por nueva capacidad china",
-        "content": "Las ofertas de lisina y treonina cayeron al entrar en operación capacidad adicional de fermentación."
+        "content": "Las ofertas de lisina y treonina cayeron al entrar en operación capacidad adicional de fermentación.",
+        "category": "Nutrición animal"
       },
       "fr": {
         "title": "Les prix des acides aminés fléchissent avec les nouvelles capacités chinoises",
-        "content": "Les offres de lysine et de thréonine ont reculé avec la mise en service de capacités de fermentation supplémentaires."
+        "content": "Les offres de lysine et de thréonine ont reculé avec la mise en service de capacités de fermentation supplémentaires.",
+        "category": "Nutrition animale"
       },
       "de": {
         "title": "Aminosäurepreise geben wegen neuer chinesischer Kapazitäten nach",
-        "content": "Die Angebote für Lysin und Threonin fielen, als zusätzliche Fermentationskapazitäten in Betrieb gingen."
+        "content": "Die Angebote für Lysin und Threonin fielen, als zusätzliche Fermentationskapazitäten in Betrieb gingen.",
+        "category": "Tierernährung"
       }
     }
   },
@@ -747,15 +813,18 @@
     "translations": {
       "es": {
         "title": "Crece la demanda de alimento acuícola con la producción de salmón",
-        "content": "El aumento de cosechas en Noruega y Chile sostiene la demanda de ingredientes ricos en proteína."
+        "content": "El aumento de cosechas en Noruega y Chile sostiene la demanda de ingredientes ricos en proteína.",
+        "category": "Nutrición animal"
       },
       "fr": {
         "title": "La demande d’aliments aquacoles croît avec la production de saumon",
-        "content": "La hausse des récoltes en Norvège et au Chili soutient la demande d’ingrédients riches en protéines."
+        "content": "La hausse des récoltes en Norvège et au Chili soutient la demande d’ingrédients riches en protéines.",
+        "category": "Nutrition animale"
       },
       "de": {
         "title": "Aquafutter-Nachfrage wächst mit der Lachsproduktion",
-        "content": "Das Erntewachstum in Norwegen und Chile stützt die Nachfrage nach proteinreichen Futterzutaten."
+        "content": "Das Erntewachstum in Norwegen und Chile stützt die Nachfrage nach proteinreichen Futterzutaten.",
+        "category": "Tierernährung"
       }
     }
   },
@@ -780,15 +849,18 @@
     "translations": {
       "es": {
         "title": "Vuelven las restricciones de calado en el río Misisipi",
-        "content": "El bajo nivel en el medidor de Memphis obligó a reducir el calado de las barcazas, elevando los fletes del grano hacia el Golfo."
+        "content": "El bajo nivel en el medidor de Memphis obligó a reducir el calado de las barcazas, elevando los fletes del grano hacia el Golfo.",
+        "category": "Logística"
       },
       "fr": {
         "title": "Les restrictions de tirant d’eau reviennent sur le Mississippi",
-        "content": "Le faible niveau à la jauge de Memphis a imposé une réduction du tirant d’eau des barges, renchérissant le fret des grains vers le Golfe."
+        "content": "Le faible niveau à la jauge de Memphis a imposé une réduction du tirant d’eau des barges, renchérissant le fret des grains vers le Golfe.",
+        "category": "Logistique"
       },
       "de": {
         "title": "Tiefgangsbeschränkungen auf dem Mississippi kehren zurück",
-        "content": "Niedrigwasser am Pegel Memphis erzwang Tiefgangsreduzierungen für Schubleichter und verteuerte die Getreidefracht zum Golf."
+        "content": "Niedrigwasser am Pegel Memphis erzwang Tiefgangsreduzierungen für Schubleichter und verteuerte die Getreidefracht zum Golf.",
+        "category": "Logistik"
       }
     }
   },
@@ -813,15 +885,18 @@
     "translations": {
       "es": {
         "title": "Mejoran los cupos de tránsito del Canal de Panamá tras la temporada de lluvias",
-        "content": "El calado restablecido y más cupos diarios redujeron las esperas de los buques graneleros con destino a Asia."
+        "content": "El calado restablecido y más cupos diarios redujeron las esperas de los buques graneleros con destino a Asia.",
+        "category": "Logística"
       },
       "fr": {
         "title": "Les créneaux de transit du canal de Panama s’améliorent après la saison des pluies",
-        "content": "Le tirant d’eau rétabli et les créneaux quotidiens ont réduit les temps d’attente des navires céréaliers à destination de l’Asie."
+        "content": "Le tirant d’eau rétabli et les créneaux quotidiens ont réduit les temps d’attente des navires céréaliers à destination de l’Asie.",
+        "category": "Logistique"
       },
       "de": {
         "title": "Transit-Slots im Panamakanal verbessern sich nach der Regenzeit",
-        "content": "Wiederhergestellter Tiefgang und mehr Tages-Slots verkürzten die Wartezeiten für Getreidefrachter nach Asien."
+        "content": "Wiederhergestellter Tiefgang und mehr Tages-Slots verkürzten die Wartezeiten für Getreidefrachter nach Asien.",
+        "category": "Logistik"
       }
     }
   },
@@ -846,15 +921,18 @@
     "translations": {
       "es": {
         "title": "Bajan las tarifas de contenedores para exportaciones de granos especiales",
-        "content": "Menores tarifas transpacíficas benefician los envíos de soja y legumbres con identidad preservada."
+        "content": "Menores tarifas transpacíficas benefician los envíos de soja y legumbres con identidad preservada.",
+        "category": "Logística"
       },
       "fr": {
         "title": "Les taux conteneurisés baissent pour les exportations de grains de spécialité",
-        "content": "La baisse des taux transpacifiques profite aux expéditions de soja et de légumineuses à identité préservée."
+        "content": "La baisse des taux transpacifiques profite aux expéditions de soja et de légumineuses à identité préservée.",
+        "category": "Logistique"
       },
       "de": {
         "title": "Containerraten für Spezialgetreide-Exporte sinken",
-        "content": "Niedrigere Transpazifik-Raten begünstigen identitätsgesicherte Soja- und Hülsenfruchtlieferungen."
+        "content": "Niedrigere Transpazifik-Raten begünstigen identitätsgesicherte Soja- und Hülsenfruchtlieferungen.",
+        "category": "Logistik"
       }
     }
   },
@@ -879,15 +957,18 @@
     "translations": {
       "es": {
         "title": "Escasean los vagones en las Praderas canadienses",
-        "content": "El fuerte movimiento de canola y trigo superó la oferta de vagones tolva; la base se amplió en los acopios del interior."
+        "content": "El fuerte movimiento de canola y trigo superó la oferta de vagones tolva; la base se amplió en los acopios del interior.",
+        "category": "Logística"
       },
       "fr": {
         "title": "La disponibilité de wagons se tend dans les Prairies canadiennes",
-        "content": "Les forts mouvements de canola et de blé ont dépassé l’offre de wagons-trémies ; la base s’est creusée aux silos de l’intérieur."
+        "content": "Les forts mouvements de canola et de blé ont dépassé l’offre de wagons-trémies ; la base s’est creusée aux silos de l’intérieur.",
+        "category": "Logistique"
       },
       "de": {
         "title": "Waggonverfügbarkeit in den kanadischen Prärien wird knapp",
-        "content": "Starke Canola- und Weizenbewegungen übertrafen das Angebot an Trichterwagen; die Basis weitete sich an Binnen-Silos aus."
+        "content": "Starke Canola- und Weizenbewegungen übertrafen das Angebot an Trichterwagen; die Basis weitete sich an Binnen-Silos aus.",
+        "category": "Logistik"
       }
     }
   },
@@ -913,15 +994,18 @@
     "translations": {
       "es": {
         "title": "La transición de El Niño eleva el riesgo climático en Sudamérica",
-        "content": "El giro del pronóstico hacia condiciones de La Niña aumenta el riesgo de sequía para el sur de Brasil y Argentina esta temporada."
+        "content": "El giro del pronóstico hacia condiciones de La Niña aumenta el riesgo de sequía para el sur de Brasil y Argentina esta temporada.",
+        "category": "Clima"
       },
       "fr": {
         "title": "La transition El Niño accroît le risque climatique en Amérique du Sud",
-        "content": "L’évolution des prévisions vers des conditions La Niña augmente le risque de sécheresse pour le sud du Brésil et l’Argentine cette saison."
+        "content": "L’évolution des prévisions vers des conditions La Niña augmente le risque de sécheresse pour le sud du Brésil et l’Argentine cette saison.",
+        "category": "Météo"
       },
       "de": {
         "title": "El-Niño-Übergang erhöht das Wetterrisiko in Südamerika",
-        "content": "Die Prognoseverschiebung hin zu La-Niña-Bedingungen erhöht das Trockenheitsrisiko für Südbrasilien und Argentinien in dieser Saison."
+        "content": "Die Prognoseverschiebung hin zu La-Niña-Bedingungen erhöht das Trockenheitsrisiko für Südbrasilien und Argentinien in dieser Saison.",
+        "category": "Wetter"
       }
     }
   },
@@ -946,15 +1030,18 @@
     "translations": {
       "es": {
         "title": "Se pronostica una cúpula de calor en el cinturón maicero de EE. UU. durante la polinización",
-        "content": "El calor prolongado a fines de julio podría recortar rendimientos de maíz si faltan lluvias; la soja está menos expuesta."
+        "content": "El calor prolongado a fines de julio podría recortar rendimientos de maíz si faltan lluvias; la soja está menos expuesta.",
+        "category": "Clima"
       },
       "fr": {
         "title": "Un dôme de chaleur prévu sur la Corn Belt américaine pendant la pollinisation",
-        "content": "Une chaleur prolongée fin juillet pourrait rogner les rendements de maïs si les pluies déçoivent ; le soja est moins exposé."
+        "content": "Une chaleur prolongée fin juillet pourrait rogner les rendements de maïs si les pluies déçoivent ; le soja est moins exposé.",
+        "category": "Météo"
       },
       "de": {
         "title": "Hitzeglocke über dem US-Corn-Belt zur Blütezeit erwartet",
-        "content": "Anhaltende Hitze Ende Juli könnte die Maiserträge schmälern, falls Regen ausbleibt; Soja ist weniger gefährdet."
+        "content": "Anhaltende Hitze Ende Juli könnte die Maiserträge schmälern, falls Regen ausbleibt; Soja ist weniger gefährdet.",
+        "category": "Wetter"
       }
     }
   },
@@ -980,15 +1067,18 @@
     "translations": {
       "es": {
         "title": "El avance del monzón indio es casi normal",
-        "content": "El avance oportuno del monzón respalda la siembra kharif de arroz, soja y algodón."
+        "content": "El avance oportuno del monzón respalda la siembra kharif de arroz, soja y algodón.",
+        "category": "Clima"
       },
       "fr": {
         "title": "La progression de la mousson indienne est proche de la normale",
-        "content": "L’avancée ponctuelle de la mousson soutient les semis kharif de riz, de soja et de coton."
+        "content": "L’avancée ponctuelle de la mousson soutient les semis kharif de riz, de soja et de coton.",
+        "category": "Météo"
       },
       "de": {
         "title": "Indischer Monsun verläuft nahezu normal",
-        "content": "Der rechtzeitige Monsunvorstoß stützt die Kharif-Aussaat von Reis, Soja und Baumwolle."
+        "content": "Der rechtzeitige Monsunvorstoß stützt die Kharif-Aussaat von Reis, Soja und Baumwolle.",
+        "category": "Wetter"
       }
     }
   },
@@ -1013,15 +1103,18 @@
     "translations": {
       "es": {
         "title": "El cinturón triguero australiano recibe lluvias oportunas",
-        "content": "Australia Occidental y Nueva Gales del Sur registraron lluvias en la temporada de siembra, mejorando las perspectivas de rendimiento."
+        "content": "Australia Occidental y Nueva Gales del Sur registraron lluvias en la temporada de siembra, mejorando las perspectivas de rendimiento.",
+        "category": "Clima"
       },
       "fr": {
         "title": "La ceinture à blé australienne reçoit des pluies opportunes",
-        "content": "L’Australie-Occidentale et la Nouvelle-Galles du Sud ont reçu des pluies en saison de semis, améliorant les perspectives de rendement."
+        "content": "L’Australie-Occidentale et la Nouvelle-Galles du Sud ont reçu des pluies en saison de semis, améliorant les perspectives de rendement.",
+        "category": "Météo"
       },
       "de": {
         "title": "Australiens Weizengürtel erhält rechtzeitig Regen",
-        "content": "Westaustralien und New South Wales verzeichneten Regen zur Aussaatzeit und verbesserten die Ertragsaussichten."
+        "content": "Westaustralien und New South Wales verzeichneten Regen zur Aussaatzeit und verbesserten die Ertragsaussichten.",
+        "category": "Wetter"
       }
     }
   },
@@ -1046,15 +1139,18 @@
     "translations": {
       "es": {
         "title": "Crece la superficie de agricultura regenerativa bajo programas para productores",
-        "content": "Las inscripciones en cultivos de cobertura y labranza reducida aumentaron con fuerza, apoyadas por incentivos por acre."
+        "content": "Las inscripciones en cultivos de cobertura y labranza reducida aumentaron con fuerza, apoyadas por incentivos por acre.",
+        "category": "Sostenibilidad"
       },
       "fr": {
         "title": "Les surfaces en agriculture régénératrice progressent grâce aux programmes agriculteurs",
-        "content": "Les inscriptions aux couverts végétaux et au travail réduit du sol ont fortement augmenté, soutenues par des primes à l’acre."
+        "content": "Les inscriptions aux couverts végétaux et au travail réduit du sol ont fortement augmenté, soutenues par des primes à l’acre.",
+        "category": "Durabilité"
       },
       "de": {
         "title": "Flächen für regenerative Landwirtschaft wachsen durch Erzeugerprogramme",
-        "content": "Anmeldungen für Zwischenfrüchte und reduzierte Bodenbearbeitung stiegen deutlich, gestützt durch Prämien je Acre."
+        "content": "Anmeldungen für Zwischenfrüchte und reduzierte Bodenbearbeitung stiegen deutlich, gestützt durch Prämien je Acre.",
+        "category": "Nachhaltigkeit"
       }
     }
   },
@@ -1081,15 +1177,18 @@
     "translations": {
       "es": {
         "title": "Se aclaran los plazos del reglamento de deforestación de la UE",
-        "content": "Los requisitos de trazabilidad para importaciones de soja y palma condicionan el abastecimiento y la documentación de los exportadores."
+        "content": "Los requisitos de trazabilidad para importaciones de soja y palma condicionan el abastecimiento y la documentación de los exportadores.",
+        "category": "Sostenibilidad"
       },
       "fr": {
         "title": "Les échéances du règlement européen sur la déforestation sont clarifiées",
-        "content": "Les exigences de traçabilité pour les importations de soja et de palme façonnent l’approvisionnement et la documentation des exportateurs."
+        "content": "Les exigences de traçabilité pour les importations de soja et de palme façonnent l’approvisionnement et la documentation des exportateurs.",
+        "category": "Durabilité"
       },
       "de": {
         "title": "Zeitpläne der EU-Entwaldungsverordnung geklärt",
-        "content": "Rückverfolgbarkeitsanforderungen für Soja- und Palmölimporte prägen Beschaffung und Dokumentation der Exporteure."
+        "content": "Rückverfolgbarkeitsanforderungen für Soja- und Palmölimporte prägen Beschaffung und Dokumentation der Exporteure.",
+        "category": "Nachhaltigkeit"
       }
     }
   },
@@ -1114,15 +1213,18 @@
     "translations": {
       "es": {
         "title": "Los programas de maíz de baja intensidad de carbono ganan adopción en plantas de etanol",
-        "content": "Las primas por materia prima con puntuación de carbono recompensan a los productores por reducir nitrógeno y labranza."
+        "content": "Las primas por materia prima con puntuación de carbono recompensan a los productores por reducir nitrógeno y labranza.",
+        "category": "Sostenibilidad"
       },
       "fr": {
         "title": "Les programmes de maïs à faible intensité carbone séduisent les usines d’éthanol",
-        "content": "Les primes sur matières premières notées carbone récompensent les producteurs qui réduisent l’azote et le travail du sol."
+        "content": "Les primes sur matières premières notées carbone récompensent les producteurs qui réduisent l’azote et le travail du sol.",
+        "category": "Durabilité"
       },
       "de": {
         "title": "Programme für Mais mit niedriger CO₂-Intensität finden Anklang bei Ethanolwerken",
-        "content": "Prämien für CO₂-bewertete Rohstoffe belohnen Landwirte für weniger Stickstoff und Bodenbearbeitung."
+        "content": "Prämien für CO₂-bewertete Rohstoffe belohnen Landwirte für weniger Stickstoff und Bodenbearbeitung.",
+        "category": "Nachhaltigkeit"
       }
     }
   },
@@ -1147,15 +1249,18 @@
     "translations": {
       "es": {
         "title": "El reporte de alcance 3 impulsa la demanda de datos de la cadena de suministro",
-        "content": "Los fabricantes de alimentos solicitan datos de emisiones a nivel de finca a sus proveedores de ingredientes."
+        "content": "Los fabricantes de alimentos solicitan datos de emisiones a nivel de finca a sus proveedores de ingredientes.",
+        "category": "Sostenibilidad"
       },
       "fr": {
         "title": "Le reporting Scope 3 dope la demande de données sur la chaîne d’approvisionnement",
-        "content": "Les industriels de l’alimentaire réclament des données d’émissions au niveau de l’exploitation à leurs fournisseurs d’ingrédients."
+        "content": "Les industriels de l’alimentaire réclament des données d’émissions au niveau de l’exploitation à leurs fournisseurs d’ingrédients.",
+        "category": "Durabilité"
       },
       "de": {
         "title": "Scope-3-Berichterstattung treibt Datenbedarf in der Lieferkette",
-        "content": "Lebensmittelhersteller fordern von Zutatenlieferanten Emissionsdaten auf Betriebsebene."
+        "content": "Lebensmittelhersteller fordern von Zutatenlieferanten Emissionsdaten auf Betriebsebene.",
+        "category": "Nachhaltigkeit"
       }
     }
   },
@@ -1181,15 +1286,18 @@
     "translations": {
       "es": {
         "title": "Las compras chinas de soja se desplazan hacia Brasil",
-        "content": "La incertidumbre arancelaria y los descuentos brasileños aumentaron la participación de Brasil en las importaciones chinas."
+        "content": "La incertidumbre arancelaria y los descuentos brasileños aumentaron la participación de Brasil en las importaciones chinas.",
+        "category": "Política comercial"
       },
       "fr": {
         "title": "Les achats chinois de soja se reportent vers le Brésil",
-        "content": "L’incertitude tarifaire et les décotes brésiliennes ont accru la part du Brésil dans les importations chinoises."
+        "content": "L’incertitude tarifaire et les décotes brésiliennes ont accru la part du Brésil dans les importations chinoises.",
+        "category": "Politique commerciale"
       },
       "de": {
         "title": "Chinas Sojakäufe verlagern sich nach Brasilien",
-        "content": "Zollunsicherheit und brasilianische Preisabschläge erhöhten Brasiliens Anteil an den chinesischen Importen."
+        "content": "Zollunsicherheit und brasilianische Preisabschläge erhöhten Brasiliens Anteil an den chinesischen Importen.",
+        "category": "Handelspolitik"
       }
     }
   },
@@ -1215,15 +1323,18 @@
     "translations": {
       "es": {
         "title": "Indonesia ajusta el gravamen a la exportación de aceite de palma",
-        "content": "La estructura revisada del gravamen altera la competitividad de la palma frente a los aceites de soja y girasol."
+        "content": "La estructura revisada del gravamen altera la competitividad de la palma frente a los aceites de soja y girasol.",
+        "category": "Política comercial"
       },
       "fr": {
         "title": "L’Indonésie ajuste sa taxe à l’export sur l’huile de palme",
-        "content": "La structure révisée de la taxe modifie la compétitivité de la palme face aux huiles de soja et de tournesol."
+        "content": "La structure révisée de la taxe modifie la compétitivité de la palme face aux huiles de soja et de tournesol.",
+        "category": "Politique commerciale"
       },
       "de": {
         "title": "Indonesien passt Exportabgabe auf Palmöl an",
-        "content": "Die überarbeitete Abgabenstruktur verändert die Wettbewerbsfähigkeit von Palmöl gegenüber Soja- und Sonnenblumenöl."
+        "content": "Die überarbeitete Abgabenstruktur verändert die Wettbewerbsfähigkeit von Palmöl gegenüber Soja- und Sonnenblumenöl.",
+        "category": "Handelspolitik"
       }
     }
   },
@@ -1249,15 +1360,18 @@
     "translations": {
       "es": {
         "title": "México revisa las reglas de importación de maíz transgénico",
-        "content": "El resultado del panel del T-MEC afecta los flujos de exportación de maíz amarillo de EE. UU. a México."
+        "content": "El resultado del panel del T-MEC afecta los flujos de exportación de maíz amarillo de EE. UU. a México.",
+        "category": "Política comercial"
       },
       "fr": {
         "title": "Le Mexique réexamine ses règles d’importation de maïs OGM",
-        "content": "L’issue du panel de l’ACEUM influe sur les flux d’exportation de maïs jaune américain vers le Mexique."
+        "content": "L’issue du panel de l’ACEUM influe sur les flux d’exportation de maïs jaune américain vers le Mexique.",
+        "category": "Politique commerciale"
       },
       "de": {
         "title": "Mexiko überprüft Importregeln für Gentechnik-Mais",
-        "content": "Der Ausgang des USMCA-Panels beeinflusst die Exportströme von US-Gelbmais nach Mexiko."
+        "content": "Der Ausgang des USMCA-Panels beeinflusst die Exportströme von US-Gelbmais nach Mexiko.",
+        "category": "Handelspolitik"
       }
     }
   },
@@ -1282,15 +1396,18 @@
     "translations": {
       "es": {
         "title": "Entran en vigor los aranceles de la UE a los granos rusos",
-        "content": "Los derechos prohibitivos redirigen los flujos rusos de trigo y oleaginosas hacia MENA y Asia."
+        "content": "Los derechos prohibitivos redirigen los flujos rusos de trigo y oleaginosas hacia MENA y Asia.",
+        "category": "Política comercial"
       },
       "fr": {
         "title": "Les droits de douane de l’UE sur les céréales russes entrent en vigueur",
-        "content": "Des droits prohibitifs redirigent les flux russes de blé et d’oléagineux vers la région MENA et l’Asie."
+        "content": "Des droits prohibitifs redirigent les flux russes de blé et d’oléagineux vers la région MENA et l’Asie.",
+        "category": "Politique commerciale"
       },
       "de": {
         "title": "EU-Zölle auf russische Getreideimporte treten in Kraft",
-        "content": "Prohibitive Zölle lenken russische Weizen- und Ölsaatenströme nach MENA und Asien um."
+        "content": "Prohibitive Zölle lenken russische Weizen- und Ölsaatenströme nach MENA und Asien um.",
+        "category": "Handelspolitik"
       }
     }
   },
@@ -1315,15 +1432,18 @@
     "translations": {
       "es": {
         "title": "Los fondos amplían la posición neta corta en maíz de CBOT",
-        "content": "El dinero gestionado sumó posiciones cortas antes del informe de superficie, elevando el riesgo de cobertura de cortos."
+        "content": "El dinero gestionado sumó posiciones cortas antes del informe de superficie, elevando el riesgo de cobertura de cortos.",
+        "category": "Mercados"
       },
       "fr": {
         "title": "Les fonds renforcent leur position nette vendeuse sur le maïs CBOT",
-        "content": "Les gérants ont accru leurs positions courtes avant le rapport sur les surfaces, augmentant le risque de rachats de couverture."
+        "content": "Les gérants ont accru leurs positions courtes avant le rapport sur les surfaces, augmentant le risque de rachats de couverture.",
+        "category": "Marchés"
       },
       "de": {
         "title": "Fonds bauen Netto-Short-Position in CBOT-Mais aus",
-        "content": "Verwaltetes Kapital erhöhte die Short-Positionen vor dem Anbauflächenbericht und steigert das Short-Covering-Risiko."
+        "content": "Verwaltetes Kapital erhöhte die Short-Positionen vor dem Anbauflächenbericht und steigert das Short-Covering-Risiko.",
+        "category": "Märkte"
       }
     }
   },
@@ -1348,15 +1468,18 @@
     "translations": {
       "es": {
         "title": "La participación del aceite en el valor de molienda de soja toca máximos de varios años",
-        "content": "La demanda de biocombustibles mantiene alta la participación del aceite frente a la harina; las molturadoras prefieren soja con alto contenido de aceite."
+        "content": "La demanda de biocombustibles mantiene alta la participación del aceite frente a la harina; las molturadoras prefieren soja con alto contenido de aceite.",
+        "category": "Mercados"
       },
       "fr": {
         "title": "La part de l’huile dans la valeur de trituration du soja atteint un plus haut pluriannuel",
-        "content": "La demande de biocarburants maintient la part de l’huile élevée par rapport au tourteau ; les triturateurs privilégient les fèves riches en huile."
+        "content": "La demande de biocarburants maintient la part de l’huile élevée par rapport au tourteau ; les triturateurs privilégient les fèves riches en huile.",
+        "category": "Marchés"
       },
       "de": {
         "title": "Ölanteil am Soja-Crush-Wert auf Mehrjahreshoch",
-        "content": "Die Biokraftstoffnachfrage hält den Ölanteil gegenüber dem Schrot hoch; Ölmühlen bevorzugen ölreiche Bohnen."
+        "content": "Die Biokraftstoffnachfrage hält den Ölanteil gegenüber dem Schrot hoch; Ölmühlen bevorzugen ölreiche Bohnen.",
+        "category": "Märkte"
       }
     }
   },
@@ -1381,15 +1504,18 @@
     "translations": {
       "es": {
         "title": "La volatilidad del cacao se traslada a la formulación de dulces",
-        "content": "Los precios récord del cacao empujan a los confiteros hacia equivalentes de manteca de cacao y recetas con menos cacao."
+        "content": "Los precios récord del cacao empujan a los confiteros hacia equivalentes de manteca de cacao y recetas con menos cacao.",
+        "category": "Mercados"
       },
       "fr": {
         "title": "La volatilité du cacao se répercute sur la formulation des produits sucrés",
-        "content": "Les prix record du cacao poussent les confiseurs vers des équivalents de beurre de cacao et des recettes à teneur réduite en cacao."
+        "content": "Les prix record du cacao poussent les confiseurs vers des équivalents de beurre de cacao et des recettes à teneur réduite en cacao.",
+        "category": "Marchés"
       },
       "de": {
         "title": "Kakao-Volatilität schlägt auf Süßwarenrezepturen durch",
-        "content": "Rekordpreise für Kakao treiben Süßwarenhersteller zu Kakaobutteräquivalenten und kakaoreduzierten Rezepturen."
+        "content": "Rekordpreise für Kakao treiben Süßwarenhersteller zu Kakaobutteräquivalenten und kakaoreduzierten Rezepturen.",
+        "category": "Märkte"
       }
     }
   },
@@ -1414,15 +1540,18 @@
     "translations": {
       "es": {
         "title": "Caen los futuros del azúcar por la producción del Centro-Sur de Brasil",
-        "content": "Una fuerte molienda de caña y una mayor proporción destinada a azúcar presionaron los precios del azúcar crudo."
+        "content": "Una fuerte molienda de caña y una mayor proporción destinada a azúcar presionaron los precios del azúcar crudo.",
+        "category": "Mercados"
       },
       "fr": {
         "title": "Les contrats à terme sur le sucre reculent avec la production du Centre-Sud brésilien",
-        "content": "Un broyage de canne soutenu et une part plus élevée allouée au sucre ont pesé sur les prix du sucre brut."
+        "content": "Un broyage de canne soutenu et une part plus élevée allouée au sucre ont pesé sur les prix du sucre brut.",
+        "category": "Marchés"
       },
       "de": {
         "title": "Zucker-Futures fallen wegen Produktion in Brasiliens Centre-Süd",
-        "content": "Starke Zuckerrohrverarbeitung und ein höherer Zuckeranteil drückten die Rohzuckerpreise."
+        "content": "Starke Zuckerrohrverarbeitung und ein höherer Zuckeranteil drückten die Rohzuckerpreise.",
+        "category": "Märkte"
       }
     }
   },
@@ -1447,15 +1576,18 @@
     "translations": {
       "es": {
         "title": "Aumentan las existencias de aceite de palma en Malasia",
-        "content": "El aumento estacional de la producción y exportaciones más lentas elevaron los inventarios de fin de mes."
+        "content": "El aumento estacional de la producción y exportaciones más lentas elevaron los inventarios de fin de mes.",
+        "category": "Mercados"
       },
       "fr": {
         "title": "Les stocks d’huile de palme augmentent en Malaisie",
-        "content": "La hausse saisonnière de la production et le ralentissement des exportations ont gonflé les stocks de fin de mois."
+        "content": "La hausse saisonnière de la production et le ralentissement des exportations ont gonflé les stocks de fin de mois.",
+        "category": "Marchés"
       },
       "de": {
         "title": "Palmölbestände in Malaysia steigen",
-        "content": "Der saisonale Produktionsanstieg und langsamere Exporte ließen die Bestände zum Monatsende wachsen."
+        "content": "Der saisonale Produktionsanstieg und langsamere Exporte ließen die Bestände zum Monatsende wachsen.",
+        "category": "Märkte"
       }
     }
   },
@@ -1480,15 +1612,18 @@
     "translations": {
       "es": {
         "title": "El mantenimiento predictivo reduce paradas no planificadas en plantas de molienda",
-        "content": "El análisis de vibraciones en los extractores redujo las paradas no programadas en las plantas piloto."
+        "content": "El análisis de vibraciones en los extractores redujo las paradas no programadas en las plantas piloto.",
+        "category": "Operaciones"
       },
       "fr": {
         "title": "La maintenance prédictive réduit les arrêts imprévus dans les usines de trituration",
-        "content": "L’analyse vibratoire des extracteurs a réduit les arrêts non planifiés sur les sites pilotes."
+        "content": "L’analyse vibratoire des extracteurs a réduit les arrêts non planifiés sur les sites pilotes.",
+        "category": "Opérations"
       },
       "de": {
         "title": "Vorausschauende Wartung senkt ungeplante Stillstände in Ölmühlen",
-        "content": "Schwingungsanalysen an Extraktoren reduzierten ungeplante Stopps an den Pilotstandorten."
+        "content": "Schwingungsanalysen an Extraktoren reduzierten ungeplante Stopps an den Pilotstandorten.",
+        "category": "Betrieb"
       }
     }
   },
@@ -1513,15 +1648,18 @@
     "translations": {
       "es": {
         "title": "Mejora el rendimiento de los acopios de grano con muestreo automatizado",
-        "content": "La sonda y la clasificación automatizadas redujeron el tiempo de rotación de camiones en los picos de cosecha."
+        "content": "La sonda y la clasificación automatizadas redujeron el tiempo de rotación de camiones en los picos de cosecha.",
+        "category": "Operaciones"
       },
       "fr": {
         "title": "Le débit des silos à grains s’améliore grâce à l’échantillonnage automatisé",
-        "content": "La sonde et le classement automatisés ont réduit le temps de rotation des camions aux pics de récolte."
+        "content": "La sonde et le classement automatisés ont réduit le temps de rotation des camions aux pics de récolte.",
+        "category": "Opérations"
       },
       "de": {
         "title": "Durchsatz der Getreidesilos steigt durch automatisierte Probenahme",
-        "content": "Automatisierte Probenahme und Klassifizierung verkürzten die Lkw-Umlaufzeiten in den Erntespitzen."
+        "content": "Automatisierte Probenahme und Klassifizierung verkürzten die Lkw-Umlaufzeiten in den Erntespitzen.",
+        "category": "Betrieb"
       }
     }
   },
@@ -1546,15 +1684,18 @@
     "translations": {
       "es": {
         "title": "Las mejoras de eficiencia energética reducen los costos de secado",
-        "content": "La recuperación de calor en las secadoras de grano redujo el consumo de gas natural por bushel."
+        "content": "La recuperación de calor en las secadoras de grano redujo el consumo de gas natural por bushel.",
+        "category": "Operaciones"
       },
       "fr": {
         "title": "Les gains d’efficacité énergétique réduisent les coûts de séchage",
-        "content": "La récupération de chaleur sur les séchoirs à grains a diminué la consommation de gaz naturel par boisseau."
+        "content": "La récupération de chaleur sur les séchoirs à grains a diminué la consommation de gaz naturel par boisseau.",
+        "category": "Opérations"
       },
       "de": {
         "title": "Energieeffizienz-Upgrades senken Trocknungskosten",
-        "content": "Wärmerückgewinnung an Getreidetrocknern senkte den Erdgasverbrauch je Bushel."
+        "content": "Wärmerückgewinnung an Getreidetrocknern senkte den Erdgasverbrauch je Bushel.",
+        "category": "Betrieb"
       }
     }
   },
@@ -1579,15 +1720,18 @@
     "translations": {
       "es": {
         "title": "Crece la adopción de la plataforma digital para productores",
-        "content": "Más productores contratan y fijan precio del grano a través de la aplicación móvil, suavizando los flujos de originación."
+        "content": "Más productores contratan y fijan precio del grano a través de la aplicación móvil, suavizando los flujos de originación.",
+        "category": "Operaciones"
       },
       "fr": {
         "title": "L’adoption de la plateforme numérique pour agriculteurs progresse",
-        "content": "Davantage d’agriculteurs contractualisent et fixent le prix de leurs grains via l’application mobile, lissant les flux d’origination."
+        "content": "Davantage d’agriculteurs contractualisent et fixent le prix de leurs grains via l’application mobile, lissant les flux d’origination.",
+        "category": "Opérations"
       },
       "de": {
         "title": "Nutzung der digitalen Erzeugerplattform nimmt zu",
-        "content": "Mehr Landwirte kontrahieren und bepreisen Getreide über die Mobil-App und glätten so die Beschaffungsströme."
+        "content": "Mehr Landwirte kontrahieren und bepreisen Getreide über die Mobil-App und glätten so die Beschaffungsströme.",
+        "category": "Betrieb"
       }
     }
   }

@@ -1,8 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useAppSelector } from '@/app/hooks'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { Button, Field } from '@/components/ui'
+import { localeChanged, useT } from '@/i18n'
 import { FALLBACK_LANGUAGES, useGetLanguagesQuery, useSubmitPromptMutation } from '@/services/api'
 import styles from './PromptForm.module.css'
 import { selectContextId } from './promptSlice'
@@ -12,24 +13,28 @@ const DEFAULT_LANGUAGE = 'en'
 
 /**
  * Collects prompt + target language, validates with zod, submits via RTK Query.
+ * The selected target language also drives the UI locale (localeSlice).
  * It does not render responses: the outcome lives in global state (promptSlice) and is rendered
  * by <PromptOutcome/>, so this component only re-renders for form and mutation state.
  */
 export function PromptForm() {
+  const t = useT()
+  const dispatch = useAppDispatch()
   const { data: languages = FALLBACK_LANGUAGES, isError: languagesUnavailable } =
     useGetLanguagesQuery()
   const contextId = useAppSelector(selectContextId)
   const [submitPrompt, { isLoading }] = useSubmitPromptMutation()
 
   const languageCodes = useMemo(() => languages.map((l) => l.code), [languages])
-  const schema = useMemo(() => makePromptFormSchema(languageCodes), [languageCodes])
+  const schema = useMemo(() => makePromptFormSchema(languageCodes, t), [languageCodes, t])
 
   const {
     register,
     handleSubmit,
     watch,
     setValue,
-    formState: { errors, isValid },
+    trigger,
+    formState: { errors, isValid, isDirty },
   } = useForm<PromptFormValues>({
     resolver: zodResolver(schema),
     mode: 'onChange',
@@ -37,6 +42,17 @@ export function PromptForm() {
   })
 
   const promptLength = watch('prompt').length
+  const targetLanguage = watch('targetLanguage')
+
+  // The whole UI follows the selected target language.
+  useEffect(() => {
+    dispatch(localeChanged(targetLanguage))
+  }, [dispatch, targetLanguage])
+
+  // Re-run validation when the locale changes so messages are shown in the new language.
+  useEffect(() => {
+    if (isDirty) void trigger()
+  }, [schema, trigger, isDirty])
 
   // If the language list arrives without the current default, snap to the first supported one.
   useEffect(() => {
@@ -51,10 +67,10 @@ export function PromptForm() {
   })
 
   return (
-    <form className={styles.form} onSubmit={onSubmit} noValidate aria-label="Prompt form">
+    <form className={styles.form} onSubmit={onSubmit} noValidate aria-label={t('form.prompt')}>
       <Field
         id="prompt"
-        label="Prompt"
+        label={t('form.prompt')}
         error={errors.prompt?.message}
         hint={`${promptLength}/${PROMPT_MAX_LENGTH}`}
       >
@@ -62,7 +78,7 @@ export function PromptForm() {
           id="prompt"
           className={styles.textarea}
           rows={3}
-          placeholder="e.g. How are soybean crush margins trending in Brazil?"
+          placeholder={t('form.promptPlaceholder')}
           aria-invalid={errors.prompt ? true : undefined}
           aria-describedby={errors.prompt ? 'prompt-error' : 'prompt-hint'}
           {...register('prompt')}
@@ -72,9 +88,9 @@ export function PromptForm() {
       <div className={styles.row}>
         <Field
           id="targetLanguage"
-          label="Target language"
+          label={t('form.targetLanguage')}
           error={errors.targetLanguage?.message}
-          hint={languagesUnavailable ? 'Could not load languages; showing defaults.' : undefined}
+          hint={languagesUnavailable ? t('form.languagesUnavailable') : undefined}
         >
           <select
             id="targetLanguage"
@@ -90,7 +106,7 @@ export function PromptForm() {
             {...register('targetLanguage')}
           >
             {languages.map((lang) => (
-              <option key={lang.code} value={lang.code}>
+              <option key={lang.code} value={lang.code} lang={lang.code}>
                 {lang.label} ({lang.code})
               </option>
             ))}
@@ -98,13 +114,13 @@ export function PromptForm() {
         </Field>
 
         <Button type="submit" disabled={!isValid} loading={isLoading} className={styles.submit}>
-          {isLoading ? 'Analysing…' : 'Get insights'}
+          {isLoading ? t('form.submitting') : t('form.submit')}
         </Button>
       </div>
 
       {contextId && (
         <p className={styles.context}>
-          Conversation <code>{contextId.slice(0, 8)}</code> — follow-ups are linked to it.
+          {t('form.conversationNote', { id: contextId.slice(0, 8) })}
         </p>
       )}
     </form>

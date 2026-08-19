@@ -35,7 +35,9 @@ class JsonInsightRepository:
 def _parse(item: dict) -> Insight:
     meta = item["metadata"]
     translations = {
-        code: LocalizedText(title=loc["title"], content=loc["content"])
+        code: LocalizedText(
+            title=loc["title"], content=loc["content"], category=loc.get("category")
+        )
         for code, loc in item.get("translations", {}).items()
     }
     return Insight(

@@ -59,10 +59,9 @@ class PromptService:
             return ClarificationResponse(
                 context_id=context_id,
                 turn=turn,
-                message="Please provide more details. "
-                + self._gatekeeper.describe(verdict.reasons[:1]),
+                message=self._gatekeeper.describe(verdict.reasons[:1], req.target_language),
                 reasons=list(verdict.reasons),
-                suggestions=list(verdict.suggestions),
+                suggestions=list(self._gatekeeper.suggestions(req.target_language)),
             )
 
         result = self._ai.generate_insights(

@@ -23,7 +23,7 @@ def test_flags_unclear_prompts(prompt: str, expected_reason: str) -> None:
     verdict = gk.assess(prompt)
     assert verdict.needs_clarification
     assert expected_reason in verdict.reasons
-    assert verdict.suggestions
+    assert gk.suggestions()
 
 
 @pytest.mark.parametrize(
@@ -36,6 +36,14 @@ def test_flags_unclear_prompts(prompt: str, expected_reason: str) -> None:
 )
 def test_accepts_clear_prompts(prompt: str) -> None:
     assert not gk.assess(prompt).needs_clarification
+
+
+def test_clarification_copy_is_localized() -> None:
+    reasons = gk.assess("hi").reasons[:1]
+    assert gk.describe(reasons, "es").startswith("Por favor, aporta más detalles.")
+    assert gk.describe(reasons, "de").startswith("Bitte geben Sie mehr Details an.")
+    assert gk.describe(reasons, "xx").startswith("Please provide more details.")  # fallback
+    assert gk.suggestions("fr")[0].startswith("Nommez le sujet")
 
 
 def test_reasons_are_deduplicated() -> None:

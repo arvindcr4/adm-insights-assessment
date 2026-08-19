@@ -96,7 +96,11 @@ describe('PromptForm', () => {
     await user.click(screen.getByRole('button', { name: /get insights/i }))
 
     const alert = await screen.findByRole('alert')
-    expect(alert).toHaveTextContent('Target language is not supported (INVALID_LANGUAGE, HTTP 400)')
+    // Title is localized by error code; the server's own message is still shown underneath.
+    expect(alert).toHaveTextContent(
+      'That target language is not supported (INVALID_LANGUAGE, HTTP 400)',
+    )
+    expect(alert).toHaveTextContent('Target language is not supported')
     expect(alert).toHaveTextContent('supportedLanguages')
     expect(screen.getByRole('region', { name: /conversation history/i })).toHaveTextContent(
       'INVALID_LANGUAGE',

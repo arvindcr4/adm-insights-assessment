@@ -1,5 +1,7 @@
 import type { Insight } from '@/services/api'
 import type { SortDirection, SortField } from '@/features/insights/insightsViewSlice'
+import { getFormatters } from '@/i18n/format'
+import type { Locale } from '@/i18n/localeSlice'
 
 /** Case-insensitive match against text and metadata (category, tags, source). */
 export function matchesSearch(insight: Insight, term: string): boolean {
@@ -20,14 +22,14 @@ export function filterInsights(insights: readonly Insight[], term: string): Insi
   return insights.filter((i) => matchesSearch(i, term))
 }
 
-const collator = new Intl.Collator(undefined, { sensitivity: 'base', numeric: true })
-
-/** Returns a new sorted array; input is never mutated. */
+/** Returns a new sorted array using the locale's collation; input is never mutated. */
 export function sortInsights(
   insights: readonly Insight[],
   field: SortField,
   direction: SortDirection,
+  locale: Locale = 'en',
 ): Insight[] {
+  const { collator } = getFormatters(locale)
   const sign = direction === 'asc' ? 1 : -1
   return [...insights].sort((a, b) => sign * collator.compare(a[field], b[field]))
 }
@@ -37,6 +39,7 @@ export function deriveVisibleInsights(
   term: string,
   field: SortField,
   direction: SortDirection,
+  locale: Locale = 'en',
 ): Insight[] {
-  return sortInsights(filterInsights(insights, term), field, direction)
+  return sortInsights(filterInsights(insights, term), field, direction, locale)
 }
