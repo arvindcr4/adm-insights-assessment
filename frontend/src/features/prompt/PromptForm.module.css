@@ -42,4 +42,8 @@
   margin: 0;
   font-size: 0.8rem;
   color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
 }

@@ -13,6 +13,7 @@ export const de: Messages = {
     submit: 'Insights abrufen',
     submitting: 'Analysiere…',
     conversationNote: 'Unterhaltung {id} — Folgefragen werden damit verknüpft.',
+    newConversation: 'Neue Unterhaltung beginnen',
     errors: {
       promptRequired: 'Die Anfrage ist erforderlich',
       promptTooLong: 'Höchstens {max} Zeichen',
@@ -25,7 +26,8 @@ export const de: Messages = {
     idleHint:
       'Versuchen Sie „Sojaverarbeitungsmargen in Brasilien“ oder „Weizenexporte Schwarzes Meer“.',
     clarificationTitle: 'Wir brauchen etwas mehr Details',
-    reset: 'Zurücksetzen',
+    dismiss: 'Schließen',
+    renderError: 'Beim Anzeigen dieser Antwort ist etwas schiefgelaufen',
     retry: 'Erneut versuchen',
   },
   errors: {

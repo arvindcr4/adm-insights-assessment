@@ -86,6 +86,7 @@ State: RTK Query owns server state (`submitPrompt` mutation, `getInsightsPages` 
 - TypeScript rather than plain JS.
 - `contextId` is created by the BFF on first contact, echoed on clarification, carried by the client on follow-ups; each submission increments the context's `turn`.
 - Single-word prompts still get a clarification request (`min_prompt_words=2`, env-tunable).
+- Error alerts have Dismiss (clears the outcome only); "Start a new conversation" drops the `contextId`; history is a log and is cleared separately. Ctrl/Cmd+Enter submits from the textarea. A render error inside an answer is contained by an error boundary rather than blanking the page; the character counter stays visible (flagged) when the prompt is over the limit; long unbroken prompts wrap.
 - `DummyAIService` ranks the 48-item catalogue by keyword overlap across all four languages and falls back to a deterministic sample, so the same prompt always paginates the same way. Each entry carries en/es/fr/de title, content and category; `localized(targetLanguage)` returns the right one (tags/source stay machine identifiers).
 
 ## Localization
@@ -108,7 +109,7 @@ See [docs/stress-and-chaos.md](docs/stress-and-chaos.md): `make stress` (scenari
 
 ## Tests
 
-Backend 109 (pytest): validation and error envelopes, gatekeeper, clarification short-circuit with a spy AI, pagination and page bounds, body-size guard, store TTL/LRU, localization, chaos middleware, ~360 fuzz cases, OpenAPI snapshot. Frontend 51 (vitest): filter/sort, debounce, error mapping, slice matchers, form gating, SUCCESS/clarification/4xx rendering, no page-1 refetch, load more and its failure, search/sort, i18n key parity and whole-UI switch, contract, retry/timeout classification.
+Backend 109 (pytest): validation and error envelopes, gatekeeper, clarification short-circuit with a spy AI, pagination and page bounds, body-size guard, store TTL/LRU, localization, chaos middleware, ~360 fuzz cases, OpenAPI snapshot. Frontend 58 (vitest): filter/sort, debounce, error mapping, slice matchers, form gating, SUCCESS/clarification/4xx rendering, no page-1 refetch, load more and its failure, search/sort, i18n key parity and whole-UI switch, contract, retry/timeout classification, UI edge cases (whitespace prompt, over-limit counter, Ctrl+Enter, dismiss vs new conversation, invalid dates, error boundary).
 
 ## Next
 

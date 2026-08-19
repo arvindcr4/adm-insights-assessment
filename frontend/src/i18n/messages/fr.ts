@@ -13,6 +13,7 @@ export const fr: Messages = {
     submit: 'Obtenir des insights',
     submitting: 'Analyse…',
     conversationNote: 'Conversation {id} — les questions de suivi y sont rattachées.',
+    newConversation: 'Démarrer une nouvelle conversation',
     errors: {
       promptRequired: 'La requête est obligatoire',
       promptTooLong: 'Maximum {max} caractères',
@@ -25,7 +26,8 @@ export const fr: Messages = {
     idleHint:
       'Essayez « marges de trituration du soja au Brésil » ou « exportations de blé mer Noire ».',
     clarificationTitle: 'Il nous faut un peu plus de détails',
-    reset: 'Réinitialiser',
+    dismiss: 'Fermer',
+    renderError: 'Une erreur est survenue lors de l’affichage de cette réponse',
     retry: 'Réessayer',
   },
   errors: {

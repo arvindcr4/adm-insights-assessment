@@ -13,6 +13,7 @@ export const es: Messages = {
     submit: 'Obtener insights',
     submitting: 'Analizando…',
     conversationNote: 'Conversación {id} — las preguntas de seguimiento quedan vinculadas.',
+    newConversation: 'Empezar una conversación nueva',
     errors: {
       promptRequired: 'La consulta es obligatoria',
       promptTooLong: 'Máximo {max} caracteres',
@@ -25,7 +26,8 @@ export const es: Messages = {
     idleHint:
       'Prueba «márgenes de molienda de soja en Brasil» o «exportaciones de trigo del mar Negro».',
     clarificationTitle: 'Necesitamos un poco más de detalle',
-    reset: 'Reiniciar',
+    dismiss: 'Cerrar',
+    renderError: 'Algo falló al mostrar esta respuesta',
     retry: 'Reintentar',
   },
   errors: {

@@ -63,8 +63,13 @@ const promptSlice = createSlice({
   name: 'prompt',
   initialState: initialPromptState,
   reducers: {
-    conversationReset() {
-      return initialPromptState
+    /** Start a new conversation: fresh context, no outcome; history is kept. */
+    conversationReset(state) {
+      state.contextId = null
+      state.outcome = { kind: 'idle' }
+    },
+    outcomeDismissed(state) {
+      state.outcome = { kind: 'idle' }
     },
     historyCleared(state) {
       state.history = []
@@ -111,8 +116,13 @@ const promptSlice = createSlice({
   },
 })
 
-export const { conversationReset, historyCleared, contextIdSet, historyEntryActivated } =
-  promptSlice.actions
+export const {
+  conversationReset,
+  outcomeDismissed,
+  historyCleared,
+  contextIdSet,
+  historyEntryActivated,
+} = promptSlice.actions
 export const { selectOutcome, selectContextId, selectHistory } = promptSlice.selectors
 export const promptReducer = promptSlice.reducer
 export const promptSliceName = promptSlice.name

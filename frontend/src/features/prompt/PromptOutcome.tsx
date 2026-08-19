@@ -1,15 +1,35 @@
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { Alert, Button, EmptyState } from '@/components/ui'
+import { Alert, Button, EmptyState, ErrorBoundary } from '@/components/ui'
 import { InsightsPanel } from '@/features/insights/InsightsPanel'
 import { errorTitle, useT } from '@/i18n'
 import { validationIssues } from '@/services/api'
 import type { AppError } from '@/services/api'
-import { conversationReset, selectOutcome } from './promptSlice'
+import {
+  outcomeDismissed,
+  selectOutcome,
+  type PromptOutcome as PromptOutcomeState,
+} from './promptSlice'
 
 export function PromptOutcome() {
   const outcome = useAppSelector(selectOutcome)
+  const dispatch = useAppDispatch()
   const t = useT()
 
+  // A rendering bug in one answer must not blank the page: the boundary resets per outcome.
+  return (
+    <ErrorBoundary
+      key={outcome.kind === 'success' ? outcome.requestId : outcome.kind}
+      title={t('outcome.renderError')}
+      actionLabel={t('outcome.dismiss')}
+      onAction={() => dispatch(outcomeDismissed())}
+    >
+      <OutcomeView outcome={outcome} />
+    </ErrorBoundary>
+  )
+}
+
+function OutcomeView({ outcome }: { outcome: PromptOutcomeState }) {
+  const t = useT()
   switch (outcome.kind) {
     case 'idle':
       return <EmptyState title={t('outcome.idleTitle')}>{t('outcome.idleHint')}</EmptyState>
@@ -57,8 +77,8 @@ function ErrorNotice({ error }: { error: AppError }) {
       tone="error"
       title={`${title} (${error.code}${error.status ? `, HTTP ${error.status}` : ''})`}
       actions={
-        <Button variant="ghost" onClick={() => dispatch(conversationReset())}>
-          {t('outcome.reset')}
+        <Button variant="ghost" onClick={() => dispatch(outcomeDismissed())}>
+          {t('outcome.dismiss')}
         </Button>
       }
     >

@@ -54,7 +54,9 @@ describe('PromptForm', () => {
 
     expect(await screen.findByRole('heading', { name: /insights for/i })).toBeInTheDocument()
     expect(screen.getAllByTestId('insight-card')).toHaveLength(10)
-    expect(screen.getByText(/conversation/i)).toHaveTextContent(CONTEXT_ID.slice(0, 8))
+    expect(
+      screen.getByText(new RegExp(`Conversation ${CONTEXT_ID.slice(0, 8)}`)),
+    ).toBeInTheDocument()
     expect(store.getState().prompt.history).toHaveLength(1)
 
     // Page 1 came from the POST; the infinite query was seeded, so no GET for it.

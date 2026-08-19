@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, type KeyboardEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { Button, Field } from '@/components/ui'
 import { localeChanged, useT } from '@/i18n'
 import { FALLBACK_LANGUAGES, useGetLanguagesQuery, useSubmitPromptMutation } from '@/services/api'
 import styles from './PromptForm.module.css'
-import { selectContextId } from './promptSlice'
+import { conversationReset, selectContextId } from './promptSlice'
 import { makePromptFormSchema, PROMPT_MAX_LENGTH, type PromptFormValues } from './promptSchema'
 
 const DEFAULT_LANGUAGE = 'en'
@@ -58,6 +58,14 @@ export function PromptForm() {
     void submitPrompt({ ...values, ...(contextId ? { contextId } : {}) })
   })
 
+  // Ctrl/Cmd+Enter submits from the textarea (Enter alone inserts a newline).
+  const onPromptKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey) && isValid && !isLoading) {
+      e.preventDefault()
+      void onSubmit()
+    }
+  }
+
   return (
     <form className={styles.form} onSubmit={onSubmit} noValidate aria-label={t('form.prompt')}>
       <Field
@@ -65,6 +73,7 @@ export function PromptForm() {
         label={t('form.prompt')}
         error={errors.prompt?.message}
         hint={`${promptLength}/${PROMPT_MAX_LENGTH}`}
+        hintTone={promptLength > PROMPT_MAX_LENGTH ? 'error' : 'muted'}
       >
         <textarea
           id="prompt"
@@ -72,7 +81,8 @@ export function PromptForm() {
           rows={3}
           placeholder={t('form.promptPlaceholder')}
           aria-invalid={errors.prompt ? true : undefined}
-          aria-describedby={errors.prompt ? 'prompt-error' : 'prompt-hint'}
+          aria-describedby={errors.prompt ? 'prompt-error prompt-hint' : 'prompt-hint'}
+          onKeyDown={onPromptKeyDown}
           {...register('prompt')}
         />
       </Field>
@@ -112,7 +122,10 @@ export function PromptForm() {
 
       {contextId && (
         <p className={styles.context}>
-          {t('form.conversationNote', { id: contextId.slice(0, 8) })}
+          {t('form.conversationNote', { id: contextId.slice(0, 8) })}{' '}
+          <Button variant="ghost" onClick={() => dispatch(conversationReset())}>
+            {t('form.newConversation')}
+          </Button>
         </p>
       )}
     </form>

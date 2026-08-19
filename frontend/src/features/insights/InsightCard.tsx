@@ -9,6 +9,10 @@ export const InsightCard = memo(function InsightCard({ insight }: { insight: Ins
   const { date, percent } = getFormatters(useLocale())
   const { title, content, metadata, language } = insight
   const confidence = percent.format(metadata.confidence)
+  const published = new Date(metadata.publishedAt)
+  const publishedLabel = Number.isNaN(published.getTime())
+    ? metadata.publishedAt
+    : date.format(published)
   return (
     <li className={styles.card} data-testid="insight-card" lang={language}>
       <div className={styles.head}>
@@ -28,7 +32,7 @@ export const InsightCard = memo(function InsightCard({ insight }: { insight: Ins
           <Badge key={tag}>{tag}</Badge>
         ))}
         <span className={styles.muted}>
-          {metadata.source} · {date.format(new Date(metadata.publishedAt))} · {language}
+          {metadata.source} · {publishedLabel} · {language}
         </span>
       </div>
     </li>

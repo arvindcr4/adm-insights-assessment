@@ -12,6 +12,7 @@ export const en = {
     submit: 'Get insights',
     submitting: 'Analysing…',
     conversationNote: 'Conversation {id} — follow-ups are linked to it.',
+    newConversation: 'Start a new conversation',
     errors: {
       promptRequired: 'Prompt is required',
       promptTooLong: 'Keep it under {max} characters',
@@ -23,7 +24,8 @@ export const en = {
     idleTitle: 'Ask something to get started',
     idleHint: 'Try “soybean crush margins in Brazil” or “wheat exports black sea”.',
     clarificationTitle: 'We need a bit more detail',
-    reset: 'Reset',
+    dismiss: 'Dismiss',
+    renderError: 'Something went wrong while showing this answer',
     retry: 'Retry',
   },
   errors: {
