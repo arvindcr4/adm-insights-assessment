@@ -11,6 +11,7 @@ export const en = {
     languagesUnavailable: 'Could not load languages; showing defaults.',
     submit: 'Get insights',
     submitting: 'Analysing…',
+    slowHint: 'Still working — a live model can take up to 30 seconds.',
     conversationNote: 'Conversation {id} — follow-ups are linked to it.',
     newConversation: 'Start a new conversation',
     errors: {
@@ -38,6 +39,9 @@ export const en = {
     SERVER_UNAVAILABLE: 'The server is temporarily unavailable; please retry',
     INTERNAL_ERROR: 'The server hit an unexpected error',
     UNKNOWN_ERROR: 'Something went wrong',
+    UNAUTHORIZED: 'This client is not authorised to use the API',
+    RATE_LIMITED: 'Too many requests; please wait a moment',
+    AI_UPSTREAM_ERROR: 'The AI service is unavailable right now; please retry',
   },
   insights: {
     heading: 'Insights for “{prompt}”',

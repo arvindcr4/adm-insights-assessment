@@ -1,4 +1,4 @@
-.PHONY: backend frontend test lint dev contract stress chaos
+.PHONY: backend frontend test lint dev contract stress chaos e2e
 
 backend:            ## run the BFF on :8000
 	cd backend && uv run uvicorn app.main:app --reload --port 8000
@@ -9,6 +9,9 @@ frontend:           ## run the SPA on :5173 (proxies /api to :8000)
 test:               ## run both test suites
 	cd backend && uv run pytest
 	cd frontend && pnpm test
+
+e2e:                ## Playwright end-to-end (starts its own servers on :8011/:5174)
+	cd frontend && pnpm test:e2e
 
 lint:               ## lint + typecheck both
 	cd backend && uv run ruff check . && uv run ruff format --check .

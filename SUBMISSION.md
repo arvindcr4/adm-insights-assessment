@@ -27,7 +27,7 @@ Tests: `cd backend && uv run pytest && uv run ruff check .` · `cd frontend && p
 | Pagination when > 10 | `domain/pagination.py`, `config.py` |
 | Dummy data, no LLM | `data/insights.json`, `services/ai_service.py` |
 
-Also: UI and content localized by target language, history with re-open, hardening, contract check, stress/chaos testing, Docker compose.
+Also: UI and content localized by target language, history with re-open, persistence, hardening, contract check, stress/chaos testing, sqlite store, API-key auth, rate limiting, live LLM provider, Playwright E2E, Docker compose.
 
 ## Decisions
 
@@ -35,7 +35,7 @@ Pagination in the BE, search/sort in the FE over loaded pages; `NEEDS_CLARIFICAT
 
 ## Limitations
 
-- Request store is in-memory (TTL 30 min, LRU 1000): ids do not survive a restart and are per-process under `--workers N`. Redis/SQL fits behind `RequestStore`.
-- No auth or rate limiting.
-- Dummy AI: keyword ranking, pre-authored translations.
-- No browser E2E suite; backend 109 / frontend 65 unit and integration tests.
+- Default request store is in-memory; the sqlite backend (used by compose) survives restarts and is shared by workers on one host. Multi-host fleets need Redis behind `RequestStore`.
+- API-key auth and per-IP rate limiting are optional (env); there is no per-user identity.
+- Default AI is the dummy catalogue; a live OpenAI-compatible model is one env switch away (DeepSeek verified).
+- Tests: backend 126, frontend 66, Playwright E2E 6.

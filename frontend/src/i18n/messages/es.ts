@@ -12,6 +12,7 @@ export const es: Messages = {
     languagesUnavailable: 'No se pudieron cargar los idiomas; se muestran los predeterminados.',
     submit: 'Obtener insights',
     submitting: 'Analizando…',
+    slowHint: 'Seguimos trabajando: un modelo en vivo puede tardar hasta 30 segundos.',
     conversationNote: 'Conversación {id} — las preguntas de seguimiento quedan vinculadas.',
     newConversation: 'Empezar una conversación nueva',
     errors: {
@@ -40,6 +41,9 @@ export const es: Messages = {
     SERVER_UNAVAILABLE: 'El servidor no está disponible temporalmente; inténtalo de nuevo',
     INTERNAL_ERROR: 'El servidor tuvo un error inesperado',
     UNKNOWN_ERROR: 'Algo salió mal',
+    UNAUTHORIZED: 'Este cliente no está autorizado para usar la API',
+    RATE_LIMITED: 'Demasiadas solicitudes; espera un momento',
+    AI_UPSTREAM_ERROR: 'El servicio de IA no está disponible ahora mismo; inténtalo de nuevo',
   },
   insights: {
     heading: 'Insights para «{prompt}»',

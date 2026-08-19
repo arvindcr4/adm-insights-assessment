@@ -76,6 +76,14 @@ hooks/              useDebouncedCallback
 
 State: RTK Query owns server state (`submitPrompt` mutation, `getInsightsPages` infinite query, `getLanguages`). `promptSlice` holds every request/response pair (history, including rejected ones), the conversation `contextId`, and one discriminated `outcome`, filled by matchers on the mutation's actions. `insightsViewSlice` holds the debounced search term and sort. `localeSlice` holds the UI locale.
 
+## Deployment options
+
+- **Request store:** `INSIGHTS_STORE_BACKEND=memory` (default, per process) or `sqlite` (`INSIGHTS_SQLITE_PATH`; survives restarts, shared by every worker/replica on the host; WAL). Compose uses sqlite on a volume.
+- **Auth:** set `INSIGHTS_API_KEYS=k1,k2` and `/api/v1/*` (except `/health`) requires `X-API-Key`. In compose the key is injected by nginx (`proxy_set_header`), so the SPA works and the browser never sees it; direct API clients need the key. Dev with a keyed BFF: `VITE_DEV_API_KEY` makes the Vite proxy add it.
+- **Rate limiting:** `INSIGHTS_RATE_LIMIT_PER_MINUTE` (+ `_BURST`) token bucket per client IP, `429 RATE_LIMITED` with `Retry-After`; `INSIGHTS_TRUST_PROXY_HEADERS=true` behind nginx. Per process.
+- **AI provider:** `INSIGHTS_AI_PROVIDER=dummy` (default) or `openai_compatible` with `INSIGHTS_AI_BASE_URL`, `INSIGHTS_AI_MODEL`, `INSIGHTS_AI_API_KEY` (DeepSeek, OpenAI, OpenRouter, ...). The model is asked for JSON, validated, mapped to insights in the target language; the gatekeeper still runs first. On upstream failure it falls back to the dummy catalogue (`meta.model` says so) or, with `INSIGHTS_AI_FALLBACK_TO_DUMMY=false`, returns `502 AI_UPSTREAM_ERROR`. Live calls take 10-30 s; the client timeout is 60 s and the form shows a hint after 4 s.
+- `.env.example` lists the compose variables; `docker compose up --build` with a populated `.env` gives a keyed, rate-limited, sqlite-backed, optionally LLM-backed stack on :8080.
+
 ## Decisions
 
 - Pagination is done in the BE; search/sort in the FE over the loaded set ("Load more"). The count line shows loaded vs total so that is never ambiguous. Server-side `q`/`sort` would replace `lib/insightFilters.ts` with query params.
@@ -110,10 +118,11 @@ See [docs/stress-and-chaos.md](docs/stress-and-chaos.md): `make stress` (scenari
 
 ## Tests
 
-Backend 109 (pytest): validation and error envelopes, gatekeeper, clarification short-circuit with a spy AI, pagination and page bounds, body-size guard, store TTL/LRU, localization, chaos middleware, ~360 fuzz cases, OpenAPI snapshot. Frontend 65 (vitest): filter/sort, debounce, error mapping, slice matchers, form gating, SUCCESS/clarification/4xx rendering, no page-1 refetch, load more and its failure, search/sort, i18n key parity and whole-UI switch, contract, retry/timeout classification, UI edge cases (whitespace prompt, over-limit counter, Ctrl+Enter, dismiss vs new conversation, invalid dates, error boundary), persistence round-trip, windowing threshold, focus management.
+End-to-end (Playwright, real Chromium against the real dev servers on :8011/:5174): `cd frontend && pnpm test:e2e` covers clarification, success + load more + search + sort, structured 4xx with dismiss, whole-UI language switch, history re-open + reload persistence, and a 375 px no-overflow check.
+
+Backend 126 (pytest): validation and error envelopes, gatekeeper, clarification short-circuit with a spy AI, pagination and page bounds, body-size guard, store TTL/LRU, localization, chaos middleware, ~360 fuzz cases, OpenAPI snapshot, sqlite store (round-trip, cap/TTL, cross-instance pagination), API-key auth, rate limiting, LLM provider (mapping, fallback, 502, gatekeeper-first). Frontend 66 (vitest): filter/sort, debounce, error mapping, slice matchers, form gating, SUCCESS/clarification/4xx rendering, no page-1 refetch, load more and its failure, search/sort, i18n key parity and whole-UI switch, contract, retry/timeout classification, UI edge cases (whitespace prompt, over-limit counter, Ctrl+Enter, dismiss vs new conversation, invalid dates, error boundary), persistence round-trip, windowing threshold, focus management.
 
 ## Next
 
-- Persist the request store (Redis/SQL) behind `RequestStore`; required for multi-worker deployments (see stress doc).
-- Server-side `q`/`sort`.
-- Auth, rate limiting, request-id logging.
+- Redis-backed `RequestStore` and a shared rate limiter for multi-host fleets (sqlite covers one host).
+- Server-side `q`/`sort`; request-id logging; per-key quotas.

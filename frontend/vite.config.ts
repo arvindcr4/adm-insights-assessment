@@ -15,6 +15,7 @@ export default defineConfig({
       '/api': {
         target: process.env.VITE_PROXY_TARGET ?? 'http://localhost:8000',
         changeOrigin: true,
+        headers: process.env.VITE_DEV_API_KEY ? { 'X-API-Key': process.env.VITE_DEV_API_KEY } : {},
       },
     },
   },
@@ -24,6 +25,7 @@ export default defineConfig({
     env: { VITE_API_BASE_URL: 'http://localhost:8000/api/v1', VITE_API_RETRY_BASE_MS: '0' },
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
+    exclude: ['e2e/**', 'node_modules/**'],
     css: { modules: { classNameStrategy: 'non-scoped' } },
     coverage: {
       provider: 'v8',

@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useMemo, type KeyboardEvent } from 'react'
+import { useEffect, useMemo, useState, type KeyboardEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { Button, Field } from '@/components/ui'
@@ -36,6 +36,17 @@ export function PromptForm() {
 
   const promptLength = watch('prompt').length
   const targetLanguage = watch('targetLanguage')
+
+  // Live models can take a while; say so after a few seconds instead of a silent spinner.
+  const [slow, setSlow] = useState(false)
+  useEffect(() => {
+    if (!isLoading) {
+      setSlow(false)
+      return
+    }
+    const timer = setTimeout(() => setSlow(true), 4000)
+    return () => clearTimeout(timer)
+  }, [isLoading])
 
   useEffect(() => {
     dispatch(localeChanged(targetLanguage))
@@ -119,6 +130,11 @@ export function PromptForm() {
           {isLoading ? t('form.submitting') : t('form.submit')}
         </Button>
       </div>
+      {slow && (
+        <p className={styles.context} role="status">
+          {t('form.slowHint')}
+        </p>
+      )}
 
       {contextId && (
         <p className={styles.context}>

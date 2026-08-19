@@ -38,6 +38,31 @@ export function persistStore(
   if (!storage) return () => {}
   let timer: ReturnType<typeof setTimeout> | null = null
   let last = pick(store.getState())
+  let pending: PersistedState | null = null
+
+  const write = (state: PersistedState) => {
+    try {
+      storage.setItem(STORAGE_KEY, JSON.stringify(state))
+    } catch {
+      // quota / private mode: persistence is best effort
+    }
+  }
+  // Debounced writes can be lost on fast navigation; flush when the page is hidden/unloaded.
+  const flush = () => {
+    if (timer) clearTimeout(timer)
+    timer = null
+    if (pending) {
+      write(pending)
+      pending = null
+    }
+  }
+  const onVisibility = () => {
+    if (document.visibilityState === 'hidden') flush()
+  }
+  const win = typeof window !== 'undefined' ? window : undefined
+  win?.addEventListener('pagehide', flush)
+  win?.document.addEventListener('visibilitychange', onVisibility)
+
   const unsubscribe = store.subscribe(() => {
     const next = pick(store.getState())
     if (
@@ -48,18 +73,14 @@ export function persistStore(
       return
     }
     last = next
+    pending = next
     if (timer) clearTimeout(timer)
-    timer = setTimeout(() => {
-      timer = null
-      try {
-        storage.setItem(STORAGE_KEY, JSON.stringify(next))
-      } catch {
-        // quota / private mode: persistence is best effort
-      }
-    }, WRITE_DELAY_MS)
+    timer = setTimeout(flush, WRITE_DELAY_MS)
   })
   return () => {
     unsubscribe()
+    win?.removeEventListener('pagehide', flush)
+    win?.document.removeEventListener('visibilitychange', onVisibility)
     if (timer) clearTimeout(timer)
   }
 }

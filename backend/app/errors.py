@@ -44,6 +44,16 @@ class InvalidPageSizeError(AppError):
     code = "VALIDATION_ERROR"
 
 
+class UnauthorizedError(AppError):
+    status_code = 401
+    code = "UNAUTHORIZED"
+
+
+class AIUpstreamError(AppError):
+    status_code = 502
+    code = "AI_UPSTREAM_ERROR"
+
+
 _HTTP_CODES = {404: "NOT_FOUND", 405: "METHOD_NOT_ALLOWED", 413: "PAYLOAD_TOO_LARGE"}
 
 
@@ -60,7 +70,8 @@ def _format_validation_issue(issue: dict[str, Any]) -> dict[str, Any]:
 def register_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppError)
     async def _app_error(_: Request, exc: AppError) -> JSONResponse:
-        return JSONResponse(status_code=exc.status_code, content=exc.to_payload())
+        headers = {"WWW-Authenticate": "ApiKey"} if exc.status_code == 401 else None
+        return JSONResponse(status_code=exc.status_code, content=exc.to_payload(), headers=headers)
 
     @app.exception_handler(RequestValidationError)
     async def _validation_error(_: Request, exc: RequestValidationError) -> JSONResponse:

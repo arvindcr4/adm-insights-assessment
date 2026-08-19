@@ -1,7 +1,20 @@
+# Copy .env.example to .env and set API_KEY (and the AI_* vars for a live model).
 services:
   backend:
     build: ./backend
-    ports: ["8000:8000"]
+    environment:
+      INSIGHTS_STORE_BACKEND: sqlite
+      INSIGHTS_SQLITE_PATH: /data/insights.db
+      INSIGHTS_API_KEYS: ${API_KEY:-}
+      INSIGHTS_RATE_LIMIT_PER_MINUTE: ${RATE_LIMIT_PER_MINUTE:-120}
+      INSIGHTS_TRUST_PROXY_HEADERS: "true"
+      INSIGHTS_AI_PROVIDER: ${AI_PROVIDER:-dummy}
+      INSIGHTS_AI_BASE_URL: ${AI_BASE_URL:-https://api.deepseek.com}
+      INSIGHTS_AI_MODEL: ${AI_MODEL:-deepseek-chat}
+      INSIGHTS_AI_API_KEY: ${AI_API_KEY:-}
+      INSIGHTS_CORS_ORIGINS: '["http://localhost:5173","http://localhost:8080"]'
+    volumes:
+      - backend-data:/data
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/api/v1/health').status == 200 else 1)"]
       interval: 5s
@@ -10,6 +23,11 @@ services:
   frontend:
     build: ./frontend
     ports: ["8080:8080"]
+    environment:
+      API_KEY: ${API_KEY:-}
     depends_on:
       backend:
         condition: service_healthy
+
+volumes:
+  backend-data:

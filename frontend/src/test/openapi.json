@@ -418,6 +418,14 @@
         "title": "ValidationError",
         "type": "object"
       }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "description": "Required when keys are set",
+        "in": "header",
+        "name": "X-API-Key",
+        "type": "apiKey"
+      }
     }
   },
   "info": {
@@ -467,6 +475,11 @@
             "description": "Successful Response"
           }
         },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "summary": "Supported target languages",
         "tags": [
           "languages"
@@ -534,6 +547,11 @@
             "description": "Malformed request body"
           }
         },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "summary": "Submit a prompt",
         "tags": [
           "prompts"
@@ -618,6 +636,11 @@
             "description": "Validation Error"
           }
         },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "summary": "Re-read an answered prompt (any page)",
         "tags": [
           "prompts"
@@ -702,6 +725,11 @@
             "description": "Validation Error"
           }
         },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "summary": "Fetch one page of insights for an answered prompt",
         "tags": [
           "prompts"

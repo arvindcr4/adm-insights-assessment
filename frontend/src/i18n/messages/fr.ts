@@ -12,6 +12,7 @@ export const fr: Messages = {
     languagesUnavailable: 'Impossible de charger les langues ; valeurs par défaut affichées.',
     submit: 'Obtenir des insights',
     submitting: 'Analyse…',
+    slowHint: 'Toujours en cours : un modèle en direct peut prendre jusqu’à 30 secondes.',
     conversationNote: 'Conversation {id} — les questions de suivi y sont rattachées.',
     newConversation: 'Démarrer une nouvelle conversation',
     errors: {
@@ -40,6 +41,9 @@ export const fr: Messages = {
     SERVER_UNAVAILABLE: 'Le serveur est temporairement indisponible ; veuillez réessayer',
     INTERNAL_ERROR: 'Le serveur a rencontré une erreur inattendue',
     UNKNOWN_ERROR: 'Une erreur est survenue',
+    UNAUTHORIZED: 'Ce client n’est pas autorisé à utiliser l’API',
+    RATE_LIMITED: 'Trop de requêtes ; patientez un instant',
+    AI_UPSTREAM_ERROR: 'Le service d’IA est indisponible pour le moment ; réessayez',
   },
   insights: {
     heading: 'Insights pour « {prompt} »',

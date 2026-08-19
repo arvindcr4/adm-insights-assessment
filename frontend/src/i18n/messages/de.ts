@@ -12,6 +12,7 @@ export const de: Messages = {
     languagesUnavailable: 'Sprachen konnten nicht geladen werden; Standardwerte werden angezeigt.',
     submit: 'Insights abrufen',
     submitting: 'Analysiere…',
+    slowHint: 'Läuft noch: ein Live-Modell kann bis zu 30 Sekunden brauchen.',
     conversationNote: 'Unterhaltung {id} — Folgefragen werden damit verknüpft.',
     newConversation: 'Neue Unterhaltung beginnen',
     errors: {
@@ -40,6 +41,9 @@ export const de: Messages = {
     SERVER_UNAVAILABLE: 'Der Server ist vorübergehend nicht erreichbar; bitte erneut versuchen',
     INTERNAL_ERROR: 'Auf dem Server ist ein unerwarteter Fehler aufgetreten',
     UNKNOWN_ERROR: 'Etwas ist schiefgelaufen',
+    UNAUTHORIZED: 'Dieser Client ist nicht berechtigt, die API zu nutzen',
+    RATE_LIMITED: 'Zu viele Anfragen; bitte kurz warten',
+    AI_UPSTREAM_ERROR: 'Der KI-Dienst ist gerade nicht verfügbar; bitte erneut versuchen',
   },
   insights: {
     heading: 'Insights zu „{prompt}“',

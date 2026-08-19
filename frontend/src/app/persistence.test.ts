@@ -34,6 +34,19 @@ describe('persistence', () => {
     expect(JSON.parse(storage.data.get(STORAGE_KEY)!)).not.toHaveProperty('api')
   })
 
+  it('flushes a pending write on pagehide so fast navigation does not lose state', () => {
+    vi.useFakeTimers()
+    const storage = memoryStorage()
+    const store = makeStore()
+    const stop = persistStore(store, storage)
+    store.dispatch(localeChanged('es'))
+    expect(storage.data.size).toBe(0)
+    window.dispatchEvent(new Event('pagehide'))
+    expect(JSON.parse(storage.data.get(STORAGE_KEY)!).locale.locale).toBe('es')
+    stop()
+    vi.useRealTimers()
+  })
+
   it('ignores missing, corrupt or foreign data', () => {
     expect(loadPersistedState(memoryStorage())).toBeUndefined()
     expect(loadPersistedState(memoryStorage({ [STORAGE_KEY]: '{not json' }))).toBeUndefined()
