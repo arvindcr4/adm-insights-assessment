@@ -41,14 +41,17 @@ export function paginate(
   }
 }
 
+export const REQUEST_ID = '11111111-1111-4111-8111-111111111111'
+export const CONTEXT_ID = '22222222-2222-4222-8222-222222222222'
+
 export function makeSuccess(
   all: Insight[],
   overrides: Partial<SuccessResponse> = {},
 ): SuccessResponse {
   return {
     status: 'SUCCESS',
-    requestId: 'req-1',
-    contextId: 'ctx-1',
+    requestId: REQUEST_ID,
+    contextId: CONTEXT_ID,
     turn: 1,
     prompt: 'soybean crush margins',
     targetLanguage: 'en',
@@ -58,6 +61,6 @@ export function makeSuccess(
   }
 }
 
-export function makePage(all: Insight[], page: number, requestId = 'req-1'): InsightsPage {
+export function makePage(all: Insight[], page: number, requestId = REQUEST_ID): InsightsPage {
   return { requestId, ...paginate(all, page, 10) }
 }

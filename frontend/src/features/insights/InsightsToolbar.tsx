@@ -1,10 +1,11 @@
-import { memo, useState, type ChangeEvent } from 'react'
+import { memo, useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { Button } from '@/components/ui'
 import { useDebouncedCallback } from '@/hooks/useDebouncedCallback'
 import styles from './InsightsToolbar.module.css'
 import {
   searchTermChanged,
+  selectSearchTerm,
   selectSortDirection,
   selectSortField,
   sortDirectionToggled,
@@ -28,10 +29,21 @@ export const InsightsToolbar = memo(function InsightsToolbar() {
 function SearchInput() {
   const dispatch = useAppDispatch()
   // Raw value is local so every keystroke does not touch the store; the store gets the debounced term.
-  const [value, setValue] = useState('')
+  const storeTerm = useAppSelector(selectSearchTerm)
+  const [value, setValue] = useState(storeTerm)
+  const lastPushed = useRef(storeTerm)
   const pushTerm = useDebouncedCallback((term: string) => {
+    lastPushed.current = term
     dispatch(searchTermChanged(term))
   }, SEARCH_DEBOUNCE_MS)
+
+  // If the store term changes from elsewhere (e.g. reset on a new answer), follow it.
+  useEffect(() => {
+    if (storeTerm !== lastPushed.current) {
+      lastPushed.current = storeTerm
+      setValue(storeTerm)
+    }
+  }, [storeTerm])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -40,6 +52,7 @@ function SearchInput() {
   const onClear = () => {
     setValue('')
     pushTerm.cancel()
+    lastPushed.current = ''
     dispatch(searchTermChanged(''))
   }
 

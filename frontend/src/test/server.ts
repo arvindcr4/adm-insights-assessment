@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
 import { API_BASE_URL } from '@/services/api/baseApi'
 import type { PromptRequest } from '@/services/api'
-import { makeInsights, makePage, makeSuccess } from './fixtures'
+import { CONTEXT_ID, makeInsights, makePage, makeSuccess } from './fixtures'
 
 export const API = (path: string) => `${API_BASE_URL}${path}`
 
@@ -41,7 +41,8 @@ export const handlers = [
     if (body.prompt.trim().length < 5) {
       return HttpResponse.json({
         status: 'NEEDS_CLARIFICATION',
-        contextId: body.contextId ?? 'ctx-1',
+        contextId: body.contextId ?? CONTEXT_ID,
+        turn: 1,
         message: 'Please provide more details. The prompt is too short to be understood.',
         reasons: ['PROMPT_TOO_SHORT'],
         suggestions: ['Name the subject you are interested in.'],
@@ -51,7 +52,7 @@ export const handlers = [
       makeSuccess(ALL_INSIGHTS, {
         prompt: body.prompt,
         targetLanguage: body.targetLanguage,
-        contextId: body.contextId ?? 'ctx-1',
+        contextId: body.contextId ?? CONTEXT_ID,
       }),
     )
   }),

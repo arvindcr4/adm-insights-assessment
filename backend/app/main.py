@@ -11,6 +11,7 @@ from app.api.router import api_router
 from app.config import Settings, get_settings
 from app.domain.gatekeeper import PromptGatekeeper
 from app.errors import register_exception_handlers
+from app.middleware import BodySizeLimitMiddleware
 from app.repositories.insight_repo import InsightRepository, JsonInsightRepository
 from app.repositories.request_store import InMemoryRequestStore
 from app.services.ai_service import AIService, DummyAIService
@@ -39,6 +40,7 @@ def create_app(
         ),
         supported_languages=settings.supported_languages,
         default_page_size=settings.default_page_size,
+        max_page_size=settings.max_page_size,
     )
 
     app = FastAPI(
@@ -51,6 +53,7 @@ def create_app(
     app.state.settings = settings
     app.state.prompt_service = service
 
+    app.add_middleware(BodySizeLimitMiddleware, max_bytes=settings.max_body_bytes)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,

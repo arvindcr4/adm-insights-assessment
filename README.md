@@ -26,16 +26,16 @@ cd backend  && uv run pytest && uv run ruff check .
 cd frontend && pnpm test && pnpm typecheck && pnpm lint
 ```
 
-Try prompts such as `soybean crush margins in brazil` (24 results → pagination), `wheat exports black sea`, `hi` (clarification), or pick an unsupported language through the API to see the structured 4xx.
+Try prompts such as `soybean crush margins in brazil` (19 results → 2 pages), `wheat exports black sea`, `hi` or `do something` (clarification), or send `targetLanguage: "xx"` through the API to see the structured 4xx.
 
 ## What the system does
 
 1. The form validates shape (zod) and disables submit until valid.
 2. `POST /api/v1/prompts` — the BFF validates strictly, then a **gatekeeper** decides whether the prompt is answerable *before any downstream call*:
-   - too short / too few words / only filler words / vague → `200 {status: "NEEDS_CLARIFICATION", message, reasons, suggestions}` — the AI service is never invoked (covered by a spy test).
+   - too short (< 5 chars) / a single word / only filler words (“do something”, “what is it?”) / vague → `200 {status: "NEEDS_CLARIFICATION", message, reasons, suggestions, contextId, turn}` — the AI service is never invoked (covered by a spy test). Thresholds are `INSIGHTS_MIN_PROMPT_LENGTH` / `INSIGHTS_MIN_PROMPT_WORDS`.
    - otherwise it calls the `AIService` seam (a deterministic dummy ranked by keyword overlap), stores the full result under a `requestId`, and returns `{status: "SUCCESS", ...page 1, pagination, meta}`.
 3. Pages 2..n are read via `GET /api/v1/prompts/{requestId}/insights?page=&pageSize=`; the client accumulates pages ("Load more") and searches/sorts the loaded set locally.
-4. Errors are always `{error, message, details?}` — `422 VALIDATION_ERROR` (missing/empty prompt, bad UUID, unknown fields), `400 INVALID_LANGUAGE`, `404 REQUEST_NOT_FOUND`, `500 INTERNAL_ERROR`.
+4. Errors are always `{error, message, details?}` — `422 VALIDATION_ERROR` (missing/empty/over-long prompt, bad UUID, unknown fields, bad `pageSize`), `400 INVALID_LANGUAGE` (any code not in the supported set), `404 REQUEST_NOT_FOUND`, `413 PAYLOAD_TOO_LARGE`, `500 INTERNAL_ERROR`; framework 404/405 use the same envelope.
 
 ## API
 
@@ -43,7 +43,7 @@ Try prompts such as `soybean crush margins in brazil` (24 results → pagination
 |---|---|---|
 | `POST` | `/api/v1/prompts` | Submit `{prompt, targetLanguage, contextId?}` → SUCCESS (page 1) or NEEDS_CLARIFICATION |
 | `GET` | `/api/v1/prompts/{requestId}/insights?page=1&pageSize=10` | One page of insights + pagination metadata |
-| `GET` | `/api/v1/prompts/{requestId}?page=&pageSize=` | Re-read a full answer envelope (deep-link / refresh) |
+| `GET` | `/api/v1/prompts/{requestId}?page=&pageSize=` | Re-read a full answer envelope (for deep-links / other clients; the SPA does not need it) |
 | `GET` | `/api/v1/languages` | Supported target languages (drives the dropdown) |
 | `GET` | `/api/v1/health` | Liveness |
 
@@ -64,9 +64,10 @@ config.py         pydantic-settings; every threshold is env-tunable (INSIGHTS_*)
 main.py           create_app() factory wires settings → repos → services → routes
 ```
 
-- `create_app(settings, ai_service=...)` lets tests inject a spy AI service and custom settings; no globals.
-- Language support, min prompt length, page-size bounds and TTL live in `Settings`, not in code paths.
-- The request store is a `Protocol`; swapping in Redis/SQL does not touch the service.
+- `create_app(settings, ai_service=...)` lets tests inject a spy AI service and custom settings; routes read nothing at import time (page-size default/max are enforced in the service from injected settings — tested).
+- Language support, gatekeeper thresholds, page-size bounds, body-size cap and TTL live in `Settings` (`INSIGHTS_*` env). The 2000-char prompt cap is a wire-contract constant in `schemas.py`.
+- `PromptService` depends on the `RequestStore` protocol only (`save/get/next_turn`); the in-memory implementation owns TTL/eviction internally, so Redis/SQL can replace it without touching the service.
+- `BodySizeLimitMiddleware` (pure ASGI) rejects bodies over `max_body_bytes` before parsing — pydantic `max_length` alone would not protect memory.
 
 ### Frontend (`frontend/src`)
 
@@ -85,7 +86,7 @@ hooks/          useDebouncedCallback
 
 State management:
 - **RTK Query** owns server state: `submitPrompt` (mutation), `getInsightsPages` (infinite query, `getNextPageParam` reads the backend's `hasNextPage`), `getLanguages` (cached ~forever).
-- **`promptSlice`** stores the request/response pairs (`history`), the conversation `contextId`, and a single discriminated `outcome` — populated by matchers on the mutation's fulfilled/rejected actions, so components never copy API results around.
+- **`promptSlice`** stores every request/response pair (`history`, including rejected 4xx/network exchanges), the conversation `contextId`, and a single discriminated `outcome` — populated by matchers on the mutation's fulfilled/rejected actions, so components never copy API results around. Clicking a history row re-opens that exchange; successful answers render straight from the RTK Query cache.
 - **`insightsViewSlice`** holds the debounced search term and sort settings.
 
 ## Decisions worth calling out
@@ -96,16 +97,21 @@ State management:
 - **`NEEDS_CLARIFICATION` is a 200.** It is a valid business outcome, not a client error, and the UI treats it as a distinct state from 4xx. Unsupported language is a `400 INVALID_LANGUAGE` (semantic); malformed bodies are `422 VALIDATION_ERROR` with per-field details.
 - **Schema split.** zod validates shape (required, max length, supported language); the BFF decides *meaning* (length/context). Duplicating the 5-char rule in the UI would make the two drift.
 - **TypeScript** rather than plain JS: RTK Query's value is largely its inferred types, and the brief emphasises a scalable codebase.
-- **Conversation tracking.** `contextId` is generated by the BFF on first contact, echoed on clarification, and carried by the client on follow-ups; the BFF counts turns per context.
+- **Conversation tracking.** `contextId` is generated by the BFF on first contact, echoed on clarification, and carried by the client on follow-ups; every submission (including clarifications) increments the context's `turn`.
 - **Dummy AI.** `DummyAIService` ranks the 48-item catalogue by keyword overlap and falls back to a deterministic (hash-seeded) sample, so the same prompt always gives the same, stable-to-paginate answer. It does not translate; `language` just echoes the request.
 
 ## Tests
 
-- Backend (29): gatekeeper rules, pagination maths, API validation/4xx shapes, clarification short-circuit (spy AI), page navigation/disjointness, 404, determinism, turn counting.
-- Frontend (29): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network), form validity gating + language loading, SUCCESS/clarification rendering, no page-1 refetch + load more, debounced search across pages, sort toggles, retryable page-fetch error, search reset on new answer.
+- Backend (42): gatekeeper rules, pagination maths, API validation/4xx envelopes (incl. framework 404/405), clarification short-circuit (spy AI), page navigation/disjointness, injected page-size bounds, body-size guard (declared and chunked), store TTL/LRU eviction, turn counting, determinism.
+- Frontend (34): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network, history incl. rejected, re-open), form validity gating, language loading + fallback on failure, SUCCESS/clarification/4xx/422 rendering, no page-1 refetch + load more, load-more failure, debounced search across pages, sort toggles, first-page fetch error with retry, search reset on new answer.
+
+## Hardening
+
+Body-size cap (413, before parsing), bounded `page`/`pageSize`, LRU+TTL caps on both request and turn stores, structured error envelope for every non-2xx (no stack traces leak), CORS allow-list without credentials, nginx security headers (`nosniff`, `X-Frame-Options`, CSP, `Referrer-Policy`) + `client_max_body_size`, non-root containers (`appuser` / `nginx-unprivileged`), backend healthcheck gating the frontend in compose. No auth by design; `requestId` (UUIDv4) is the only handle to a result.
 
 ## Not done / next
 
 - Persist the request store (Redis/SQLite) so `requestId`s survive restarts; a DB-backed catalogue.
 - Server-side `q`/`sort` and virtualised list for very large result sets.
 - Auth/rate limiting and request-id logging on the BFF.
+- A contract test (OpenAPI → TS types / msw handlers) so the frontend mocks cannot drift from the BFF.

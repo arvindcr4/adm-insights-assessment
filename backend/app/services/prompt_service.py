@@ -8,8 +8,8 @@ from uuid import UUID, uuid4
 from app.domain.gatekeeper import PromptGatekeeper
 from app.domain.models import Insight, StoredRequest
 from app.domain.pagination import Page, paginate
-from app.errors import RequestNotFoundError, UnsupportedLanguageError
-from app.repositories.request_store import InMemoryRequestStore
+from app.errors import InvalidPageSizeError, RequestNotFoundError, UnsupportedLanguageError
+from app.repositories.request_store import RequestStore
 from app.schemas import (
     ClarificationResponse,
     InsightMetadata,
@@ -28,16 +28,18 @@ class PromptService:
         self,
         *,
         ai: AIService,
-        store: InMemoryRequestStore,
+        store: RequestStore,
         gatekeeper: PromptGatekeeper,
         supported_languages: dict[str, str],
         default_page_size: int,
+        max_page_size: int,
     ) -> None:
         self._ai = ai
         self._store = store
         self._gatekeeper = gatekeeper
         self._languages = supported_languages
         self._default_page_size = default_page_size
+        self._max_page_size = max_page_size
 
     # ----- commands -----
 
@@ -49,12 +51,14 @@ class PromptService:
             )
 
         context_id = req.context_id or uuid4()
+        turn = self._store.next_turn(context_id)
 
         verdict = self._gatekeeper.assess(req.prompt)
         if verdict.needs_clarification:
             # Short-circuit: no downstream AI call is made.
             return ClarificationResponse(
                 context_id=context_id,
+                turn=turn,
                 message="Please provide more details. "
                 + self._gatekeeper.describe(verdict.reasons[:1]),
                 reasons=list(verdict.reasons),
@@ -64,30 +68,32 @@ class PromptService:
         result = self._ai.generate_insights(
             prompt=req.prompt, target_language=req.target_language, context_id=context_id
         )
-        now = datetime.now(UTC)
         stored = StoredRequest(
             request_id=uuid4(),
             context_id=context_id,
-            turn=self._store.next_turn(context_id),
+            turn=turn,
             prompt=req.prompt,
             target_language=req.target_language,
             result=result,
-            created_at=now,
-            expires_at=now + self._store.ttl,
+            created_at=datetime.now(UTC),
         )
         self._store.save(stored)
         return self._success(stored, page=1, page_size=self._default_page_size)
 
     # ----- queries -----
 
-    def get_request(self, request_id: UUID, *, page: int, page_size: int) -> SuccessResponse:
-        return self._success(self._require(request_id), page=page, page_size=page_size)
+    def get_request(self, request_id: UUID, *, page: int, page_size: int | None) -> SuccessResponse:
+        return self._success(
+            self._require(request_id), page=page, page_size=self._resolve_page_size(page_size)
+        )
 
     def get_insights_page(
-        self, request_id: UUID, *, page: int, page_size: int
+        self, request_id: UUID, *, page: int, page_size: int | None
     ) -> InsightsPageResponse:
         stored = self._require(request_id)
-        paged = paginate(stored.result.insights, page=page, page_size=page_size)
+        paged = paginate(
+            stored.result.insights, page=page, page_size=self._resolve_page_size(page_size)
+        )
         return InsightsPageResponse(
             request_id=stored.request_id,
             insights=[_to_out(i) for i in paged.items],
@@ -95,6 +101,22 @@ class PromptService:
         )
 
     # ----- helpers -----
+
+    def _resolve_page_size(self, page_size: int | None) -> int:
+        if page_size is None:
+            return self._default_page_size
+        if page_size > self._max_page_size:
+            raise InvalidPageSizeError(
+                "Request validation failed",
+                details=[
+                    {
+                        "field": "pageSize",
+                        "code": "less_than_equal",
+                        "message": f"pageSize must be <= {self._max_page_size}",
+                    }
+                ],
+            )
+        return page_size
 
     def _require(self, request_id: UUID) -> StoredRequest:
         stored = self._store.get(request_id)

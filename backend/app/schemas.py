@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Annotated, Literal
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 from pydantic.alias_generators import to_camel
 
 
@@ -16,8 +16,10 @@ class ApiModel(BaseModel):
 
 # ---------- Requests ----------
 
+PROMPT_MAX_LENGTH = 2000
+
 LanguageCode = Annotated[
-    str, StringConstraints(strip_whitespace=True, to_lower=True, min_length=2, max_length=2)
+    str, StringConstraints(strip_whitespace=True, to_lower=True, min_length=1, max_length=16)
 ]
 
 
@@ -26,16 +28,10 @@ class PromptRequest(ApiModel):
         alias_generator=to_camel, populate_by_name=True, extra="forbid", str_strip_whitespace=True
     )
 
-    prompt: str = Field(..., min_length=1, max_length=2000, description="User's query")
+    # Hard wire limit; the body-size middleware guards memory before this runs.
+    prompt: str = Field(..., min_length=1, max_length=PROMPT_MAX_LENGTH, description="User's query")
     target_language: LanguageCode = Field(..., description="ISO 639-1 code, e.g. en, de, fr")
     context_id: UUID | None = Field(default=None, description="Conversation tracking id")
-
-    @field_validator("target_language")
-    @classmethod
-    def _alpha(cls, v: str) -> str:
-        if not v.isalpha():
-            raise ValueError("must be a two-letter ISO 639-1 code")
-        return v
 
 
 # ---------- Responses ----------
@@ -87,6 +83,7 @@ class SuccessResponse(ApiModel):
 class ClarificationResponse(ApiModel):
     status: Literal["NEEDS_CLARIFICATION"] = "NEEDS_CLARIFICATION"
     context_id: UUID
+    turn: int
     message: str
     reasons: list[str]
     suggestions: list[str]

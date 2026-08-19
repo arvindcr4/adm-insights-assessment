@@ -14,6 +14,9 @@ gk = PromptGatekeeper(min_length=5, min_words=2)
         ("what is it?", "ONLY_FILLER_WORDS"),
         ("!!! ???", "NO_MEANINGFUL_CONTENT"),
         ("tell me more", "VAGUE_PROMPT"),
+        ("do something", "ONLY_FILLER_WORDS"),
+        ("give details", "ONLY_FILLER_WORDS"),
+        ("I want to know more", "ONLY_FILLER_WORDS"),
     ],
 )
 def test_flags_unclear_prompts(prompt: str, expected_reason: str) -> None:

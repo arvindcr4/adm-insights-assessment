@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     # Gatekeeper thresholds: below these we answer NEEDS_CLARIFICATION without touching the AI.
     min_prompt_length: int = 5
     min_prompt_words: int = 2
-    max_prompt_length: int = 2000
+    # Hard cap on request bodies (bytes); enforced before parsing.
+    max_body_bytes: int = 64 * 1024
     # Pagination bounds.
     default_page_size: int = 10
     max_page_size: int = 50

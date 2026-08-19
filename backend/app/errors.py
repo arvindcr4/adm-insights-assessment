@@ -12,6 +12,7 @@ from typing import Any
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 log = logging.getLogger(__name__)
 
@@ -42,6 +43,14 @@ class RequestNotFoundError(AppError):
     code = "REQUEST_NOT_FOUND"
 
 
+class InvalidPageSizeError(AppError):
+    status_code = 422
+    code = "VALIDATION_ERROR"
+
+
+_HTTP_CODES = {404: "NOT_FOUND", 405: "METHOD_NOT_ALLOWED", 413: "PAYLOAD_TOO_LARGE"}
+
+
 def _format_validation_issue(issue: dict[str, Any]) -> dict[str, Any]:
     # pydantic loc looks like ("body", "prompt") or ("query", "page"); drop the source segment.
     loc = [str(p) for p in issue.get("loc", ()) if p not in ("body", "query", "path")]
@@ -67,6 +76,16 @@ def register_exception_handlers(app: FastAPI) -> None:
                 "message": "Request validation failed",
                 "details": details,
             },
+        )
+
+    @app.exception_handler(StarletteHTTPException)
+    async def _http_error(_: Request, exc: StarletteHTTPException) -> JSONResponse:
+        # Framework-raised errors (unknown route, wrong method, ...) use the same envelope.
+        code = _HTTP_CODES.get(exc.status_code, f"HTTP_{exc.status_code}")
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"error": code, "message": str(exc.detail)},
+            headers=dict(exc.headers or {}),
         )
 
     @app.exception_handler(Exception)

@@ -4,7 +4,6 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query
 
 from app.api.deps import get_prompt_service
-from app.config import get_settings
 from app.schemas import (
     ClarificationResponse,
     ErrorResponse,
@@ -19,9 +18,9 @@ ServiceDep = Annotated[PromptService, Depends(get_prompt_service)]
 
 router = APIRouter(prefix="/prompts", tags=["prompts"])
 
-_settings = get_settings()
-PageParam = Annotated[int, Query(ge=1, description="1-based page number")]
-PageSizeParam = Annotated[int, Query(ge=1, le=_settings.max_page_size, alias="pageSize")]
+PageParam = Annotated[int, Query(ge=1, le=10_000, description="1-based page number")]
+# Upper bound and default come from injected settings (enforced in PromptService).
+PageSizeParam = Annotated[int | None, Query(ge=1, alias="pageSize")]
 
 _ERRORS = {
     400: {"model": ErrorResponse, "description": "Unsupported target language"},
@@ -56,7 +55,7 @@ def get_prompt(
     request_id: UUID,
     service: ServiceDep,
     page: PageParam = 1,
-    page_size: PageSizeParam = _settings.default_page_size,
+    page_size: PageSizeParam = None,
 ) -> SuccessResponse:
     return service.get_request(request_id, page=page, page_size=page_size)
 
@@ -71,6 +70,6 @@ def get_insights_page(
     request_id: UUID,
     service: ServiceDep,
     page: PageParam = 1,
-    page_size: PageSizeParam = _settings.default_page_size,
+    page_size: PageSizeParam = None,
 ) -> InsightsPageResponse:
     return service.get_insights_page(request_id, page=page, page_size=page_size)

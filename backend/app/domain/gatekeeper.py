@@ -15,7 +15,8 @@ STOPWORDS: frozenset[str] = frozenset(
     she her it its they them their this that these those what which who whom when where why
     how all any both each few more most other some such no nor not only own same so than too
     very can will just should now please tell give show explain help hi hello hey thanks
-    thank ok okay yes yeah
+    thank ok okay yes yeah something anything everything nothing stuff thing things details
+    detail info information want need know let us get find see look make use
     """.split()  # noqa: SIM905 - readable word list
 )
 

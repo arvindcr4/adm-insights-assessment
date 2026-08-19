@@ -32,6 +32,22 @@ def test_unsupported_language_is_400(client: TestClient) -> None:
     assert "en" in body["details"]["supportedLanguages"]
 
 
+def test_malformed_language_codes_are_also_invalid_language(client: TestClient) -> None:
+    for code in ("eng", "123", "e"):
+        r = submit(client, targetLanguage=code)
+        assert r.status_code == 400, code
+        assert r.json()["error"] == "INVALID_LANGUAGE"
+
+
+def test_unknown_route_and_method_use_error_envelope(client: TestClient) -> None:
+    r = client.get("/api/v1/nope")
+    assert r.status_code == 404
+    assert r.json() == {"error": "NOT_FOUND", "message": "Not Found"}
+    r = client.delete("/api/v1/prompts")
+    assert r.status_code == 405
+    assert r.json()["error"] == "METHOD_NOT_ALLOWED"
+
+
 def test_language_is_case_insensitive(client: TestClient) -> None:
     r = submit(client, targetLanguage="EN")
     assert r.status_code == 200
@@ -71,10 +87,12 @@ def test_short_prompt_needs_clarification_without_calling_ai(settings: Settings)
     assert calls == []
 
 
-def test_clarification_preserves_context_id(client: TestClient) -> None:
+def test_clarification_preserves_context_id_and_counts_as_a_turn(client: TestClient) -> None:
     ctx = str(uuid4())
     r = submit(client, prompt="what is it", contextId=ctx)
     assert r.json()["contextId"] == ctx
+    assert r.json()["turn"] == 1
+    assert submit(client, contextId=ctx).json()["turn"] == 2
 
 
 # ---------- success + pagination ----------
@@ -116,9 +134,20 @@ def test_page_beyond_range_is_empty_not_error(client: TestClient) -> None:
 def test_page_size_bounds_enforced(client: TestClient) -> None:
     rid = submit(client).json()["requestId"]
     assert client.get(f"/api/v1/prompts/{rid}/insights", params={"pageSize": 0}).status_code == 422
-    assert (
-        client.get(f"/api/v1/prompts/{rid}/insights", params={"pageSize": 999}).status_code == 422
-    )
+    r = client.get(f"/api/v1/prompts/{rid}/insights", params={"pageSize": 999})
+    assert r.status_code == 422
+    assert r.json()["error"] == "VALIDATION_ERROR"
+    assert r.json()["details"][0]["field"] == "pageSize"
+
+
+def test_page_size_bounds_come_from_injected_settings() -> None:
+    client = TestClient(create_app(Settings(default_page_size=3, max_page_size=4)))
+    first = submit(client).json()
+    assert first["pagination"]["pageSize"] == 3
+    rid = first["requestId"]
+    assert client.get(f"/api/v1/prompts/{rid}/insights").json()["pagination"]["pageSize"] == 3
+    assert client.get(f"/api/v1/prompts/{rid}/insights", params={"pageSize": 4}).status_code == 200
+    assert client.get(f"/api/v1/prompts/{rid}/insights", params={"pageSize": 5}).status_code == 422
 
 
 def test_unknown_request_is_404(client: TestClient) -> None:

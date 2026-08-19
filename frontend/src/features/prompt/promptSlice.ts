@@ -17,11 +17,16 @@ export type PromptOutcome =
   | { kind: 'clarification'; message: string; reasons: string[]; suggestions: string[] }
   | { kind: 'error'; error: AppError }
 
+/** A 4xx/network failure is still a response worth keeping. */
+export interface ErrorResponse {
+  status: 'ERROR'
+  error: AppError
+}
+
 export interface PromptExchange {
   id: string
-  submittedAt: number
   request: PromptRequest
-  response: PromptResponse
+  response: PromptResponse | ErrorResponse
 }
 
 export interface PromptState {
@@ -40,7 +45,8 @@ export const initialPromptState: PromptState = {
   history: [],
 }
 
-function outcomeFrom(response: PromptResponse): PromptOutcome {
+function outcomeFrom(response: PromptResponse | ErrorResponse): PromptOutcome {
+  if (response.status === 'ERROR') return { kind: 'error', error: response.error }
   if (response.status === 'NEEDS_CLARIFICATION') {
     const { message, reasons, suggestions } = response as ClarificationResponse
     return { kind: 'clarification', message, reasons, suggestions }
@@ -69,6 +75,13 @@ const promptSlice = createSlice({
     contextIdSet(state, action: PayloadAction<string | null>) {
       state.contextId = action.payload
     },
+    /** Re-open a past exchange; successful answers come straight from the RTK Query cache. */
+    historyEntryActivated(state, action: PayloadAction<string>) {
+      const entry = state.history.find((e) => e.id === action.payload)
+      if (!entry) return
+      state.outcome = outcomeFrom(entry.response)
+      if (entry.response.status !== 'ERROR') state.contextId = entry.response.contextId
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -78,7 +91,6 @@ const promptSlice = createSlice({
         state.outcome = outcomeFrom(response)
         state.history.unshift({
           id: action.meta.requestId,
-          submittedAt: action.meta.fulfilledTimeStamp ?? 0,
           request: action.meta.arg.originalArgs,
           response,
         })
@@ -86,7 +98,14 @@ const promptSlice = createSlice({
       })
       .addMatcher(promptsApi.endpoints.submitPrompt.matchRejected, (state, action) => {
         if (action.meta.condition) return // request was skipped, not failed
-        state.outcome = { kind: 'error', error: toAppError(action.payload ?? action.error) }
+        const error = toAppError(action.payload ?? action.error)
+        state.outcome = { kind: 'error', error }
+        state.history.unshift({
+          id: action.meta.requestId,
+          request: action.meta.arg.originalArgs,
+          response: { status: 'ERROR', error },
+        })
+        if (state.history.length > HISTORY_LIMIT) state.history.length = HISTORY_LIMIT
       })
   },
   selectors: {
@@ -96,7 +115,8 @@ const promptSlice = createSlice({
   },
 })
 
-export const { conversationReset, historyCleared, contextIdSet } = promptSlice.actions
+export const { conversationReset, historyCleared, contextIdSet, historyEntryActivated } =
+  promptSlice.actions
 export const { selectOutcome, selectContextId, selectHistory } = promptSlice.selectors
 export const promptReducer = promptSlice.reducer
 export const promptSliceName = promptSlice.name

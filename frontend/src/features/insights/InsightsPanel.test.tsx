@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
 import { describe, expect, it } from 'vitest'
 import { renderWithStore } from '@/test/render'
+import { REQUEST_ID } from '@/test/fixtures'
 import { API, server } from '@/test/server'
 import { InsightsPanel } from './InsightsPanel'
 import { SEARCH_DEBOUNCE_MS } from './InsightsToolbar'
@@ -10,7 +11,7 @@ import { SEARCH_DEBOUNCE_MS } from './InsightsToolbar'
 function renderPanel() {
   return renderWithStore(
     <InsightsPanel
-      requestId="req-1"
+      requestId={REQUEST_ID}
       prompt="soybean"
       targetLanguage="en"
       turn={1}
@@ -84,7 +85,25 @@ describe('InsightsPanel', () => {
     expect(titles().at(-1)).toBe('Insight 10')
   })
 
-  it('shows a retryable error when the page fetch fails', async () => {
+  it('keeps loaded results and shows an inline error when "Load more" fails', async () => {
+    const user = userEvent.setup()
+    renderPanel()
+    await waitFor(() => expect(screen.getAllByTestId('insight-card')).toHaveLength(10))
+    server.use(
+      http.get(API('/prompts/:requestId/insights'), () =>
+        HttpResponse.json(
+          { error: 'REQUEST_NOT_FOUND', message: 'Request not found or expired' },
+          { status: 404 },
+        ),
+      ),
+    )
+    await user.click(screen.getByRole('button', { name: /load more/i }))
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent(/could not load more: request not found or expired/i)
+    expect(screen.getAllByTestId('insight-card')).toHaveLength(10)
+  })
+
+  it('shows a retryable error when the first page fetch fails', async () => {
     server.use(
       http.get(API('/prompts/:requestId/insights'), () =>
         HttpResponse.json(

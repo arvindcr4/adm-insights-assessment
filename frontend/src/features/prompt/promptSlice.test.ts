@@ -2,9 +2,16 @@ import { describe, expect, it } from 'vitest'
 import { makeStore } from '@/app/store'
 import { insightsApi, promptsApi } from '@/services/api'
 import { http, HttpResponse } from 'msw'
+import { CONTEXT_ID, REQUEST_ID } from '@/test/fixtures'
 import { ALL_INSIGHTS, API, server } from '@/test/server'
 import { searchTermChanged, selectSearchTerm } from '@/features/insights/insightsViewSlice'
-import { conversationReset, selectContextId, selectHistory, selectOutcome } from './promptSlice'
+import {
+  conversationReset,
+  historyEntryActivated,
+  selectContextId,
+  selectHistory,
+  selectOutcome,
+} from './promptSlice'
 
 const flushMicrotasks = () => new Promise((r) => setTimeout(r, 0))
 
@@ -20,10 +27,10 @@ describe('promptSlice', () => {
     const outcome = selectOutcome(state)
     expect(outcome.kind).toBe('success')
     if (outcome.kind === 'success') {
-      expect(outcome.requestId).toBe('req-1')
+      expect(outcome.requestId).toBe(REQUEST_ID)
       expect(outcome.totalItems).toBe(ALL_INSIGHTS.length)
     }
-    expect(selectContextId(state)).toBe('ctx-1')
+    expect(selectContextId(state)).toBe(CONTEXT_ID)
     expect(selectHistory(state)).toHaveLength(1)
     expect(selectHistory(state)[0]?.request.prompt).toBe('soybean crush margins')
   })
@@ -32,7 +39,7 @@ describe('promptSlice', () => {
     const store = makeStore()
     await submit(store, 'soybean crush margins')
     await flushMicrotasks()
-    const cached = insightsApi.endpoints.getInsightsPages.select({ requestId: 'req-1' })(
+    const cached = insightsApi.endpoints.getInsightsPages.select({ requestId: REQUEST_ID })(
       store.getState(),
     )
     expect(cached.data?.pages[0]?.insights).toHaveLength(10)
@@ -49,8 +56,14 @@ describe('promptSlice', () => {
       expect(outcome.error.code).toBe('INVALID_LANGUAGE')
       expect(outcome.error.status).toBe(400)
     }
-    // Only fulfilled exchanges are recorded: the clarification, not the 400.
-    expect(selectHistory(errState)).toHaveLength(1)
+    // Both exchanges are recorded: the clarification and the 400.
+    const history = selectHistory(errState)
+    expect(history).toHaveLength(2)
+    expect(history[0]?.response).toMatchObject({
+      status: 'ERROR',
+      error: { code: 'INVALID_LANGUAGE' },
+    })
+    expect(history[1]?.response.status).toBe('NEEDS_CLARIFICATION')
   })
 
   it('maps network failures to a NETWORK_ERROR outcome', async () => {
@@ -66,6 +79,19 @@ describe('promptSlice', () => {
     await submit(store, 'soybean crush margins')
     expect(selectSearchTerm(store.getState())).toBe('')
     expect(store.getState().insightsView.sortField).toBe('title')
+  })
+
+  it('historyEntryActivated re-opens a past exchange', async () => {
+    const store = makeStore()
+    await submit(store, 'soybean crush margins')
+    await submit(store, 'hi')
+    expect(selectOutcome(store.getState()).kind).toBe('clarification')
+    const past = selectHistory(store.getState())[1]!
+    store.dispatch(historyEntryActivated(past.id))
+    expect(selectOutcome(store.getState())).toMatchObject({
+      kind: 'success',
+      requestId: REQUEST_ID,
+    })
   })
 
   it('conversationReset clears everything', async () => {

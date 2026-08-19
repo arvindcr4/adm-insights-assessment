@@ -52,7 +52,6 @@ class StoredRequest:
     target_language: str
     result: AIResult
     created_at: datetime
-    expires_at: datetime
 
 
 @dataclass(frozen=True, slots=True)

@@ -25,7 +25,21 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
+  padding: 0.3rem 0.4rem;
+  font: inherit;
   font-size: 0.88rem;
+  text-align: left;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.row:hover,
+.row:focus-visible {
+  border-color: var(--color-border);
+  background: var(--color-bg);
 }
 .prompt {
   flex: 1;

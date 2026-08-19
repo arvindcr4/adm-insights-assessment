@@ -16,7 +16,8 @@ const DEFAULT_LANGUAGE = 'en'
  * by <PromptOutcome/>, so this component only re-renders for form and mutation state.
  */
 export function PromptForm() {
-  const { data: languages = FALLBACK_LANGUAGES } = useGetLanguagesQuery()
+  const { data: languages = FALLBACK_LANGUAGES, isError: languagesUnavailable } =
+    useGetLanguagesQuery()
   const contextId = useAppSelector(selectContextId)
   const [submitPrompt, { isLoading }] = useSubmitPromptMutation()
 
@@ -69,11 +70,23 @@ export function PromptForm() {
       </Field>
 
       <div className={styles.row}>
-        <Field id="targetLanguage" label="Target language" error={errors.targetLanguage?.message}>
+        <Field
+          id="targetLanguage"
+          label="Target language"
+          error={errors.targetLanguage?.message}
+          hint={languagesUnavailable ? 'Could not load languages; showing defaults.' : undefined}
+        >
           <select
             id="targetLanguage"
             className={styles.select}
             aria-invalid={errors.targetLanguage ? true : undefined}
+            aria-describedby={
+              errors.targetLanguage
+                ? 'targetLanguage-error'
+                : languagesUnavailable
+                  ? 'targetLanguage-hint'
+                  : undefined
+            }
             {...register('targetLanguage')}
           >
             {languages.map((lang) => (

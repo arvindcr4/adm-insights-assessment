@@ -13,7 +13,11 @@ export const InsightCard = memo(function InsightCard({ insight }: { insight: Ins
     <li className={styles.card} data-testid="insight-card">
       <div className={styles.head}>
         <h3 className={styles.title}>{title}</h3>
-        <span className={styles.confidence} title="Model confidence">
+        <span
+          className={styles.confidence}
+          title="Model confidence"
+          aria-label={`Model confidence ${percent.format(metadata.confidence)}`}
+        >
           {percent.format(metadata.confidence)}
         </span>
       </div>

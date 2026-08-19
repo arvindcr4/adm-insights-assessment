@@ -52,6 +52,7 @@ export interface SuccessResponse {
 export interface ClarificationResponse {
   status: 'NEEDS_CLARIFICATION'
   contextId: string
+  turn: number
   message: string
   reasons: string[]
   suggestions: string[]
