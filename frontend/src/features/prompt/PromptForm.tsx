@@ -3,13 +3,11 @@ import { useEffect, useMemo, type KeyboardEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { Button, Field } from '@/components/ui'
-import { localeChanged, useT } from '@/i18n'
+import { localeChanged, useLocale, useT } from '@/i18n'
 import { FALLBACK_LANGUAGES, useGetLanguagesQuery, useSubmitPromptMutation } from '@/services/api'
 import styles from './PromptForm.module.css'
 import { conversationReset, selectContextId } from './promptSlice'
 import { makePromptFormSchema, PROMPT_MAX_LENGTH, type PromptFormValues } from './promptSchema'
-
-const DEFAULT_LANGUAGE = 'en'
 
 export function PromptForm() {
   const t = useT()
@@ -17,6 +15,7 @@ export function PromptForm() {
   const { data: languages = FALLBACK_LANGUAGES, isError: languagesUnavailable } =
     useGetLanguagesQuery()
   const contextId = useAppSelector(selectContextId)
+  const initialLocale = useLocale()
   const [submitPrompt, { isLoading }] = useSubmitPromptMutation()
 
   const languageCodes = useMemo(() => languages.map((l) => l.code), [languages])
@@ -32,7 +31,7 @@ export function PromptForm() {
   } = useForm<PromptFormValues>({
     resolver: zodResolver(schema),
     mode: 'onChange',
-    defaultValues: { prompt: '', targetLanguage: DEFAULT_LANGUAGE },
+    defaultValues: { prompt: '', targetLanguage: initialLocale },
   })
 
   const promptLength = watch('prompt').length
@@ -47,11 +46,12 @@ export function PromptForm() {
     if (isDirty) void trigger()
   }, [schema, trigger, isDirty])
 
+  // If the server's list does not contain the current value, snap to the first supported one.
   useEffect(() => {
-    if (languageCodes.length && !languageCodes.includes(DEFAULT_LANGUAGE)) {
+    if (languageCodes.length && !languageCodes.includes(targetLanguage)) {
       setValue('targetLanguage', languageCodes[0]!, { shouldValidate: true })
     }
-  }, [languageCodes, setValue])
+  }, [languageCodes, targetLanguage, setValue])
 
   const onSubmit = handleSubmit((values) => {
     // promptSlice matchers capture the result.

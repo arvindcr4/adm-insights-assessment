@@ -15,6 +15,9 @@
   font-size: 1.15rem;
   overflow-wrap: anywhere;
 }
+.title:focus {
+  outline: none;
+}
 .meta {
   margin: 0;
   font-size: 0.85rem;

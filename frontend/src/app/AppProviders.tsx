@@ -1,8 +1,15 @@
 import type { ReactNode } from 'react'
 import { Provider } from 'react-redux'
+import { loadPersistedState, persistStore } from './persistence'
 import { makeStore, type AppStore } from './store'
 
-const defaultStore = makeStore()
+function createDefaultStore(): AppStore {
+  const store = makeStore(loadPersistedState())
+  persistStore(store)
+  return store
+}
+
+const defaultStore = createDefaultStore()
 
 export function AppProviders({
   children,

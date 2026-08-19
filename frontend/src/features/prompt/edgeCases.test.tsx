@@ -123,3 +123,34 @@ describe('UI edge cases', () => {
     spy.mockRestore()
   })
 })
+
+describe('focus management', () => {
+  it('moves focus to the results heading after a submission, and to the alert on clarification', async () => {
+    const user = userEvent.setup()
+    renderWithStore(<Page />)
+    const box = screen.getByRole('textbox', { name: 'Prompt' })
+    await user.type(box, 'soybean crush margins')
+    await user.click(screen.getByRole('button', { name: /get insights/i }))
+    const heading = await screen.findByRole('heading', { name: /insights for/i })
+    await waitFor(() => expect(document.activeElement).toBe(heading))
+
+    await user.clear(box)
+    await user.type(box, 'hi')
+    await user.click(screen.getByRole('button', { name: /get insights/i }))
+    const status = await screen.findByRole('status')
+    await waitFor(() => expect(document.activeElement).toBe(status))
+  })
+
+  it('does not steal focus on initial render of a restored outcome', () => {
+    renderWithStore(<Page />, {
+      preloadedState: {
+        prompt: {
+          contextId: null,
+          history: [],
+          outcome: { kind: 'clarification', message: 'm', reasons: [], suggestions: [] },
+        },
+      },
+    })
+    expect(document.activeElement).toBe(document.body)
+  })
+})

@@ -38,4 +38,4 @@ Pagination in the BE, search/sort in the FE over loaded pages; `NEEDS_CLARIFICAT
 - Request store is in-memory (TTL 30 min, LRU 1000): ids do not survive a restart and are per-process under `--workers N`. Redis/SQL fits behind `RequestStore`.
 - No auth or rate limiting.
 - Dummy AI: keyword ranking, pre-authored translations.
-- No browser E2E suite; backend 109 / frontend 58 unit and integration tests.
+- No browser E2E suite; backend 109 / frontend 65 unit and integration tests.

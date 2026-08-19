@@ -14,7 +14,7 @@ export const InsightCard = memo(function InsightCard({ insight }: { insight: Ins
     ? metadata.publishedAt
     : date.format(published)
   return (
-    <li className={styles.card} data-testid="insight-card" lang={language}>
+    <article className={styles.card} data-testid="insight-card" lang={language}>
       <div className={styles.head}>
         <h3 className={styles.title}>{title}</h3>
         <span
@@ -35,6 +35,6 @@ export const InsightCard = memo(function InsightCard({ insight }: { insight: Ins
           {metadata.source} · {publishedLabel} · {language}
         </span>
       </div>
-    </li>
+    </article>
   )
 })

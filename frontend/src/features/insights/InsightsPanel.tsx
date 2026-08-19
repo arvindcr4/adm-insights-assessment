@@ -75,7 +75,9 @@ export function InsightsPanel({
     >
       <header className={styles.header}>
         <div>
-          <h2 className={styles.title}>{t('insights.heading', { prompt })}</h2>
+          <h2 className={styles.title} tabIndex={-1} data-focus-target>
+            {t('insights.heading', { prompt })}
+          </h2>
           <p className={styles.meta}>
             <Badge tone="accent">{targetLanguage}</Badge>{' '}
             <Badge>{t('insights.turn', { turn })}</Badge>{' '}

@@ -5,6 +5,18 @@
   display: grid;
   gap: 0.75rem;
 }
+.windowed {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.windowedRow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
 .skeleton {
   height: 5.5rem;
   border-radius: var(--radius-lg);
