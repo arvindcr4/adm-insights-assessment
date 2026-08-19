@@ -8,6 +8,8 @@ from datetime import datetime
 from types import MappingProxyType
 from uuid import UUID
 
+MIN_PREFIX = 3
+
 
 @dataclass(frozen=True, slots=True)
 class InsightMetadata:
@@ -34,12 +36,21 @@ class Insight:
     metadata: InsightMetadata
     # Pre-authored renditions keyed by ISO code (the catalogue's stand-in for an AI translating).
     translations: Mapping[str, LocalizedText] = field(default_factory=lambda: MappingProxyType({}))
+    # Precomputed search index (see `indexed()`): every token across all languages, and every
+    # token prefix of length >= MIN_PREFIX so "export" matches "exports" in O(1).
+    terms: frozenset[str] = frozenset()
+    prefixes: frozenset[str] = frozenset()
 
-    def search_terms(self) -> frozenset[str]:
-        """Lower-cased bag of words (all languages) the dummy AI uses for relevance scoring."""
+    def indexed(self) -> Insight:
+        """Copy with the search index built — once at catalogue load, never per request."""
         parts = [self.title, self.content, self.metadata.category, *self.metadata.tags]
         parts += [t for loc in self.translations.values() for t in (loc.title, loc.content)]
-        return frozenset(_tokenize(" ".join(parts)))
+        terms = frozenset(_tokenize(" ".join(parts)))
+        prefixes = frozenset(t[:n] for t in terms for n in range(MIN_PREFIX, len(t) + 1))
+        return replace(self, terms=terms, prefixes=prefixes)
+
+    def matches(self, keyword: str) -> bool:
+        return keyword in self.terms or (len(keyword) >= MIN_PREFIX and keyword in self.prefixes)
 
     def available_languages(self) -> frozenset[str]:
         return frozenset({self.language, *self.translations})

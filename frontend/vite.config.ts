@@ -21,7 +21,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     // jsdom has no origin, so fetch needs an absolute base URL; msw handlers use the same constant.
-    env: { VITE_API_BASE_URL: 'http://localhost:8000/api/v1' },
+    env: { VITE_API_BASE_URL: 'http://localhost:8000/api/v1', VITE_API_RETRY_BASE_MS: '0' },
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
     css: { modules: { classNameStrategy: 'non-scoped' } },

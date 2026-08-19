@@ -16,6 +16,8 @@ export interface ValidationIssue {
   message: string
 }
 
+const UNAVAILABLE_STATUSES = new Set([502, 503, 504])
+
 function isApiErrorBody(value: unknown): value is ApiErrorBody {
   return (
     typeof value === 'object' &&
@@ -40,6 +42,13 @@ export function toAppError(error: FetchBaseQueryError | SerializedError | undefi
           ...(details !== undefined ? { details } : {}),
         }
       }
+      if (UNAVAILABLE_STATUSES.has(error.status)) {
+        return {
+          code: 'SERVER_UNAVAILABLE',
+          message: `The server is unavailable (${error.status})`,
+          status: error.status,
+        }
+      }
       return {
         code: `HTTP_${error.status}`,
         message: `Request failed (${error.status})`,
@@ -53,6 +62,14 @@ export function toAppError(error: FetchBaseQueryError | SerializedError | undefi
       return { code: 'TIMEOUT', message: 'The request timed out' }
     }
     if (error.status === 'PARSING_ERROR') {
+      // A proxy/gateway answering with HTML (502/503/504) lands here.
+      if (UNAVAILABLE_STATUSES.has(error.originalStatus)) {
+        return {
+          code: 'SERVER_UNAVAILABLE',
+          message: `The server is unavailable (${error.originalStatus})`,
+          status: error.originalStatus,
+        }
+      }
       return {
         code: 'PARSING_ERROR',
         message: 'Unexpected response from the server',

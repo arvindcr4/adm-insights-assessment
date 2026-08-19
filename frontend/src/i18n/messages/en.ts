@@ -36,6 +36,7 @@ export const en = {
     PAYLOAD_TOO_LARGE: 'The prompt is too large',
     NETWORK_ERROR: 'Could not reach the server. Is the API running?',
     TIMEOUT: 'The request timed out',
+    SERVER_UNAVAILABLE: 'The server is temporarily unavailable; please retry',
     INTERNAL_ERROR: 'The server hit an unexpected error',
     UNKNOWN_ERROR: 'Something went wrong',
   },

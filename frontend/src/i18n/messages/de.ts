@@ -35,6 +35,7 @@ export const de: Messages = {
     PAYLOAD_TOO_LARGE: 'Die Anfrage ist zu groß',
     NETWORK_ERROR: 'Server nicht erreichbar. Läuft die API?',
     TIMEOUT: 'Zeitüberschreitung der Anfrage',
+    SERVER_UNAVAILABLE: 'Der Server ist vorübergehend nicht erreichbar; bitte erneut versuchen',
     INTERNAL_ERROR: 'Auf dem Server ist ein unerwarteter Fehler aufgetreten',
     UNKNOWN_ERROR: 'Etwas ist schiefgelaufen',
   },

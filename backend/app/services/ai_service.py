@@ -37,8 +37,7 @@ class DummyAIService:
         scored: list[tuple[int, Insight]] = []
         matched: set[str] = set()
         for insight in catalogue:
-            terms = insight.search_terms()
-            hits = [k for k in keywords if k in terms or any(t.startswith(k) for t in terms)]
+            hits = [k for k in keywords if insight.matches(k)]
             if hits:
                 matched.update(hits)
                 scored.append((len(hits), insight))

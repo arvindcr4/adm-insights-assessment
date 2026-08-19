@@ -1,4 +1,4 @@
-.PHONY: backend frontend test lint dev contract
+.PHONY: backend frontend test lint dev contract stress chaos
 
 backend:            ## run the BFF on :8000
 	cd backend && uv run uvicorn app.main:app --reload --port 8000
@@ -19,3 +19,10 @@ dev:                ## both servers in one terminal
 
 contract:           ## re-export the BFF OpenAPI doc the frontend contract test validates against
 	cd backend && uv run python scripts/export_openapi.py
+
+stress:             ## scenario load test against :8000 (see docs/stress-and-chaos.md)
+	cd backend && uv run python scripts/stress.py --concurrency 64 --duration 30
+
+chaos:              ## BFF on :8002 with fault injection (503 20%, drops 5%, +150ms)
+	cd backend && INSIGHTS_CHAOS_ERROR_RATE=0.2 INSIGHTS_CHAOS_DROP_RATE=0.05 INSIGHTS_CHAOS_LATENCY_MS=150 \
+		uv run uvicorn app.main:app --port 8002

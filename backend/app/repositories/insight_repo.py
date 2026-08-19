@@ -29,7 +29,7 @@ class JsonInsightRepository:
 
     def _load(self) -> tuple[Insight, ...]:
         raw = json.loads(self._path.read_text(encoding="utf-8"))
-        return tuple(_parse(item) for item in raw)
+        return tuple(_parse(item).indexed() for item in raw)
 
 
 def _parse(item: dict) -> Insight:

@@ -35,6 +35,7 @@ export const fr: Messages = {
     PAYLOAD_TOO_LARGE: 'La requête est trop volumineuse',
     NETWORK_ERROR: 'Impossible de joindre le serveur. L’API est-elle démarrée ?',
     TIMEOUT: 'La requête a expiré',
+    SERVER_UNAVAILABLE: 'Le serveur est temporairement indisponible ; veuillez réessayer',
     INTERNAL_ERROR: 'Le serveur a rencontré une erreur inattendue',
     UNKNOWN_ERROR: 'Une erreur est survenue',
   },

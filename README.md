@@ -110,12 +110,16 @@ The selected target language drives the whole experience, not just the answer:
 
 ## Tests
 
-- Backend (49): gatekeeper rules, pagination maths, API validation/4xx envelopes (incl. framework 404/405), clarification short-circuit (spy AI), page navigation/disjointness, injected page-size bounds, body-size guard (declared and chunked), store TTL/LRU eviction, turn counting, determinism, localized content/categories/clarification copy, multilingual matching.
-- Frontend (45): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network, history incl. rejected, re-open), form validity gating, language loading + fallback on failure, SUCCESS/clarification/4xx/422 rendering, no page-1 refetch + load more, load-more failure, debounced search across pages, sort toggles, first-page fetch error with retry, search reset on new answer, i18n (key parity across locales, plurals, whole-UI switch incl. validation messages and result chrome).
+- Backend (109): gatekeeper rules, pagination maths, API validation/4xx envelopes (incl. framework 404/405), clarification short-circuit (spy AI), page navigation/disjointness, injected page-size bounds, body-size guard (declared and chunked), store TTL/LRU eviction, turn counting, determinism, localized content/categories/clarification copy, multilingual matching, precomputed search index, chaos middleware, ~360 fuzz cases (never 5xx).
+- Frontend (51): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network, history incl. rejected, re-open), form validity gating, language loading + fallback on failure, SUCCESS/clarification/4xx/422 rendering, no page-1 refetch + load more, load-more failure, debounced search across pages, sort toggles, first-page fetch error with retry, search reset on new answer, i18n (key parity across locales, plurals, whole-UI switch incl. validation messages and result chrome), contract check, resilience (transient retry for queries only, 5xx mapping).
 
 ### Contract check
 
 `make contract` exports the BFF's OpenAPI document to `frontend/src/test/openapi.json`. `backend/tests/test_openapi_snapshot.py` fails when that file is stale; `frontend/src/test/contract.test.ts` validates every mock the UI tests rely on (and, transitively, the TS wire types they are typed against) with Ajv against those schemas. A field renamed on either side breaks one of the two.
+
+## Stress & chaos
+
+See [docs/stress-and-chaos.md](docs/stress-and-chaos.md): scenario load generator (`make stress`), raw `oha` numbers (1 worker ≈ 2.3k POST/s, 4 workers ≈ 7.7k), the CPU hot path it exposed and fixed (search index precomputed at load), the multi-worker/in-memory-store finding, opt-in fault injection (`make chaos`), fuzz tests, and what the UI does when the BFF is flaky, dead, or restarted. Client-side: request timeout + transient-failure retry for queries (never for the POST), `SERVER_UNAVAILABLE` mapping.
 
 ## Hardening
 

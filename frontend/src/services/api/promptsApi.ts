@@ -6,6 +6,9 @@ export const promptsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     submitPrompt: build.mutation<PromptResponse, PromptRequest>({
       query: (body) => ({ url: 'prompts', method: 'POST', body }),
+      // Never auto-retry the submission: a retry would start a new conversation turn. The user
+      // sees the error and decides.
+      extraOptions: { maxRetries: 0 },
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled

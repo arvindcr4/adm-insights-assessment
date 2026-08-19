@@ -29,6 +29,15 @@ class Settings(BaseSettings):
     request_ttl_seconds: int = 60 * 30
     max_stored_requests: int = 1000
     cors_origins: list[str] = Field(default=["http://localhost:5173", "http://127.0.0.1:5173"])
+    # Fault injection for chaos testing; all zero (= off) by default. Never enable in production.
+    chaos_error_rate: float = Field(default=0.0, ge=0, le=1)
+    chaos_drop_rate: float = Field(default=0.0, ge=0, le=1)
+    chaos_latency_ms: int = Field(default=0, ge=0)
+    chaos_seed: int | None = None
+
+    @property
+    def chaos_enabled(self) -> bool:
+        return bool(self.chaos_error_rate or self.chaos_drop_rate or self.chaos_latency_ms)
 
 
 @lru_cache

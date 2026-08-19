@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.router import api_router
+from app.chaos import ChaosMiddleware
 from app.config import Settings, get_settings
 from app.domain.gatekeeper import PromptGatekeeper
 from app.errors import register_exception_handlers
@@ -54,6 +55,15 @@ def create_app(
     app.state.prompt_service = service
 
     app.add_middleware(BodySizeLimitMiddleware, max_bytes=settings.max_body_bytes)
+    if settings.chaos_enabled:
+        # Outermost so even the error handlers can be hit; exempt paths keep /health usable.
+        app.add_middleware(
+            ChaosMiddleware,
+            error_rate=settings.chaos_error_rate,
+            drop_rate=settings.chaos_drop_rate,
+            latency_ms=settings.chaos_latency_ms,
+            seed=settings.chaos_seed,
+        )
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,

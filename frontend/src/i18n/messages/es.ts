@@ -35,6 +35,7 @@ export const es: Messages = {
     PAYLOAD_TOO_LARGE: 'La consulta es demasiado grande',
     NETWORK_ERROR: 'No se pudo contactar con el servidor. ¿Está en marcha la API?',
     TIMEOUT: 'La solicitud ha expirado',
+    SERVER_UNAVAILABLE: 'El servidor no está disponible temporalmente; inténtalo de nuevo',
     INTERNAL_ERROR: 'El servidor tuvo un error inesperado',
     UNKNOWN_ERROR: 'Algo salió mal',
   },
