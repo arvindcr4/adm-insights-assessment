@@ -33,7 +33,6 @@ function interpolate(template: string, params?: Params): string {
 
 const pluralRules = new Map<Locale, Intl.PluralRules>()
 
-/** Pure translate: usable outside React (schemas, selectors, tests). */
 export function translate(locale: Locale, key: MessageKey, params?: Params): string {
   const message = lookup(MESSAGES[locale], key) ?? lookup(en, key)
   if (message === undefined) return key
@@ -50,7 +49,6 @@ export function translate(locale: Locale, key: MessageKey, params?: Params): str
 
 export type Translate = (key: MessageKey, params?: Params) => string
 
-/** Hook: `t('form.submit')`, `t('history.insights', { count })`. Stable per locale. */
 export function useT(): Translate {
   const locale = useAppSelector(selectLocale)
   return useCallback<Translate>((key, params) => translate(locale, key, params), [locale])
@@ -60,7 +58,7 @@ export function useLocale(): Locale {
   return useAppSelector(selectLocale)
 }
 
-/** Human title for an API error: localized by code when known, else the server's message. */
+/** Localized by code when known, else the server's message. */
 export function errorTitle(t: Translate, code: string, fallback: string): string {
   const key = `errors.${code}` as MessageKey
   const text = translate('en', key)

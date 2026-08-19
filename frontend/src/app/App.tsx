@@ -9,7 +9,6 @@ export function App() {
   const t = useT()
   const locale = useLocale()
 
-  // Keep the document language in step with the UI locale (screen readers, hyphenation, fonts).
   useEffect(() => {
     document.documentElement.lang = locale
     document.title = t('app.title')

@@ -8,7 +8,6 @@ export function isLocale(value: string): value is Locale {
   return (SUPPORTED_LOCALES as readonly string[]).includes(value)
 }
 
-/** The UI follows the selected target language; unknown codes fall back to the default. */
 export function toLocale(code: string): Locale {
   return isLocale(code) ? code : DEFAULT_LOCALE
 }

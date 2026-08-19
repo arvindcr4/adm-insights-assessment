@@ -1,5 +1,3 @@
-"""App factory. Wires settings -> repositories -> services -> routes."""
-
 from __future__ import annotations
 
 import logging
@@ -56,7 +54,7 @@ def create_app(
 
     app.add_middleware(BodySizeLimitMiddleware, max_bytes=settings.max_body_bytes)
     if settings.chaos_enabled:
-        # Outermost so even the error handlers can be hit; exempt paths keep /health usable.
+        # Outermost; /health and docs are exempt.
         app.add_middleware(
             ChaosMiddleware,
             error_rate=settings.chaos_error_rate,

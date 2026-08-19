@@ -2,7 +2,6 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import type { SerializedError } from '@reduxjs/toolkit'
 import type { ApiErrorBody } from './types'
 
-/** Normalised, serialisable error the UI renders. */
 export interface AppError {
   code: string
   message: string
@@ -27,7 +26,6 @@ function isApiErrorBody(value: unknown): value is ApiErrorBody {
   )
 }
 
-/** Collapse RTK Query's error union into one shape, preserving the BFF's structured body. */
 export function toAppError(error: FetchBaseQueryError | SerializedError | undefined): AppError {
   if (!error) return { code: 'UNKNOWN_ERROR', message: 'Something went wrong' }
 
@@ -62,7 +60,7 @@ export function toAppError(error: FetchBaseQueryError | SerializedError | undefi
       return { code: 'TIMEOUT', message: 'The request timed out' }
     }
     if (error.status === 'PARSING_ERROR') {
-      // A proxy/gateway answering with HTML (502/503/504) lands here.
+      // Gateway answering with HTML.
       if (UNAVAILABLE_STATUSES.has(error.originalStatus)) {
         return {
           code: 'SERVER_UNAVAILABLE',

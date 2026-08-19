@@ -10,7 +10,6 @@ import {
   type PromptExchange,
 } from './promptSlice'
 
-/** Request/response pairs kept in global state; clicking one re-opens that answer. */
 export function ConversationHistory() {
   const history = useAppSelector(selectHistory)
   const dispatch = useAppDispatch()

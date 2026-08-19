@@ -2,7 +2,6 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { promptsApi, toAppError } from '@/services/api'
 import type { AppError, ClarificationResponse, PromptRequest, PromptResponse } from '@/services/api'
 
-/** Exactly one outcome is shown at a time; each submission resolves into one of these. */
 export type PromptOutcome =
   | { kind: 'idle' }
   | {
@@ -17,7 +16,6 @@ export type PromptOutcome =
   | { kind: 'clarification'; message: string; reasons: string[]; suggestions: string[] }
   | { kind: 'error'; error: AppError }
 
-/** A 4xx/network failure is still a response worth keeping. */
 export interface ErrorResponse {
   status: 'ERROR'
   error: AppError
@@ -30,10 +28,9 @@ export interface PromptExchange {
 }
 
 export interface PromptState {
-  /** Conversation id carried across submissions so the BFF can link turns. */
   contextId: string | null
   outcome: PromptOutcome
-  /** Request + response pairs, newest first. */
+  /** Newest first. */
   history: PromptExchange[]
 }
 
@@ -75,7 +72,6 @@ const promptSlice = createSlice({
     contextIdSet(state, action: PayloadAction<string | null>) {
       state.contextId = action.payload
     },
-    /** Re-open a past exchange; successful answers come straight from the RTK Query cache. */
     historyEntryActivated(state, action: PayloadAction<string>) {
       const entry = state.history.find((e) => e.id === action.payload)
       if (!entry) return

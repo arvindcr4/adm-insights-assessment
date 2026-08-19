@@ -11,12 +11,6 @@ import { makePromptFormSchema, PROMPT_MAX_LENGTH, type PromptFormValues } from '
 
 const DEFAULT_LANGUAGE = 'en'
 
-/**
- * Collects prompt + target language, validates with zod, submits via RTK Query.
- * The selected target language also drives the UI locale (localeSlice).
- * It does not render responses: the outcome lives in global state (promptSlice) and is rendered
- * by <PromptOutcome/>, so this component only re-renders for form and mutation state.
- */
 export function PromptForm() {
   const t = useT()
   const dispatch = useAppDispatch()
@@ -44,17 +38,15 @@ export function PromptForm() {
   const promptLength = watch('prompt').length
   const targetLanguage = watch('targetLanguage')
 
-  // The whole UI follows the selected target language.
   useEffect(() => {
     dispatch(localeChanged(targetLanguage))
   }, [dispatch, targetLanguage])
 
-  // Re-run validation when the locale changes so messages are shown in the new language.
+  // Re-validate on locale change so messages switch language.
   useEffect(() => {
     if (isDirty) void trigger()
   }, [schema, trigger, isDirty])
 
-  // If the language list arrives without the current default, snap to the first supported one.
   useEffect(() => {
     if (languageCodes.length && !languageCodes.includes(DEFAULT_LANGUAGE)) {
       setValue('targetLanguage', languageCodes[0]!, { shouldValidate: true })
@@ -62,7 +54,7 @@ export function PromptForm() {
   }, [languageCodes, setValue])
 
   const onSubmit = handleSubmit((values) => {
-    // Errors/responses are captured by promptSlice matchers; nothing to await here.
+    // promptSlice matchers capture the result.
     void submitPrompt({ ...values, ...(contextId ? { contextId } : {}) })
   })
 

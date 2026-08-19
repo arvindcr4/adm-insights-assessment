@@ -1,9 +1,5 @@
-"""The downstream "AI" boundary.
-
-`AIService` is the seam a real LLM client would implement. `DummyAIService` ranks the local
-catalogue by keyword overlap with the prompt, falling back to a deterministic sample so the same
-prompt always yields the same result set (which keeps pagination stable across calls).
-"""
+"""`AIService` is the seam a real LLM client would implement. `DummyAIService` ranks the
+catalogue by keyword overlap, falling back to a deterministic sample so pagination is stable."""
 
 from __future__ import annotations
 

@@ -1,8 +1,5 @@
-"""Pure-ASGI request body size guard.
-
-Starlette buffers the whole body before pydantic sees it, so `max_length` on a field does not
-protect memory. This rejects oversized requests up front with the standard error envelope.
-"""
+"""Request body size guard. Starlette buffers the whole body before pydantic runs, so a
+field `max_length` does not protect memory; this rejects oversized bodies up front."""
 
 from __future__ import annotations
 

@@ -6,7 +6,6 @@ import { validationIssues } from '@/services/api'
 import type { AppError } from '@/services/api'
 import { conversationReset, selectOutcome } from './promptSlice'
 
-/** Switches on the single source of truth for "what did the last submission produce". */
 export function PromptOutcome() {
   const outcome = useAppSelector(selectOutcome)
   const t = useT()

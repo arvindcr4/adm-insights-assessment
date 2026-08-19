@@ -9,7 +9,7 @@ interface FieldProps {
   children: ReactNode
 }
 
-/** Label + control + error wiring (aria-describedby handled by the caller via `${id}-error`). */
+/** Error/hint ids are `${id}-error` / `${id}-hint` for aria-describedby. */
 export function Field({ id, label, error, hint, children }: FieldProps) {
   return (
     <div className={styles.field}>

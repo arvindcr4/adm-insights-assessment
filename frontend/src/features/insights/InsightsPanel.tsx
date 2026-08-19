@@ -20,11 +20,6 @@ interface InsightsPanelProps {
 
 const EMPTY: never[] = []
 
-/**
- * Owns data fetching (infinite query) and derives the visible list from
- * loaded pages + view state (search/sort). Children are memoised so typing in the search box
- * or loading another page only re-renders what actually changed.
- */
 export function InsightsPanel({
   requestId,
   prompt,

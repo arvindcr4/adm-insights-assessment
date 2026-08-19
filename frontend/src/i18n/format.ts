@@ -1,6 +1,5 @@
 import type { Locale } from './localeSlice'
 
-/** Locale-aware Intl helpers, cached per locale so memoised components stay cheap. */
 export interface Formatters {
   date: Intl.DateTimeFormat
   percent: Intl.NumberFormat

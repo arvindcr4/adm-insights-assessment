@@ -1,5 +1,3 @@
-"""Hostile / malformed input must never produce a 5xx or a non-envelope body."""
-
 import json
 import random
 import string

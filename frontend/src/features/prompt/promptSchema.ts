@@ -3,10 +3,7 @@ import type { Translate } from '@/i18n'
 
 export const PROMPT_MAX_LENGTH = 2000
 
-/**
- * Shape validation only. Whether a prompt is *meaningful* (length/context) is the BFF's call —
- * it answers NEEDS_CLARIFICATION and the UI relays that, so both layers stay in agreement.
- */
+// Shape only. Whether a prompt is meaningful is the BFF's call (NEEDS_CLARIFICATION).
 export function makePromptFormSchema(supportedLanguages: readonly string[], t: Translate) {
   return z.object({
     prompt: z

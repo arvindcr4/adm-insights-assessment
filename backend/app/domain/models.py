@@ -1,4 +1,4 @@
-"""Plain domain objects. No FastAPI/pydantic here so the core is framework-agnostic."""
+# Framework-free domain objects.
 
 from __future__ import annotations
 
@@ -34,15 +34,13 @@ class Insight:
     content: str
     language: str
     metadata: InsightMetadata
-    # Pre-authored renditions keyed by ISO code (the catalogue's stand-in for an AI translating).
+    # Pre-authored renditions by ISO code.
     translations: Mapping[str, LocalizedText] = field(default_factory=lambda: MappingProxyType({}))
-    # Precomputed search index (see `indexed()`): every token across all languages, and every
-    # token prefix of length >= MIN_PREFIX so "export" matches "exports" in O(1).
+    # Search index, built once at load: tokens of all languages + prefixes >= MIN_PREFIX.
     terms: frozenset[str] = frozenset()
     prefixes: frozenset[str] = frozenset()
 
     def indexed(self) -> Insight:
-        """Copy with the search index built — once at catalogue load, never per request."""
         parts = [self.title, self.content, self.metadata.category, *self.metadata.tags]
         parts += [t for loc in self.translations.values() for t in (loc.title, loc.content)]
         terms = frozenset(_tokenize(" ".join(parts)))
@@ -56,7 +54,6 @@ class Insight:
         return frozenset({self.language, *self.translations})
 
     def localized(self, language: str) -> Insight:
-        """Return this insight in `language`; falls back to the source text (tagged as such)."""
         if language == self.language:
             return self
         loc = self.translations.get(language)

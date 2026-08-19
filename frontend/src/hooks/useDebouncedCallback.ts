@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react'
 
-/**
- * Returns a stable function that invokes the latest `callback` only after `delayMs` of inactivity.
- * Pending calls are cancelled on unmount.
- */
+/** Stable debounced wrapper; pending call is cancelled on unmount. */
 export function useDebouncedCallback<Args extends unknown[]>(
   callback: (...args: Args) => void,
   delayMs: number,

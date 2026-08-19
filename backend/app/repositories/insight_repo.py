@@ -1,5 +1,3 @@
-"""Read-only catalogue of dummy insights, loaded from a local JSON file."""
-
 from __future__ import annotations
 
 import json

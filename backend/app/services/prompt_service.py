@@ -1,5 +1,3 @@
-"""Use-case orchestration: validate language -> gatekeep -> call AI -> store -> paginate."""
-
 from __future__ import annotations
 
 from datetime import UTC, datetime
@@ -41,8 +39,6 @@ class PromptService:
         self._default_page_size = default_page_size
         self._max_page_size = max_page_size
 
-    # ----- commands -----
-
     def handle_prompt(self, req: PromptRequest) -> SuccessResponse | ClarificationResponse:
         if req.target_language not in self._languages:
             raise UnsupportedLanguageError(
@@ -55,7 +51,7 @@ class PromptService:
 
         verdict = self._gatekeeper.assess(req.prompt)
         if verdict.needs_clarification:
-            # Short-circuit: no downstream AI call is made.
+            # no AI call
             return ClarificationResponse(
                 context_id=context_id,
                 turn=turn,
@@ -79,8 +75,6 @@ class PromptService:
         self._store.save(stored)
         return self._success(stored, page=1, page_size=self._default_page_size)
 
-    # ----- queries -----
-
     def get_request(self, request_id: UUID, *, page: int, page_size: int | None) -> SuccessResponse:
         return self._success(
             self._require(request_id), page=page, page_size=self._resolve_page_size(page_size)
@@ -98,8 +92,6 @@ class PromptService:
             insights=[_to_out(i) for i in paged.items],
             pagination=_to_pagination(paged),
         )
-
-    # ----- helpers -----
 
     def _resolve_page_size(self, page_size: int | None) -> int:
         if page_size is None:

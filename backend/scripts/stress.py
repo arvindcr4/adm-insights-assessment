@@ -1,13 +1,8 @@
-"""Scenario-based load generator for the BFF (asyncio + httpx).
+"""Scenario load generator (asyncio + httpx): mixed traffic, latency percentiles per scenario,
+status counts, server RSS samples.
 
-Mixed, realistic traffic: unique prompts (defeats result caching), "load more" page fetches,
-clarification short-circuits, validation errors, oversized bodies. Reports throughput, latency
-percentiles per scenario, error counts, and samples the server's RSS so the LRU/TTL caps can be
-checked under pressure.
-
-Usage (from backend/):
-  uv run python scripts/stress.py --base http://localhost:8000 --concurrency 64 --duration 30
-  uv run python scripts/stress.py --requests 5000 --mix flood   # memory-bound test
+  uv run python scripts/stress.py --concurrency 64 --duration 30
+  uv run python scripts/stress.py --mix flood --requests 10000     # unique prompt + contextId
 """
 
 from __future__ import annotations
@@ -127,7 +122,6 @@ async def scenario_oversized(client: httpx.AsyncClient, stats: Stats, rng: rando
 
 
 async def scenario_flood(client: httpx.AsyncClient, stats: Stats, rng: random.Random) -> None:
-    """Unique prompt AND unique contextId every time: pressure on both LRU caps."""
     body = {"prompt": unique_prompt(rng), "targetLanguage": "en", "contextId": str(uuid.uuid4())}
     t0 = time.perf_counter()
     try:

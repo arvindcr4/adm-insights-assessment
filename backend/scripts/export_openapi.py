@@ -1,8 +1,5 @@
-"""Export the BFF's OpenAPI document for the frontend contract test.
-
-Usage: uv run python scripts/export_openapi.py   (from backend/)
-The output is committed; `tests/test_openapi_snapshot.py` fails when it is stale.
-"""
+"""Export the OpenAPI document for the frontend contract test (`make contract`).
+Committed; tests/test_openapi_snapshot.py fails when stale."""
 
 from __future__ import annotations
 

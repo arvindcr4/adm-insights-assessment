@@ -3,7 +3,6 @@ import type { SortDirection, SortField } from '@/features/insights/insightsViewS
 import { getFormatters } from '@/i18n/format'
 import type { Locale } from '@/i18n/localeSlice'
 
-/** Case-insensitive match against text and metadata (category, tags, source). */
 export function matchesSearch(insight: Insight, term: string): boolean {
   const needle = term.trim().toLowerCase()
   if (!needle) return true
@@ -22,7 +21,6 @@ export function filterInsights(insights: readonly Insight[], term: string): Insi
   return insights.filter((i) => matchesSearch(i, term))
 }
 
-/** Returns a new sorted array using the locale's collation; input is never mutated. */
 export function sortInsights(
   insights: readonly Insight[],
   field: SortField,

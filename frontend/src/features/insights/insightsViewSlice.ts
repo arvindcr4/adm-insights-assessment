@@ -6,7 +6,6 @@ export type SortField = (typeof SORT_FIELDS)[number]
 export type SortDirection = 'asc' | 'desc'
 
 export interface InsightsViewState {
-  /** Debounced search term (the raw input value stays local to the input). */
   searchTerm: string
   sortField: SortField
   sortDirection: SortDirection
@@ -36,7 +35,7 @@ const insightsViewSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // A new answer is a new result set: drop the search term, keep the user's sort preference.
+    // New answer, new result set: drop the search term, keep the sort.
     builder.addMatcher(promptsApi.endpoints.submitPrompt.matchFulfilled, (state) => {
       state.searchTerm = ''
     })

@@ -19,7 +19,7 @@ ServiceDep = Annotated[PromptService, Depends(get_prompt_service)]
 router = APIRouter(prefix="/prompts", tags=["prompts"])
 
 PageParam = Annotated[int, Query(ge=1, le=10_000, description="1-based page number")]
-# Upper bound and default come from injected settings (enforced in PromptService).
+# default/max come from settings, enforced in PromptService
 PageSizeParam = Annotated[int | None, Query(ge=1, alias="pageSize")]
 
 _ERRORS = {

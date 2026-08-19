@@ -11,7 +11,6 @@ interface InsightListProps {
   searchTerm: string
 }
 
-/** Pure presentational list; re-renders only when the visible array identity changes. */
 export const InsightList = memo(function InsightList({
   insights,
   loading,

@@ -1,9 +1,5 @@
-/**
- * FE–BE contract check. The BFF's OpenAPI document is exported to ./openapi.json
- * (`make contract`; backend/tests/test_openapi_snapshot.py fails when it is stale). Every mock the
- * UI tests rely on — and therefore the TS wire types they are typed against — must validate
- * against the BFF's schemas, so a field renamed on either side fails here.
- */
+// Mocks (typed against services/api/types.ts) must validate against the BFF's OpenAPI
+// (./openapi.json, exported by `make contract`; staleness-tested on the backend).
 import Ajv2020 from 'ajv/dist/2020'
 import addFormats from 'ajv-formats'
 import { describe, expect, it } from 'vitest'

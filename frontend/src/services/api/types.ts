@@ -1,4 +1,4 @@
-/** Wire contracts shared with the BFF (mirrors backend/app/schemas.py). */
+// Mirrors backend/app/schemas.py; checked by src/test/contract.test.ts.
 
 export interface InsightMetadata {
   category: string
@@ -75,7 +75,6 @@ export interface LanguagesResponse {
   languages: Language[]
 }
 
-/** Structured error envelope every non-2xx response carries. */
 export interface ApiErrorBody {
   error: string
   message: string

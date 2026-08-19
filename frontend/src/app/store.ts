@@ -14,7 +14,6 @@ export const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
-/** Factory so tests get an isolated store with the same wiring as production. */
 export function makeStore(preloadedState?: Partial<RootState>) {
   const store = configureStore({
     reducer: rootReducer,

@@ -17,7 +17,6 @@ import {
 
 export const SEARCH_DEBOUNCE_MS = 300
 
-/** Search + sort controls. Memoised: it never depends on the list itself. */
 export const InsightsToolbar = memo(function InsightsToolbar() {
   const t = useT()
   return (
@@ -31,7 +30,7 @@ export const InsightsToolbar = memo(function InsightsToolbar() {
 function SearchInput() {
   const dispatch = useAppDispatch()
   const t = useT()
-  // Raw value is local so every keystroke does not touch the store; the store gets the debounced term.
+  // Keystrokes stay local; only the debounced term reaches the store.
   const storeTerm = useAppSelector(selectSearchTerm)
   const [value, setValue] = useState(storeTerm)
   const lastPushed = useRef(storeTerm)
@@ -40,7 +39,7 @@ function SearchInput() {
     dispatch(searchTermChanged(term))
   }, SEARCH_DEBOUNCE_MS)
 
-  // If the store term changes from elsewhere (e.g. reset on a new answer), follow it.
+  // Follow external resets (e.g. a new answer clears the term).
   useEffect(() => {
     if (storeTerm !== lastPushed.current) {
       lastPushed.current = storeTerm

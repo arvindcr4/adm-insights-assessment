@@ -1,4 +1,4 @@
-"""Wire contracts (pydantic). Field names are camelCase on the wire, snake_case in Python."""
+# Wire contracts. camelCase on the wire, snake_case here.
 
 from __future__ import annotations
 
@@ -14,8 +14,6 @@ class ApiModel(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True, from_attributes=True)
 
 
-# ---------- Requests ----------
-
 PROMPT_MAX_LENGTH = 2000
 
 LanguageCode = Annotated[
@@ -28,13 +26,9 @@ class PromptRequest(ApiModel):
         alias_generator=to_camel, populate_by_name=True, extra="forbid", str_strip_whitespace=True
     )
 
-    # Hard wire limit; the body-size middleware guards memory before this runs.
     prompt: str = Field(..., min_length=1, max_length=PROMPT_MAX_LENGTH, description="User's query")
     target_language: LanguageCode = Field(..., description="ISO 639-1 code, e.g. en, de, fr")
     context_id: UUID | None = Field(default=None, description="Conversation tracking id")
-
-
-# ---------- Responses ----------
 
 
 class InsightMetadata(ApiModel):

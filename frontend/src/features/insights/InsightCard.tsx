@@ -4,7 +4,6 @@ import { getFormatters, useLocale, useT } from '@/i18n'
 import type { Insight } from '@/services/api'
 import styles from './InsightCard.module.css'
 
-/** Memoised by insight identity: filtering/sorting/paginating the list never re-renders unchanged cards. */
 export const InsightCard = memo(function InsightCard({ insight }: { insight: Insight }) {
   const t = useT()
   const { date, percent } = getFormatters(useLocale())

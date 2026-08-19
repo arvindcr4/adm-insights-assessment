@@ -2,9 +2,7 @@ import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api/v1'
-/** A hung upstream must surface as TIMEOUT, not an endless spinner. */
 export const API_TIMEOUT_MS = Number(import.meta.env.VITE_API_TIMEOUT_MS ?? 15_000)
-/** Queries retry transient failures (network, timeout, 502/503/504) with exponential backoff. */
 export const DEFAULT_MAX_RETRIES = 2
 const RETRY_BASE_MS = Number(import.meta.env.VITE_API_RETRY_BASE_MS ?? 300)
 
@@ -18,7 +16,7 @@ export function isTransientError(error: FetchBaseQueryError): boolean {
 }
 
 const baseQuery = retry(fetchBaseQuery({ baseUrl: API_BASE_URL, timeout: API_TIMEOUT_MS }), {
-  // Retry only what is worth retrying; per-endpoint `extraOptions.maxRetries` can opt out (0).
+  // Endpoints opt out with extraOptions.maxRetries = 0.
   retryCondition: (error, _args, { attempt, extraOptions }) => {
     const max =
       (extraOptions as { maxRetries?: number } | undefined)?.maxRetries ?? DEFAULT_MAX_RETRIES
@@ -30,11 +28,7 @@ const baseQuery = retry(fetchBaseQuery({ baseUrl: API_BASE_URL, timeout: API_TIM
   },
 })
 
-/**
- * Single RTK Query slice. Feature-specific endpoints are injected from their own modules
- * (`promptsApi`, `insightsApi`, `languagesApi`) so API logic stays next to the feature that owns it
- * while sharing one cache/middleware.
- */
+// Endpoints are injected per feature (promptsApi, insightsApi, languagesApi).
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery,

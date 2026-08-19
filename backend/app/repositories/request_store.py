@@ -1,7 +1,5 @@
-"""Keeps answered requests addressable for page navigation.
-
-In-memory with TTL + size cap. A Redis/SQL implementation only has to satisfy `RequestStore`.
-"""
+"""Answered requests, kept addressable for page navigation. In-memory, TTL + LRU cap;
+a Redis/SQL implementation only has to satisfy `RequestStore`."""
 
 from __future__ import annotations
 
@@ -41,7 +39,7 @@ class InMemoryRequestStore:
         self._clock = clock
         self._lock = threading.Lock()
         self._items: OrderedDict[UUID, _Entry] = OrderedDict()
-        # Turn counters are keyed by client-supplied context ids, so they are LRU-capped too.
+        # Keyed by client-supplied ids, so capped too.
         self._turns: OrderedDict[UUID, int] = OrderedDict()
 
     def save(self, request: StoredRequest) -> None:

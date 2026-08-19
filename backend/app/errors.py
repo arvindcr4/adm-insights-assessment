@@ -1,8 +1,4 @@
-"""Structured error model.
-
-Every non-2xx response has the same envelope:
-    {"error": "<MACHINE_CODE>", "message": "<human text>", "details": <optional>}
-"""
+"""Every non-2xx response is {"error": CODE, "message": text, "details"?: any}."""
 
 from __future__ import annotations
 
@@ -52,7 +48,7 @@ _HTTP_CODES = {404: "NOT_FOUND", 405: "METHOD_NOT_ALLOWED", 413: "PAYLOAD_TOO_LA
 
 
 def _format_validation_issue(issue: dict[str, Any]) -> dict[str, Any]:
-    # pydantic loc looks like ("body", "prompt") or ("query", "page"); drop the source segment.
+    # loc is ("body", "prompt") / ("query", "page"); drop the source segment.
     loc = [str(p) for p in issue.get("loc", ()) if p not in ("body", "query", "path")]
     return {
         "field": ".".join(loc) or "body",
@@ -80,7 +76,7 @@ def register_exception_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(StarletteHTTPException)
     async def _http_error(_: Request, exc: StarletteHTTPException) -> JSONResponse:
-        # Framework-raised errors (unknown route, wrong method, ...) use the same envelope.
+        # Unknown route / wrong method use the same envelope.
         code = _HTTP_CODES.get(exc.status_code, f"HTTP_{exc.status_code}")
         return JSONResponse(
             status_code=exc.status_code,

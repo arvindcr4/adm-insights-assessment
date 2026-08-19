@@ -6,15 +6,13 @@ export const promptsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     submitPrompt: build.mutation<PromptResponse, PromptRequest>({
       query: (body) => ({ url: 'prompts', method: 'POST', body }),
-      // Never auto-retry the submission: a retry would start a new conversation turn. The user
-      // sees the error and decides.
+      // No auto-retry: a retry would start a new conversation turn.
       extraOptions: { maxRetries: 0 },
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
           if (data.status !== 'SUCCESS') return
-          // The POST already carries page 1; seed the infinite-query cache so the results panel
-          // renders instantly and "Load more" starts from page 2 without re-fetching page 1.
+          // The POST already carries page 1; seed the page cache so it is not fetched again.
           const { requestId, insights, pagination } = data
           dispatch(
             insightsApi.util.upsertQueryData(
@@ -24,7 +22,7 @@ export const promptsApi = baseApi.injectEndpoints({
             ),
           )
         } catch {
-          // Error state is handled by the caller / promptSlice matcher.
+          // handled by promptSlice matchers
         }
       },
     }),

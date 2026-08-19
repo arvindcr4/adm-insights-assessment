@@ -1,11 +1,6 @@
-"""Opt-in fault injection for chaos testing. Inert unless a knob is > 0 (see Settings.chaos_*).
-
-- error_rate:  fraction of requests answered 503 {"error": "CHAOS_INJECTED"} (app-level failure)
-- drop_rate:   fraction of requests that raise before any response (infra-level failure: the server
-               emits a bare 500 and closes the connection — what a crashed upstream looks like)
-- latency_ms:  fixed extra delay on every request (slow upstream)
-Health and docs endpoints are exempt so orchestration keeps working during a chaos run.
-"""
+"""Opt-in fault injection (Settings.chaos_*): error_rate -> 503 CHAOS_INJECTED, drop_rate ->
+raise before responding (bare 500, like a crashed upstream), latency_ms -> fixed delay.
+/health and docs are exempt."""
 
 from __future__ import annotations
 
@@ -28,7 +23,7 @@ EXEMPT_PATHS = ("/api/v1/health", "/docs", "/openapi.json", "/redoc")
 
 
 class ChaosInjectedError(RuntimeError):
-    """Raised to simulate an upstream crash (connection dropped before a response)."""
+    pass
 
 
 class ChaosMiddleware:

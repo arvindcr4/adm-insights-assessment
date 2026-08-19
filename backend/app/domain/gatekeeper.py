@@ -1,12 +1,9 @@
-"""Decides, *before* any downstream AI call, whether a prompt needs clarification."""
-
 from __future__ import annotations
 
 from dataclasses import dataclass
 
 from app.domain.models import ClarificationVerdict, _tokenize
 
-# Small English stop-word list; enough to catch "what is it?"-style prompts.
 STOPWORDS: frozenset[str] = frozenset(
     """
     a an the and or but of to in on at for from by with about as into like through after
@@ -37,7 +34,6 @@ VAGUE_PHRASES: frozenset[str] = frozenset(
     }
 )
 
-# Human-readable copy per language. Codes in `reasons` stay machine-readable for clients.
 PREFIX: dict[str, str] = {
     "en": "Please provide more details.",
     "es": "Por favor, aporta más detalles.",
@@ -125,7 +121,7 @@ class PromptGatekeeper:
             if text.lower().rstrip("?!.") in VAGUE_PHRASES:
                 reasons.append("VAGUE_PROMPT")
 
-        # De-duplicate while preserving order (e.g. "hi" trips both TOO_SHORT and TOO_FEW_WORDS).
+        # order-preserving dedupe
         unique = tuple(dict.fromkeys(reasons))
         if not unique:
             return ClarificationVerdict(needs_clarification=False)
@@ -133,7 +129,6 @@ class PromptGatekeeper:
 
     @staticmethod
     def describe(reasons: tuple[str, ...], language: str = DEFAULT_LANGUAGE) -> str:
-        """Localized message: prefix + the primary reason, in `language` (falls back to English)."""
         lang = language if language in REASON_MESSAGES else DEFAULT_LANGUAGE
         table = REASON_MESSAGES[lang]
         detail = " ".join(

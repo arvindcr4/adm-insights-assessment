@@ -1,7 +1,4 @@
-/**
- * Source-of-truth dictionary. Other locales are typed against this shape, so a missing key is a
- * compile error. Values are either a string (with `{param}` placeholders) or a plural object.
- */
+// Source of truth; other locales are typed against this shape.
 export const en = {
   app: {
     title: 'Insights Console',

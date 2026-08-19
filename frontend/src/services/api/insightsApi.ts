@@ -7,10 +7,6 @@ export interface InsightsQueryArg {
   requestId: string
 }
 
-/**
- * Pages of insights for an answered prompt. The backend owns slicing and metadata; the client
- * accumulates pages ("Load more") and searches/sorts the loaded set locally.
- */
 export const insightsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getInsightsPages: build.infiniteQuery<InsightsPage, InsightsQueryArg, number>({

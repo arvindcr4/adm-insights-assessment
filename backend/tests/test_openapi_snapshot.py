@@ -1,5 +1,3 @@
-"""The frontend validates its mocks against the committed OpenAPI document; keep it fresh."""
-
 import json
 import sys
 from pathlib import Path
