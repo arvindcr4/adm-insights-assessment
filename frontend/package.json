@@ -33,6 +33,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
     "@vitest/coverage-v8": "^4.1.11",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "jsdom": "^30.0.1",
     "msw": "^2.15.0",
     "oxlint": "^1.75.0",

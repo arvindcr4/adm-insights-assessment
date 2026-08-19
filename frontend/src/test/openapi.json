@@ -1,0 +1,661 @@
+{
+  "components": {
+    "schemas": {
+      "ClarificationResponse": {
+        "properties": {
+          "contextId": {
+            "format": "uuid",
+            "title": "Contextid",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reasons",
+            "type": "array"
+          },
+          "status": {
+            "const": "NEEDS_CLARIFICATION",
+            "default": "NEEDS_CLARIFICATION",
+            "title": "Status",
+            "type": "string"
+          },
+          "suggestions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Suggestions",
+            "type": "array"
+          },
+          "turn": {
+            "title": "Turn",
+            "type": "integer"
+          }
+        },
+        "required": ["contextId", "turn", "message", "reasons", "suggestions"],
+        "title": "ClarificationResponse",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "details": {
+            "anyOf": [
+              {},
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          },
+          "error": {
+            "title": "Error",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": ["error", "message"],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "InsightMetadata": {
+        "properties": {
+          "category": {
+            "title": "Category",
+            "type": "string"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "publishedAt": {
+            "format": "date-time",
+            "title": "Publishedat",
+            "type": "string"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags",
+            "type": "array"
+          }
+        },
+        "required": ["category", "tags", "confidence", "source", "publishedAt"],
+        "title": "InsightMetadata",
+        "type": "object"
+      },
+      "InsightOut": {
+        "properties": {
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/InsightMetadata"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": ["id", "title", "content", "language", "metadata"],
+        "title": "InsightOut",
+        "type": "object"
+      },
+      "InsightsPageResponse": {
+        "properties": {
+          "insights": {
+            "items": {
+              "$ref": "#/components/schemas/InsightOut"
+            },
+            "title": "Insights",
+            "type": "array"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          },
+          "requestId": {
+            "format": "uuid",
+            "title": "Requestid",
+            "type": "string"
+          }
+        },
+        "required": ["requestId", "insights", "pagination"],
+        "title": "InsightsPageResponse",
+        "type": "object"
+      },
+      "LanguageOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": ["code", "label"],
+        "title": "LanguageOut",
+        "type": "object"
+      },
+      "LanguagesResponse": {
+        "properties": {
+          "languages": {
+            "items": {
+              "$ref": "#/components/schemas/LanguageOut"
+            },
+            "title": "Languages",
+            "type": "array"
+          }
+        },
+        "required": ["languages"],
+        "title": "LanguagesResponse",
+        "type": "object"
+      },
+      "Pagination": {
+        "properties": {
+          "hasNextPage": {
+            "title": "Hasnextpage",
+            "type": "boolean"
+          },
+          "hasPreviousPage": {
+            "title": "Haspreviouspage",
+            "type": "boolean"
+          },
+          "page": {
+            "title": "Page",
+            "type": "integer"
+          },
+          "pageSize": {
+            "title": "Pagesize",
+            "type": "integer"
+          },
+          "totalItems": {
+            "title": "Totalitems",
+            "type": "integer"
+          },
+          "totalPages": {
+            "title": "Totalpages",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "page",
+          "pageSize",
+          "totalItems",
+          "totalPages",
+          "hasNextPage",
+          "hasPreviousPage"
+        ],
+        "title": "Pagination",
+        "type": "object"
+      },
+      "PromptRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "contextId": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Conversation tracking id",
+            "title": "Contextid"
+          },
+          "prompt": {
+            "description": "User's query",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Prompt",
+            "type": "string"
+          },
+          "targetLanguage": {
+            "description": "ISO 639-1 code, e.g. en, de, fr",
+            "maxLength": 16,
+            "minLength": 1,
+            "title": "Targetlanguage",
+            "type": "string"
+          }
+        },
+        "required": ["prompt", "targetLanguage"],
+        "title": "PromptRequest",
+        "type": "object"
+      },
+      "ResponseMeta": {
+        "properties": {
+          "generatedAt": {
+            "format": "date-time",
+            "title": "Generatedat",
+            "type": "string"
+          },
+          "matchedKeywords": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Matchedkeywords",
+            "type": "array"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          }
+        },
+        "required": ["model", "matchedKeywords", "generatedAt"],
+        "title": "ResponseMeta",
+        "type": "object"
+      },
+      "SuccessResponse": {
+        "properties": {
+          "contextId": {
+            "format": "uuid",
+            "title": "Contextid",
+            "type": "string"
+          },
+          "insights": {
+            "items": {
+              "$ref": "#/components/schemas/InsightOut"
+            },
+            "title": "Insights",
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ResponseMeta"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          },
+          "prompt": {
+            "title": "Prompt",
+            "type": "string"
+          },
+          "requestId": {
+            "format": "uuid",
+            "title": "Requestid",
+            "type": "string"
+          },
+          "status": {
+            "const": "SUCCESS",
+            "default": "SUCCESS",
+            "title": "Status",
+            "type": "string"
+          },
+          "targetLanguage": {
+            "title": "Targetlanguage",
+            "type": "string"
+          },
+          "turn": {
+            "title": "Turn",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "requestId",
+          "contextId",
+          "turn",
+          "prompt",
+          "targetLanguage",
+          "insights",
+          "pagination",
+          "meta"
+        ],
+        "title": "SuccessResponse",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Middleware between a UI client and an AI service: validation, gatekeeping, pagination.",
+    "title": "Insights BFF",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Health Api V1 Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Liveness probe",
+        "tags": ["health"]
+      }
+    },
+    "/api/v1/languages": {
+      "get": {
+        "operationId": "list_languages_api_v1_languages_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LanguagesResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Supported target languages",
+        "tags": ["languages"]
+      }
+    },
+    "/api/v1/prompts": {
+      "post": {
+        "description": "Validates the request, decides whether the AI service should be called, and returns either the first page of insights (SUCCESS) or a NEEDS_CLARIFICATION envelope.",
+        "operationId": "submit_prompt_api_v1_prompts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PromptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "discriminator": {
+                    "mapping": {
+                      "NEEDS_CLARIFICATION": "#/components/schemas/ClarificationResponse",
+                      "SUCCESS": "#/components/schemas/SuccessResponse"
+                    },
+                    "propertyName": "status"
+                  },
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/SuccessResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ClarificationResponse"
+                    }
+                  ],
+                  "title": "Response Submit Prompt Api V1 Prompts Post"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unsupported target language"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Malformed request body"
+          }
+        },
+        "summary": "Submit a prompt",
+        "tags": ["prompts"]
+      }
+    },
+    "/api/v1/prompts/{request_id}": {
+      "get": {
+        "operationId": "get_prompt_api_v1_prompts__request_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "request_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Request Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "1-based page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "1-based page number",
+              "maximum": 10000,
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Re-read an answered prompt (any page)",
+        "tags": ["prompts"]
+      }
+    },
+    "/api/v1/prompts/{request_id}/insights": {
+      "get": {
+        "operationId": "get_insights_page_api_v1_prompts__request_id__insights_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "request_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Request Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "1-based page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "1-based page number",
+              "maximum": 10000,
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Pagesize"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InsightsPageResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Fetch one page of insights for an answered prompt",
+        "tags": ["prompts"]
+      }
+    }
+  }
+}

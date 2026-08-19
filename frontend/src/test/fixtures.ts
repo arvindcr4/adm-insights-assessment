@@ -1,4 +1,12 @@
-import type { Insight, InsightsPage, Pagination, SuccessResponse } from '@/services/api'
+import type {
+  ApiErrorBody,
+  ClarificationResponse,
+  Insight,
+  InsightsPage,
+  Language,
+  Pagination,
+  SuccessResponse,
+} from '@/services/api'
 
 export function makeInsight(n: number, overrides: Partial<Insight> = {}): Insight {
   return {
@@ -64,3 +72,38 @@ export function makeSuccess(
 export function makePage(all: Insight[], page: number, requestId = REQUEST_ID): InsightsPage {
   return { requestId, ...paginate(all, page, 10) }
 }
+
+export const LANGUAGES: Language[] = [
+  { code: 'de', label: 'Deutsch' },
+  { code: 'en', label: 'English' },
+  { code: 'es', label: 'Español' },
+  { code: 'fr', label: 'Français' },
+]
+
+export function makeClarification(
+  overrides: Partial<ClarificationResponse> = {},
+): ClarificationResponse {
+  return {
+    status: 'NEEDS_CLARIFICATION',
+    contextId: CONTEXT_ID,
+    turn: 1,
+    message: 'Please provide more details. The prompt is too short to be understood.',
+    reasons: ['PROMPT_TOO_SHORT'],
+    suggestions: ['Name the subject you are interested in.'],
+    ...overrides,
+  }
+}
+
+export const ERRORS = {
+  validation: {
+    error: 'VALIDATION_ERROR',
+    message: 'Request validation failed',
+    details: [{ field: 'prompt', code: 'missing', message: 'Field required' }],
+  },
+  invalidLanguage: {
+    error: 'INVALID_LANGUAGE',
+    message: 'Target language is not supported',
+    details: { supportedLanguages: ['de', 'en', 'es', 'fr'] },
+  },
+  notFound: { error: 'REQUEST_NOT_FOUND', message: 'Request not found or expired' },
+} satisfies Record<string, ApiErrorBody>

@@ -1,4 +1,4 @@
-.PHONY: backend frontend test lint dev
+.PHONY: backend frontend test lint dev contract
 
 backend:            ## run the BFF on :8000
 	cd backend && uv run uvicorn app.main:app --reload --port 8000
@@ -16,3 +16,6 @@ lint:               ## lint + typecheck both
 
 dev:                ## both servers in one terminal
 	$(MAKE) -j2 backend frontend
+
+contract:           ## re-export the BFF OpenAPI doc the frontend contract test validates against
+	cd backend && uv run python scripts/export_openapi.py

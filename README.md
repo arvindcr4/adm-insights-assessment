@@ -110,8 +110,12 @@ The selected target language drives the whole experience, not just the answer:
 
 ## Tests
 
-- Backend (48): gatekeeper rules, pagination maths, API validation/4xx envelopes (incl. framework 404/405), clarification short-circuit (spy AI), page navigation/disjointness, injected page-size bounds, body-size guard (declared and chunked), store TTL/LRU eviction, turn counting, determinism, localized content/categories/clarification copy, multilingual matching.
-- Frontend (38): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network, history incl. rejected, re-open), form validity gating, language loading + fallback on failure, SUCCESS/clarification/4xx/422 rendering, no page-1 refetch + load more, load-more failure, debounced search across pages, sort toggles, first-page fetch error with retry, search reset on new answer, i18n (key parity across locales, plurals, whole-UI switch incl. validation messages and result chrome).
+- Backend (49): gatekeeper rules, pagination maths, API validation/4xx envelopes (incl. framework 404/405), clarification short-circuit (spy AI), page navigation/disjointness, injected page-size bounds, body-size guard (declared and chunked), store TTL/LRU eviction, turn counting, determinism, localized content/categories/clarification copy, multilingual matching.
+- Frontend (45): pure filter/sort, debounce hook, error normalisation, slice matchers (success/clarification/error/network, history incl. rejected, re-open), form validity gating, language loading + fallback on failure, SUCCESS/clarification/4xx/422 rendering, no page-1 refetch + load more, load-more failure, debounced search across pages, sort toggles, first-page fetch error with retry, search reset on new answer, i18n (key parity across locales, plurals, whole-UI switch incl. validation messages and result chrome).
+
+### Contract check
+
+`make contract` exports the BFF's OpenAPI document to `frontend/src/test/openapi.json`. `backend/tests/test_openapi_snapshot.py` fails when that file is stale; `frontend/src/test/contract.test.ts` validates every mock the UI tests rely on (and, transitively, the TS wire types they are typed against) with Ajv against those schemas. A field renamed on either side breaks one of the two.
 
 ## Hardening
 
@@ -122,4 +126,3 @@ Body-size cap (413, before parsing), bounded `page`/`pageSize`, LRU+TTL caps on 
 - Persist the request store (Redis/SQLite) so `requestId`s survive restarts; a DB-backed catalogue.
 - Server-side `q`/`sort` and virtualised list for very large result sets.
 - Auth/rate limiting and request-id logging on the BFF.
-- A contract test (OpenAPI → TS types / msw handlers) so the frontend mocks cannot drift from the BFF.
