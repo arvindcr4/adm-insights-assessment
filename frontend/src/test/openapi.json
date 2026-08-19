@@ -37,7 +37,13 @@
             "type": "integer"
           }
         },
-        "required": ["contextId", "turn", "message", "reasons", "suggestions"],
+        "required": [
+          "contextId",
+          "turn",
+          "message",
+          "reasons",
+          "suggestions"
+        ],
         "title": "ClarificationResponse",
         "type": "object"
       },
@@ -61,7 +67,10 @@
             "type": "string"
           }
         },
-        "required": ["error", "message"],
+        "required": [
+          "error",
+          "message"
+        ],
         "title": "ErrorResponse",
         "type": "object"
       },
@@ -107,7 +116,13 @@
             "type": "array"
           }
         },
-        "required": ["category", "tags", "confidence", "source", "publishedAt"],
+        "required": [
+          "category",
+          "tags",
+          "confidence",
+          "source",
+          "publishedAt"
+        ],
         "title": "InsightMetadata",
         "type": "object"
       },
@@ -133,7 +148,13 @@
             "type": "string"
           }
         },
-        "required": ["id", "title", "content", "language", "metadata"],
+        "required": [
+          "id",
+          "title",
+          "content",
+          "language",
+          "metadata"
+        ],
         "title": "InsightOut",
         "type": "object"
       },
@@ -155,7 +176,11 @@
             "type": "string"
           }
         },
-        "required": ["requestId", "insights", "pagination"],
+        "required": [
+          "requestId",
+          "insights",
+          "pagination"
+        ],
         "title": "InsightsPageResponse",
         "type": "object"
       },
@@ -170,7 +195,10 @@
             "type": "string"
           }
         },
-        "required": ["code", "label"],
+        "required": [
+          "code",
+          "label"
+        ],
         "title": "LanguageOut",
         "type": "object"
       },
@@ -184,7 +212,9 @@
             "type": "array"
           }
         },
-        "required": ["languages"],
+        "required": [
+          "languages"
+        ],
         "title": "LanguagesResponse",
         "type": "object"
       },
@@ -257,7 +287,10 @@
             "type": "string"
           }
         },
-        "required": ["prompt", "targetLanguage"],
+        "required": [
+          "prompt",
+          "targetLanguage"
+        ],
         "title": "PromptRequest",
         "type": "object"
       },
@@ -280,7 +313,11 @@
             "type": "string"
           }
         },
-        "required": ["model", "matchedKeywords", "generatedAt"],
+        "required": [
+          "model",
+          "matchedKeywords",
+          "generatedAt"
+        ],
         "title": "ResponseMeta",
         "type": "object"
       },
@@ -373,7 +410,11 @@
             "type": "string"
           }
         },
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "title": "ValidationError",
         "type": "object"
       }
@@ -406,7 +447,9 @@
           }
         },
         "summary": "Liveness probe",
-        "tags": ["health"]
+        "tags": [
+          "health"
+        ]
       }
     },
     "/api/v1/languages": {
@@ -425,7 +468,9 @@
           }
         },
         "summary": "Supported target languages",
-        "tags": ["languages"]
+        "tags": [
+          "languages"
+        ]
       }
     },
     "/api/v1/prompts": {
@@ -490,7 +535,9 @@
           }
         },
         "summary": "Submit a prompt",
-        "tags": ["prompts"]
+        "tags": [
+          "prompts"
+        ]
       }
     },
     "/api/v1/prompts/{request_id}": {
@@ -572,7 +619,9 @@
           }
         },
         "summary": "Re-read an answered prompt (any page)",
-        "tags": ["prompts"]
+        "tags": [
+          "prompts"
+        ]
       }
     },
     "/api/v1/prompts/{request_id}/insights": {
@@ -654,7 +703,9 @@
           }
         },
         "summary": "Fetch one page of insights for an answered prompt",
-        "tags": ["prompts"]
+        "tags": [
+          "prompts"
+        ]
       }
     }
   }
